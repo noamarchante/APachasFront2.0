@@ -53,8 +53,8 @@ export class AppComponent implements OnInit {
   }
 
   getEventNotifications() {
-    const userId = this.authenticationService.getUser().id;
-
+    const userId = this.authenticationService.getUser()?.id;
+    if(userId != null){
     this.userEventService.getNotifications(userId).subscribe(
         (events) => {
             this.processEventNotifications(events);
@@ -65,6 +65,7 @@ export class AppComponent implements OnInit {
             // Handle the error appropriately
         }
     );
+      }
 }
 
 processEventNotifications(events: any[]) {
@@ -75,16 +76,17 @@ processEventNotifications(events: any[]) {
 
 getUserNotifications() {
     const userId = this.authenticationService.getUser().id;
-
-    this.userUserService.getNotifications(userId).subscribe(
-        (userNotifications) => {
-            this.processUserNotifications(userNotifications);
-            this.setBadge();
-        },
-        (error) => {
-            console.error('Error fetching user notifications:', error);
-        }
-    );
+    if(userId != null){
+      this.userUserService.getNotifications(userId).subscribe(
+          (userNotifications) => {
+              this.processUserNotifications(userNotifications);
+              this.setBadge();
+          },
+          (error) => {
+              console.error('Error fetching user notifications:', error);
+          }
+      );
+    }
 }
 
 processUserNotifications(userNotifications: any[]) {
