@@ -3,23 +3,17 @@
   "version": "0.0.0",
   "proxy": "http://apachas-api.up.railway.app",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve -o",
-    "start:development": "ng serve -o --configuration=development",
-    "start:staging": "ng serve -o --configuration=staging",
-    "start:production": "ng serve -o --configuration=production",
-    "build": "ng build",
-    "build:development": "ng build --configuration=development",
-    "build:staging": "ng build --configuration=staging",
-    "build:production": "ng build --configuration=production",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "stats": "ng build --stats-json & webpack-bundle-analyzer dist/my-app/stats.json"
+    "ng": "./node_modules/@angular/cli/bin/ng",
+    "start": "./node_modules/.bin/ng serve --open --host 0.0.0.0",
+    "start-develop": "./node_modules/.bin/ng serve --open --host 0.0.0.0 --configuration development",
+    "start-production": "./node_modules/.bin/ng serve --open --host 0.0.0.0 --configuration production",
+    "build-develop": "./node_modules/.bin/ng build --configuration development",
+    "build-production": "./node_modules/.bin/ng build --configuration production",
+    "test": "./node_modules/.bin/ng test"
   },
   "private": false,
   "files": [
-    "dist"
+    "docs"
   ],
   "dependencies": {
     "@angular/animations": "~12.0.4",
