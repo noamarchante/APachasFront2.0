@@ -267,7 +267,7 @@ ul.paginationProduct li:last-child a
 .more{
     display:flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     padding-bottom: 20px;
 
 }

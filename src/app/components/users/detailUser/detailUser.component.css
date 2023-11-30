@@ -251,7 +251,7 @@ div.mutualRight{
 .more{
     display:flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     padding-bottom: 20px;
     font-weight: 600;
     text-decoration: none;
@@ -265,7 +265,7 @@ div.mutualRight{
 .moreMutual{
     display:flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     padding-bottom: 20px;
     font-weight: 600;
     text-decoration: none;

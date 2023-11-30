@@ -489,7 +489,7 @@ div.paginationPartakerDiv {
 .more{
     display:flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     padding-bottom: 20px;
 
 }

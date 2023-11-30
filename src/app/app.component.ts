@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
       }
     );
     this.getEventNotifications();
+    this.getUserNotifications();
   }
 
   getEventNotifications() {
@@ -58,7 +59,6 @@ export class AppComponent implements OnInit {
       });
       this.setBadge();
     });
-    this.getUserNotifications();
   }
 
   getUserNotifications() {
