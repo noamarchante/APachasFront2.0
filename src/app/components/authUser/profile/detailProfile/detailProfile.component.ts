@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from "../../../../services/authentication.service";
 import {AuthUser} from "../../../../models/AuthUser";
 import {DomSanitizer} from "@angular/platform-browser";
-import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours,} from 'date-fns';
+import {isSameDay, isSameMonth, addHours,} from 'date-fns';
 import { Subject } from 'rxjs';
 import {CalendarEvent, CalendarView,} from 'angular-calendar';
 import {UserEventService} from "../../../../services/userEvent.service";

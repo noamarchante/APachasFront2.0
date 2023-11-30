@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from "../../../services/user.service";
 import {MUser} from "../../../models/MUser";
-import {AuthenticationService} from "../../../services/authentication.service";
 import {NotificationService} from "../../../modules/notification/services/notification.service";
 
 @Component({

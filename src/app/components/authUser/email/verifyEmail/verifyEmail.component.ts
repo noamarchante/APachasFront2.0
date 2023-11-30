@@ -1,7 +1,6 @@
-import {AfterViewChecked, Component, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../../services/user.service";
-import {AuthenticationService} from "../../../../services/authentication.service";
 import {MVerifyEmail} from "../../../../models/MVerifyEmail";
 @Component({
     selector: 'app-verifyEmail',
