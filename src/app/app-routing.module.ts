@@ -100,7 +100,7 @@ const routes: Routes = [
 		path: 'paypal', component: PaypalComponent
 	},
 	{
-		path: '', redirectTo: 'home', pathMatch: 'full'
+		path: '', redirectTo: 'login', pathMatch: 'full'
 	}
 ];
 
