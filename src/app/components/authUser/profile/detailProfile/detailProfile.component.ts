@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 import {CalendarEvent, CalendarView,} from 'angular-calendar';
 import {UserEventService} from "../../../../services/userEvent.service";
 import {EventService} from "../../../../services/event.service";
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 const colors: any = {
     blue: {
@@ -83,7 +82,7 @@ export class DetailProfileComponent implements OnInit {
 
     //evento seleccionado
     handleEvent(event: CalendarEvent): void {
-       this.eventService.getEvent(toNumbers(event.id.valueOf().toString())[0]).subscribe((response) =>{
+       this.eventService.getEvent(event.id.valueOf().toString().split('.').map(Number)[0]).subscribe((response) =>{
             localStorage.setItem("products",  JSON.stringify(response));
             this.router.navigateByUrl("/products");
         });

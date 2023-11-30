@@ -26,9 +26,6 @@ SOFTWARE.
 @angular/common
 MIT
 
-@angular/compiler-cli
-MIT
-
 @ng-select/ng-select
 MIT
 
