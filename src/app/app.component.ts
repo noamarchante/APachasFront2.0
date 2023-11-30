@@ -53,22 +53,45 @@ export class AppComponent implements OnInit {
   }
 
   getEventNotifications() {
-    return this.userEventService.getNotifications(this.authenticationService.getUser().id).subscribe((response) => {
-      response.forEach((eventName) => {
-        this.notifications.push("Invitación a evento " + eventName);
-      });
-      this.setBadge();
-    });
-  }
+    const userId = this.authenticationService.getUser().id;
 
-  getUserNotifications() {
-    return this.userUserService.getNotifications(this.authenticationService.getUser().id).subscribe((response) => {
-      response.forEach((userLogin) => {
-        this.notifications.push("Solicitud de amistad de " + userLogin);
-      });
-      this.setBadge();
+    this.userEventService.getNotifications(userId).subscribe(
+        (events) => {
+            this.processEventNotifications(events);
+            this.setBadge();
+        },
+        (error) => {
+            console.error('Error fetching event notifications:', error);
+            // Handle the error appropriately
+        }
+    );
+}
+
+processEventNotifications(events: any[]) {
+    events.forEach((event) => {
+        this.notifications.push("Invitación a evento " + event);
     });
-  }
+}
+
+getUserNotifications() {
+    const userId = this.authenticationService.getUser().id;
+
+    this.userUserService.getNotifications(userId).subscribe(
+        (userNotifications) => {
+            this.processUserNotifications(userNotifications);
+            this.setBadge();
+        },
+        (error) => {
+            console.error('Error fetching user notifications:', error);
+        }
+    );
+}
+
+processUserNotifications(userNotifications: any[]) {
+    userNotifications.forEach((notification) => {
+        this.notifications.push("Solicitud de amistad de " + notification);
+    });
+}
 
   setBadge(){
     if (this.notifications.length != 0) {
