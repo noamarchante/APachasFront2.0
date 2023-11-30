@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   getEventNotifications() {
-    this.userEventService.getNotifications(this.authenticationService.getUser().id).subscribe((response) => {
+    return this.userEventService.getNotifications(this.authenticationService.getUser().id).subscribe((response) => {
       response.forEach((eventName) => {
         this.notifications.push("Invitación a evento " + eventName);
       });
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
   }
 
   getUserNotifications() {
-    this.userUserService.getNotifications(this.authenticationService.getUser().id).subscribe((response) => {
+    return this.userUserService.getNotifications(this.authenticationService.getUser().id).subscribe((response) => {
       response.forEach((userLogin) => {
         this.notifications.push("Solicitud de amistad de " + userLogin);
       });
