@@ -10,7 +10,6 @@ import {ProductService} from "../../../services/product.service";
 import {Router} from "@angular/router";
 import {UserUserEventService} from "../../../services/userUserEvent.service";
 import {UserProductService} from "../../../services/userProduct.service";
-import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
 
 @Component({
     selector: 'app-detailEvent',
