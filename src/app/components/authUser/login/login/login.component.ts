@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
 	ngOnInit() {
 		this.route.queryParams
-		  .subscribe(params => this.return = params['return'] || '');
+		  .subscribe(params => this.return = params['return'] || 'home');
 
 	}
 
