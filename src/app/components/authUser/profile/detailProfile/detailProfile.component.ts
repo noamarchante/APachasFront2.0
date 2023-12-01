@@ -84,7 +84,7 @@ export class DetailProfileComponent implements OnInit {
     handleEvent(event: CalendarEvent): void {
        this.eventService.getEvent(event.id.valueOf().toString().split('.').map(Number)[0]).subscribe((response) =>{
             localStorage.setItem("products",  JSON.stringify(response));
-            this.router.navigateByUrl("/products");
+            this.router.navigate(["products"]);
         });
     }
 

@@ -128,7 +128,7 @@ export class EditProfileComponent implements OnInit, AfterViewChecked {
                 document.getElementById("closeButton").click();
                 localStorage.setItem("profile", JSON.stringify(true));
                 this.authenticationService.logOut();
-                this.router.navigateByUrl("/login");
+                this.router.navigate(["login"]);
             });
         }
     }

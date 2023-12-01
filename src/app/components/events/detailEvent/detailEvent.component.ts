@@ -68,12 +68,12 @@ export class DetailEventComponent implements OnInit {
 
     showDetailsAndProducts(){
         localStorage.setItem("products", JSON.stringify(this.event));
-        this.router.navigateByUrl("/products");
+        this.router.navigate(["products"]);
     }
 
     showTransactions(){
         localStorage.setItem("transactions", JSON.stringify(this.event));
-        this.router.navigateByUrl("/transactions");
+        this.router.navigate(["transactions"]);
     }
 
     messageValue() {

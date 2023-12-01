@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 	logIn() {
 		this.authenticationService.checkCredentials(this.login, this.password).subscribe(( s:any) =>{
 			this.authenticationService.logIn(this.login, this.password, s.headers.get("Authorization"));
-			this.router.navigateByUrl(this.return);
+			this.router.navigate(['home']);
 		});
 	}
 

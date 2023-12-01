@@ -105,9 +105,9 @@ processUserNotifications(userNotifications: any[]) {
 
   logOut() {
     this.authenticationService.logOut();
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['login']);
   }
   logIn(){
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['login']);
   }
 }

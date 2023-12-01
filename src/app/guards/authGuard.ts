@@ -12,12 +12,12 @@ export class AuthGuard implements CanActivate {
 
 		if (localStorage.getItem('currentUser')) {
 			if (route.url[0].path === "products" && localStorage.getItem("products") == undefined) {
-				this.router.navigate(['/events']);
+				this.router.navigate(['events']);
 				return false;
 			}
 
 			if (route.url[0].path === "transactions" && localStorage.getItem("transactions") == undefined) {
-				this.router.navigate(['/events']);
+				this.router.navigate(['events']);
 				return false;
 			}
 
@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
 			}
 			return true;
 		}
-		this.router.navigate(['/login']);
+		this.router.navigate(['login']);
 
 		return false;
 	}
