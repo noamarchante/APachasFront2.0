@@ -3,7 +3,7 @@
         <div class="user signupBx">
             <div class="formBx">
                 <form (submit)="onCreate()" ngNativeValidate #loginForm="ngForm">
-                    <h2>Crear una cuenta en <a href="home">¡A pachas!</a></h2>
+                    <h2>Crear una cuenta en <a routerLink="home">¡A pachas!</a></h2>
                     <div>
                         <input type="text" id="register_userName" name="userName" placeholder="Nombre*"
                                pattern="[a-zA-ZñÑ]{1,100}" title="Must be an alpha"
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <input type="submit" value="Registrar">
-                    <p class="signin">¿tienes una cuenta? <a href="login"> Inicia sesión</a></p>
+                    <p class="signin">¿tienes una cuenta? <a routerLink="login"> Inicia sesión</a></p>
                 </form>
             </div>
             <div class="imgBx"><img src="assets/RegisterMoney.jpg" alt="Imagen de tarjetas decorativa registro"></div>
