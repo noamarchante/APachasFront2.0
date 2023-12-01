@@ -1,4 +1,4 @@
-import {NotificationModule} from './notification.module';
+import {NotificationModule} from '@modules/notification/notification.module';
 
 describe('NotificationModule', () => {
 	let notificationModule: NotificationModule;

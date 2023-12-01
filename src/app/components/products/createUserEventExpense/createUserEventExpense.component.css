@@ -39,7 +39,7 @@ input[type="button"]{
     background-position-x: 5px;
     padding-left:30px;
     -webkit-appearance: none;
-    background: url("../../../../assets/closeSearch.svg") top left no-repeat #ffffff;
+    background: url("assets/closeSearch.svg") top left no-repeat #ffffff;
     background-size: 0.8rem 0.8rem;
     width: 0.8rem;
     height: 0.8rem;
@@ -60,7 +60,7 @@ input[type="button"]{
     font-size: 16px;
     letter-spacing: 1px;
     font-weight: 300;
-    background: url("../../../../assets/search.svg")  top left no-repeat #f5f5f5;
+    background: url("assets/search.svg")  top left no-repeat #f5f5f5;
     background-size: 1rem;
     background-position-y: 13px;
     background-position-x: 5px;

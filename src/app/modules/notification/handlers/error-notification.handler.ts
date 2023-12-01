@@ -1,7 +1,7 @@
 import { ErrorHandler, Injectable } from '@angular/core';
-import { NotificationService } from '../services/notification.service';
+import { NotificationService } from '@modules/notification/services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { APachasError } from '../entities';
+import { APachasError } from '@modules/notification/entities';
 
 @Injectable()
 export class ErrorNotificationHandler implements ErrorHandler {

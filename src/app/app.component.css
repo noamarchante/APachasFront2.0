@@ -25,7 +25,7 @@
 .notButton{
     width: 20px;
     height: 50px;
-    background: url("../../src/assets/alert.svg") top left no-repeat ;
+    background: url("assets/alert.svg") top left no-repeat ;
     border: none;
     outline: none;
     box-shadow: none;

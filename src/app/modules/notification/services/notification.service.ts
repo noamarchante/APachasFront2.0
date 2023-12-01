@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {ErrorMessage, Severity} from '../entities';
+import {ErrorMessage, Severity} from '@modules/notification/entities';
 import {Observable} from 'rxjs';
 
 @Injectable()

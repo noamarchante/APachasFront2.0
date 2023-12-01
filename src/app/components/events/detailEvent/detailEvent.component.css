@@ -250,7 +250,7 @@ ul.paginationEvent li:last-child a
     border: none;
     width: 40px;
     height: 40px;
-    background: url("../../../../assets/edit.svg") top left no-repeat;
+    background: url("assets/edit.svg") top left no-repeat;
     background-size: 40px 40px;
 }
 
@@ -283,7 +283,7 @@ ul.paginationEvent li:last-child a
     border: none;
     width: 40px;
     height: 40px;
-    background: url("../../../../assets/delete.svg") top left no-repeat;
+    background: url("assets/delete.svg") top left no-repeat;
     background-position: center;
     background-size: 40px 40px;
 }

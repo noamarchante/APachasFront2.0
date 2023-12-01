@@ -75,7 +75,7 @@
     height: 50px;
     margin-top: 15px;
     padding-right: 15px;
-    background: url("../../../../../assets/image.svg") top left no-repeat;
+    background: url("assets/image.svg") top left no-repeat;
     background-size: 50px 50px;
 }
 
@@ -190,7 +190,7 @@
         width: 60px;
         height: 60px;
         padding-right: 15px;
-        /*background: url("../../assets/image.svg") top left no-repeat;*/
+        /*background: url("assets/image.svg") top left no-repeat;*/
         background-size: 60px 60px;
     }
     .imageColor2{
