@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
   login: string;
   password: string;
-  private return = '';
+  private return = 'home';
 
 	constructor(private authenticationService: AuthenticationService,
 				private userService: UserService,

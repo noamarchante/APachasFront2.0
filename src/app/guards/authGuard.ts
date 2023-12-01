@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {AuthenticationService} from "../services/authentication.service";
 /*
 Es un servicio injectable que devuelve true si el usuario puede acceder a una ruta o false si no puede.
  */
@@ -12,24 +11,24 @@ export class AuthGuard implements CanActivate {
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
 		if (localStorage.getItem('currentUser')) {
-			if (route.url.toString() == "products" && localStorage.getItem("products") == undefined) {
+			if (route.url[0].path === "products" && localStorage.getItem("products") == undefined) {
 				this.router.navigate(['/events']);
 				return false;
 			}
 
-			if (route.url.toString() == "transactions" && localStorage.getItem("transactions") == undefined) {
+			if (route.url[0].path === "transactions" && localStorage.getItem("transactions") == undefined) {
 				this.router.navigate(['/events']);
 				return false;
 			}
 
-			if (route.url.toString() != "products"){
+			if (route.url[0].path !== "products"){
 				localStorage.removeItem("products");
 			}
-			if (route.url.toString() != "transactions"){
+			if (route.url[0].path !== "transactions"){
 				localStorage.removeItem("transactions");
 			}
 
-			if (route.url.toString() != "profile"){
+			if (route.url[0].path !== "profile"){
 				localStorage.removeItem("profile");
 			}
 			return true;
