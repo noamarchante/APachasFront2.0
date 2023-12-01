@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
-import {MEvent} from "../models/MEvent";
-import {APachasError} from "../modules/notification/entities";
-import {Event} from "./entities/Event";
+import {environment} from "environments/environment";
+import {MEvent} from "@models/MEvent";
+import {APachasError} from "@modules/notification/entities";
+import {Event} from "@services/entities/Event";
 import {map} from "rxjs/operators";
 
 @Injectable({

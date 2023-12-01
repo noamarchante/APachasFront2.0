@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {UserEventService} from "../../../services/userEvent.service";
+import {UserEventService} from "@services/userEvent.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {AuthenticationService} from "../../../services/authentication.service";
-import {MProduct} from "../../../models/MProduct";
-import {ProductService} from "../../../services/product.service";
-import {MEvent} from "../../../models/MEvent";
-import {MUser} from "../../../models/MUser";
-import {UserProductService} from "../../../services/userProduct.service";
-import {MUserEvent} from "../../../models/MUserEvent";
-import {MUserUserEvent} from "../../../models/MUserUserEvent";
-import {UserUserEventService} from "../../../services/userUserEvent.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {MProduct} from "@models/MProduct";
+import {ProductService} from "@services/product.service";
+import {MEvent} from "@models/MEvent";
+import {MUser} from "@models/MUser";
+import {UserProductService} from "@services/userProduct.service";
+import {MUserEvent} from "@models/MUserEvent";
+import {MUserUserEvent} from "@models/MUserUserEvent";
+import {UserUserEventService} from "@services/userUserEvent.service";
 
 export enum PRODUCTJOIN {
     JOIN = 'Participar', CANCEL = 'Quitar participación'
@@ -29,8 +29,8 @@ export class ListProductsComponent implements OnInit {
     pageDirection: number;
 
     //EVENTO
-    defaultEventImage: string = "./assets/event7.jpg";
-    defaultUserImage: string = "./assets/user16.jpg";
+    defaultEventImage: string = "assets/event7.jpg";
+    defaultUserImage: string = "assets/user16.jpg";
     event: MEvent;
     eventPartakers: MUser[] = [];
     eventPartakersStored: MUser[] = [];
@@ -46,7 +46,7 @@ export class ListProductsComponent implements OnInit {
 
 
     //PRODUCTOS
-    defaultImage: string = "./assets/product3_2.jpg";
+    defaultImage: string = "assets/product3_2.jpg";
     productName = "";
     products: MProduct[] = [];
     imagesProducts: {[index:number]: any;} = {};

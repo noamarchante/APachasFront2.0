@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {AuthenticationService} from "../../../services/authentication.service";
-import {MEvent} from "../../../models/MEvent";
-import {UserEventService} from "../../../services/userEvent.service";
-import {STATUS} from "../../users/listUsers/listUsers.component";
+import {AuthenticationService} from "@services/authentication.service";
+import {MEvent} from "@models/MEvent";
+import {UserEventService} from "@services/userEvent.service";
+import {STATUS} from "@app/components/users/listUsers/listUsers.component";
 
 @Component({
     selector: 'app-events',
@@ -15,7 +15,7 @@ export class ListEventsComponent implements OnInit {
     events: MEvent[] = [];
     images: {[index:number]: any;} = {};
     status: {[index: number]: any;} = {};
-    defaultImage: string = "./assets/event7.jpg";
+    defaultImage: string = "assets/event7.jpg";
     totalPage:number= 0;
     page: number= 0;
     selectedEvent: MEvent = new MEvent();

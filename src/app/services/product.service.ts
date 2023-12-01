@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
-import {APachasError} from "../modules/notification/entities";
-import {MProduct} from "../models/MProduct";
-import {Group} from "./entities/Group";
+import {environment} from "environments/environment";
+import {APachasError} from "@modules/notification/entities";
+import {MProduct} from "@models/MProduct";
+import {Group} from "@services/entities/Group";
 import {map} from "rxjs/operators";
-import {Product} from "./entities/Product";
-import {MEvent} from "../models/MEvent";
+import {Product} from "@services/entities/Product";
+import {MEvent} from "@models/MEvent";
 
 @Injectable({
     providedIn: 'root'

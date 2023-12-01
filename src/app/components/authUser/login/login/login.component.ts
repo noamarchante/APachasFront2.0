@@ -2,10 +2,10 @@
 COMPONENT -> Bloque de código re-utilizable: CSS + HTML + TypeScript
  */
 import {AfterViewChecked, Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../../../services/authentication.service';
+import {AuthenticationService} from '@services/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NotificationService} from "../../../../modules/notification/services/notification.service";
-import {UserService} from "../../../../services/user.service";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {UserService} from "@services/user.service";
 
 @Component({
 	selector: 'app-login',

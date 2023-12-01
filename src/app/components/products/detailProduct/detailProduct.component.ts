@@ -1,12 +1,12 @@
 import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AuthenticationService} from "../../../services/authentication.service";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {MUser} from "../../../models/MUser";
-import {MProduct} from "../../../models/MProduct";
-import {ProductService} from "../../../services/product.service";
-import {UserProductService} from "../../../services/userProduct.service";
-import {PRODUCTJOIN} from "../listProducts/listProducts.component";
-import {UserEventService} from "../../../services/userEvent.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {MUser} from "@models/MUser";
+import {MProduct} from "@models/MProduct";
+import {ProductService} from "@services/product.service";
+import {UserProductService} from "@services/userProduct.service";
+import {PRODUCTJOIN} from "@app/components/products/listProducts/listProducts.component";
+import {UserEventService} from "@services/userEvent.service";
 
 @Component({
     selector: 'app-detailProduct',
@@ -24,8 +24,8 @@ export class DetailProductComponent implements OnInit, AfterViewChecked {
     @Output()
     statusUpdate = new EventEmitter<number>();
 
-    defaultUserImage: string = "./assets/user16.jpg";
-    defaultImage: string = "./assets/product3.jpg";
+    defaultUserImage: string = "assets/user16.jpg";
+    defaultImage: string = "assets/product3.jpg";
 
     productPartakers: MUser[] = [];
     productPartakersStored: MUser[] = [];

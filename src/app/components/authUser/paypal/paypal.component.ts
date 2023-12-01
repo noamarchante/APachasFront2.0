@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ICreateOrderRequest } from 'ngx-paypal';
-import {AuthenticationService} from "../../../services/authentication.service";
+import {AuthenticationService} from "@services/authentication.service";
 
 declare var paypal;
 

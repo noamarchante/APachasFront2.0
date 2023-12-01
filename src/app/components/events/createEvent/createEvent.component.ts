@@ -1,15 +1,15 @@
 import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AuthenticationService} from "../../../services/authentication.service";
-import {MUser} from "../../../models/MUser";
-import {UserUserService} from "../../../services/userUser.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {MUser} from "@models/MUser";
+import {UserUserService} from "@services/userUser.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {MEvent} from "../../../models/MEvent";
-import {UserEventService} from "../../../services/userEvent.service";
-import {EventService} from "../../../services/event.service";
-import {MGroup} from "../../../models/MGroup";
-import {GroupUserService} from "../../../services/groupUser.service";
-import {MGroupMembers} from "../../../models/MGroupMembers";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {MEvent} from "@models/MEvent";
+import {UserEventService} from "@services/userEvent.service";
+import {EventService} from "@services/event.service";
+import {MGroup} from "@models/MGroup";
+import {GroupUserService} from "@services/groupUser.service";
+import {MGroupMembers} from "@models/MGroupMembers";
 
 @Component({
     selector: 'app-createEvent',
@@ -18,9 +18,9 @@ import {MGroupMembers} from "../../../models/MGroupMembers";
 })
 export class CreateEventComponent implements OnInit, AfterViewChecked {
 
-    defaultImage = "./assets/event7.jpg";
-    defaultUserImage = "./assets/user16.jpg";
-    defaultGroupImage = "./assets/group7_2.jpg";
+    defaultImage = "assets/event7.jpg";
+    defaultUserImage = "assets/user16.jpg";
+    defaultGroupImage = "assets/group7_2.jpg";
 
     friends: MUser[];
     groups: MGroup[];

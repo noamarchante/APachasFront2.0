@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GroupService} from "../../../services/group.service";
-import {AuthenticationService} from "../../../services/authentication.service";
-import {MUser} from "../../../models/MUser";
-import {GroupUserService} from "../../../services/groupUser.service";
-import {UserUserService} from "../../../services/userUser.service";
+import {GroupService} from "@services/group.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {MUser} from "@models/MUser";
+import {GroupUserService} from "@services/groupUser.service";
+import {UserUserService} from "@services/userUser.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {MGroup} from "../../../models/MGroup";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {MGroup} from "@models/MGroup";
 
 @Component({
     selector: 'app-createGroup',
@@ -15,8 +15,8 @@ import {MGroup} from "../../../models/MGroup";
 })
 export class CreateGroupComponent implements OnInit {
 
-    defaultImage = "./assets/group7_2.jpg";
-    defaultUserImage = "./assets/user16.jpg";
+    defaultImage = "assets/group7_2.jpg";
+    defaultUserImage = "assets/user16.jpg";
     friends: MUser[];
     imageFormat: boolean;
     groupMembers: number[];

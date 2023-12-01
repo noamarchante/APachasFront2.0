@@ -41,20 +41,20 @@
                                     <img class="imageEvent" [src]="defaultImage" alt="foto de evento por defecto">
                                 </ng-template>
                                 <div class="date text">
-                                    <img class="icon" src="./assets/date.svg" alt="icono de fecha"
+                                    <img class="icon" src="assets/date.svg" alt="icono de fecha"
                                             id="detailUserEvent_date">{{event.eventStart | date: 'dd-MM-yyyy HH:mm'}}
                                     <p class="finalDate">{{event.eventEnd | date: 'dd-MM-yyyy HH:mm'}}</p></div>
                                 <div class="description-row text"
                                      name="eventLocation"
                                      id="detailEvent_eventLocation">
-                                    <img class="icon" src="./assets/location.svg" alt="icono de Localizacion"
+                                    <img class="icon" src="assets/location.svg" alt="icono de Localizacion"
                                          id="detailUserEvent_location">
                                     {{event.eventLocation}}
                                 </div>
                                 <div class="description-row text"
                                      name="eventDescription"
                                      id="detailEvent_eventDescription">
-                                    <img class="icon" src="./assets/comment.svg" alt="icono de comentario"
+                                    <img class="icon" src="assets/comment.svg" alt="icono de comentario"
                                          id="detailUserEvent_description">{{event.eventDescription}}
                                 </div>
                             </div>

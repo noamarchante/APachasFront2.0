@@ -1,12 +1,12 @@
 import {Component, OnInit} from "@angular/core";
-import {MUser} from "../../../models/MUser";
-import {UserUserEventService} from "../../../services/userUserEvent.service";
-import {AuthenticationService} from "../../../services/authentication.service";
+import {MUser} from "@models/MUser";
+import {UserUserEventService} from "@services/userUserEvent.service";
+import {AuthenticationService} from "@services/authentication.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {MUserUserEvent} from "../../../models/MUserUserEvent";
-import {EventService} from "../../../services/event.service";
-import {MEvent} from "../../../models/MEvent";
-import {UserService} from "../../../services/user.service";
+import {MUserUserEvent} from "@models/MUserUserEvent";
+import {EventService} from "@services/event.service";
+import {MEvent} from "@models/MEvent";
+import {UserService} from "@services/user.service";
 
 @Component({
     selector: 'app-transactionHistory',
@@ -21,8 +21,8 @@ export class TransactionHistoryComponent implements OnInit {
     previous:string;
     next:string;
     transactions: MUserUserEvent[] = [];
-    defaultUserImage: string = "./assets/user16.jpg";
-    defaultEventImage: string = "./assets/event7.jpg";
+    defaultUserImage: string = "assets/user16.jpg";
+    defaultEventImage: string = "assets/event7.jpg";
     imagesPartakers: {[index:number]: any;} = {};
     imagesEvents: {[index:number]: any;} = {};
     searchTransactionValue = "";

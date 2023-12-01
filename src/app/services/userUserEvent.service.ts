@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
+import {environment} from "environments/environment";
 import {map} from "rxjs/operators";
-import {UserUserEvent} from "./entities/UserUserEvent";
-import {MUserUserEvent} from "../models/MUserUserEvent";
-import {APachasError} from "../modules/notification/entities";
-import {MUser} from "../models/MUser";
-import {User} from "./entities/User";
+import {UserUserEvent} from "@services/entities/UserUserEvent";
+import {MUserUserEvent} from "@models/MUserUserEvent";
+import {APachasError} from "@modules/notification/entities";
+import {MUser} from "@models/MUser";
+import {User} from "@services/entities/User";
 
 @Injectable({
     providedIn: 'root'

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../services/user.service";
-import {UserUserService} from "../../../services/userUser.service";
-import {AuthenticationService} from "../../../services/authentication.service";
+import {UserService} from "@services/user.service";
+import {UserUserService} from "@services/userUser.service";
+import {AuthenticationService} from "@services/authentication.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {MUser} from "../../../models/MUser";
+import {MUser} from "@models/MUser";
 
 
 export enum STATUS {
@@ -19,7 +19,7 @@ export class ListUsersComponent implements OnInit {
     login = "";
     users: MUser[] = [];
     images: {[index:number]: any;} = {};
-    defaultImage = "./assets/user16.jpg";
+    defaultImage = "assets/user16.jpg";
     friends: {[index: number]: any;} = {};
     totalPage = 0;
     page = 0;

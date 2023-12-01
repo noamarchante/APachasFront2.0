@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {UserEventService} from "../../../services/userEvent.service";
-import {MUserEvent} from "../../../models/MUserEvent";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {UserEventService} from "@services/userEvent.service";
+import {MUserEvent} from "@models/MUserEvent";
 
 @Component({
     selector: 'app-createUserEventExpense',

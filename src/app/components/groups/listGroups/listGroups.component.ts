@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {AuthenticationService} from "../../../services/authentication.service";
-import {MGroup} from "../../../models/MGroup";
-import {GroupUserService} from "../../../services/groupUser.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {MGroup} from "@models/MGroup";
+import {GroupUserService} from "@services/groupUser.service";
 
 @Component({
     selector: 'app-groups',
@@ -13,7 +13,7 @@ export class ListGroupsComponent implements OnInit {
     groupName = "";
     groups: MGroup[] = [];
     images: {[index:number]: any;} = {};
-    defaultImage = "./assets/group7_2.jpg";
+    defaultImage = "assets/group7_2.jpg";
     totalPage:number= 0;
     page: number= 0;
     selectedUserGroup: MGroup = new MGroup();

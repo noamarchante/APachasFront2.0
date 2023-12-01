@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../../../services/user.service";
-import {MVerifyEmail} from "../../../../models/MVerifyEmail";
+import {UserService} from "@services/user.service";
+import {MVerifyEmail} from "@models/MVerifyEmail";
 @Component({
     selector: 'app-verifyEmail',
     templateUrl: './verifyEmail.component.html',

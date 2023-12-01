@@ -1,9 +1,9 @@
-import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {NotificationService} from "../../../../modules/notification/services/notification.service";
-import {AuthenticationService} from "../../../../services/authentication.service";
-import {AuthUser} from "../../../../models/AuthUser";
-import {UserService} from "../../../../services/user.service";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {AuthUser} from "@models/AuthUser";
+import {UserService} from "@services/user.service";
 import {Router} from "@angular/router";
 
 
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
     styleUrls: ['./editProfile.component.css']
 })
 export class EditProfileComponent implements OnInit, AfterViewChecked {
-    defaultImage = "./assets/user16.jpg";
+    defaultImage = "assets/user16.jpg";
     imageFormat: boolean;
     imageColor:string="";
     imageText: string;

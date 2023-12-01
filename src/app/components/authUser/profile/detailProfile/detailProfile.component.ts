@@ -1,13 +1,13 @@
 import {Component, OnInit,ChangeDetectionStrategy, ViewChild, TemplateRef,} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthenticationService} from "../../../../services/authentication.service";
-import {AuthUser} from "../../../../models/AuthUser";
+import {AuthenticationService} from "@services/authentication.service";
+import {AuthUser} from "@models/AuthUser";
 import {DomSanitizer} from "@angular/platform-browser";
 import {isSameDay, isSameMonth, addHours,} from 'date-fns';
 import { Subject } from 'rxjs';
 import {CalendarEvent, CalendarView,} from 'angular-calendar';
-import {UserEventService} from "../../../../services/userEvent.service";
-import {EventService} from "../../../../services/event.service";
+import {UserEventService} from "@services/userEvent.service";
+import {EventService} from "@services/event.service";
 
 const colors: any = {
     blue: {
@@ -33,7 +33,7 @@ const colors: any = {
 export class DetailProfileComponent implements OnInit {
     authUser: AuthUser;
     imageProfile: any = null;
-    defaultImage: string = "./assets/user16.jpg";
+    defaultImage: string = "assets/user16.jpg";
 
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 

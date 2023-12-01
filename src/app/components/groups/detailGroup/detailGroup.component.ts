@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GroupService} from "../../../services/group.service";
-import {GroupUserService} from "../../../services/groupUser.service";
-import {AuthenticationService} from "../../../services/authentication.service";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {MUser} from "../../../models/MUser";
-import {MGroup} from "../../../models/MGroup";
+import {GroupService} from "@services/group.service";
+import {GroupUserService} from "@services/groupUser.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {MUser} from "@models/MUser";
+import {MGroup} from "@models/MGroup";
 
 @Component({
     selector: 'app-detailGroup',
@@ -19,8 +19,8 @@ export class DetailGroupComponent implements OnInit {
     @Output()
     eventDetail = new EventEmitter<number>();
 
-    defaultUserImage: string = "./assets/user16.jpg";
-    defaultImage: string = "./assets/group7_2.jpg";
+    defaultUserImage: string = "assets/user16.jpg";
+    defaultImage: string = "assets/group7_2.jpg";
 
     groupMembers: MUser[] = [];
     groupMembersStored: MUser[] = [];

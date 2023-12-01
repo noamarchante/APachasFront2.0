@@ -1,13 +1,13 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
-import {MUserUserEvent} from "../../models/MUserUserEvent";
-import {ProductService} from "../../services/product.service";
-import {UserEventService} from "../../services/userEvent.service";
-import {UserUserEventService} from "../../services/userUserEvent.service";
-import {MEvent} from "../../models/MEvent";
-import {MUser} from "../../models/MUser";
-import {MUserEvent} from "../../models/MUserEvent";
+import {Component, OnInit} from '@angular/core';
+import {MUserUserEvent} from "@models/MUserUserEvent";
+import {ProductService} from "@services/product.service";
+import {UserEventService} from "@services/userEvent.service";
+import {UserUserEventService} from "@services/userUserEvent.service";
+import {MEvent} from "@models/MEvent";
+import {MUser} from "@models/MUser";
+import {MUserEvent} from "@models/MUserEvent";
 import {DomSanitizer} from "@angular/platform-browser";
-import {AuthenticationService} from "../../services/authentication.service";
+import {AuthenticationService} from "@services/authentication.service";
 
 @Component({
     selector: 'app-transactions',
@@ -22,7 +22,7 @@ export class ListTransactionsComponent implements OnInit {
     previous:string;
     next:string;
 
-    defaultUserImage: string = "./assets/user16.jpg";
+    defaultUserImage: string = "assets/user16.jpg";
     event: MEvent;
     eventPartakers: MUser[] = [];
     totalPartaker: number=0;

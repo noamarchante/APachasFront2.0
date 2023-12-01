@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AuthenticationService} from "../../../services/authentication.service";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {MUser} from "../../../models/MUser";
-import {MEvent} from "../../../models/MEvent";
-import {EventService} from "../../../services/event.service";
-import {UserEventService} from "../../../services/userEvent.service";
-import {STATUS} from "../../users/listUsers/listUsers.component";
-import {ProductService} from "../../../services/product.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {MUser} from "@models/MUser";
+import {MEvent} from "@models/MEvent";
+import {EventService} from "@services/event.service";
+import {UserEventService} from "@services/userEvent.service";
+import {ProductService} from "@services/product.service";
 import {Router} from "@angular/router";
-import {UserUserEventService} from "../../../services/userUserEvent.service";
-import {UserProductService} from "../../../services/userProduct.service";
+import {UserUserEventService} from "@services/userUserEvent.service";
+import {UserProductService} from "@services/userProduct.service";
+import { STATUS } from '@app/components/users/listUsers/listUsers.component';
 
 @Component({
     selector: 'app-detailEvent',
@@ -27,8 +27,8 @@ export class DetailEventComponent implements OnInit {
     @Output()
     eventDetail = new EventEmitter<number>();
 
-    defaultUserImage: string = "./assets/user16.jpg";
-    defaultImage: string = "./assets/event7.jpg";
+    defaultUserImage: string = "assets/user16.jpg";
+    defaultImage: string = "assets/event7.jpg";
 
     eventPartakers: MUser[] = [];
     eventPartakersStored: MUser[] = [];

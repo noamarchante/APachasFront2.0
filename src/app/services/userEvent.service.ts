@@ -1,16 +1,16 @@
 import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
-import {MEvent} from "../models/MEvent";
-import {Event} from "./entities/Event";
+import {environment} from "environments/environment";
+import {MEvent} from "@models/MEvent";
+import {Event} from "@services/entities/Event";
 import {map} from "rxjs/operators";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {MUser} from "../models/MUser";
-import {User} from "./entities/User";
-import {APachasError} from "../modules/notification/entities";
-import {UserEvent} from "./entities/UserEvent";
-import {MUserEvent} from "../models/MUserEvent";
-import {AuthenticationService} from "./authentication.service";
+import {MUser} from "@models/MUser";
+import {User} from "@services/entities/User";
+import {APachasError} from "@modules/notification/entities";
+import {UserEvent} from "@services/entities/UserEvent";
+import {MUserEvent} from "@models/MUserEvent";
+import {AuthenticationService} from "@services/authentication.service";
 
 @Injectable({
     providedIn: 'root'

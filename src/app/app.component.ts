@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {NotificationService} from './modules/notification/services/notification.service';
+import {NotificationService} from '@modules/notification/services/notification.service';
 import {NotificationsService} from 'angular2-notifications';
-import {Severity} from './modules/notification/entities';
-import {AuthenticationService} from './services/authentication.service';
+import {Severity} from '@modules/notification/entities';
+import {AuthenticationService} from '@services/authentication.service';
 import {Router} from '@angular/router';
-import {UserEventService} from "./services/userEvent.service";
-import {UserUserService} from "./services/userUser.service";
+import {UserEventService} from "@services/userEvent.service";
+import {UserUserService} from "@services/userUser.service";
 
 declare var paypal;
 
@@ -16,7 +16,7 @@ declare var paypal;
 })
 export class AppComponent implements OnInit {
   title = 'APachas';
-  defaultImage: string = './assets/user16.jpg';
+  defaultImage: string = 'assets/user16.jpg';
   notifications: string[] = [];
   badge: string ="";
   constructor(

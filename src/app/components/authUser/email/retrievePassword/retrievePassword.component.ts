@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {MRetrievePassword} from "../../../../models/MRetrievePassword";
+import {MRetrievePassword} from "@models/MRetrievePassword";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../../../services/user.service";
+import {UserService} from "@services/user.service";
 
 @Component({
     selector: 'app-retrievePassword',

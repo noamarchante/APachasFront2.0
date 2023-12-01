@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {environment} from "../../environments/environment";
-import {APachasError} from "../modules/notification/entities";
-import {User} from "./entities/User";
-import {MUser} from "../models/MUser";
-import {UserUser} from "./entities/UserUser";
-import {MUserUser} from "../models/MUserUser";
+import {environment} from "environments/environment";
+import {APachasError} from "@modules/notification/entities";
+import {User} from "@services/entities/User";
+import {MUser} from "@models/MUser";
+import {UserUser} from "@services/entities/UserUser";
+import {MUserUser} from "@models/MUserUser";
 import {map} from "rxjs/operators";
 
 @Injectable({

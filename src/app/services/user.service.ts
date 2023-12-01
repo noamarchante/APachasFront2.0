@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {environment} from "../../environments/environment";
-import {APachasError} from "../modules/notification/entities";
-import {User} from "./entities/User";
+import {environment} from "environments/environment";
+import {APachasError} from "@modules/notification/entities";
+import {User} from "@services/entities/User";
 import {map} from "rxjs/operators";
-import {MUser} from "../models/MUser";
-import {AuthUser} from "../models/AuthUser";
-import {MVerifyEmail} from "../models/MVerifyEmail";
-import {MRetrievePassword} from "../models/MRetrievePassword";
+import {MUser} from "@models/MUser";
+import {AuthUser} from "@models/AuthUser";
+import {MVerifyEmail} from "@models/MVerifyEmail";
+import {MRetrievePassword} from "@models/MRetrievePassword";
 
 @Injectable({
   providedIn: 'root'

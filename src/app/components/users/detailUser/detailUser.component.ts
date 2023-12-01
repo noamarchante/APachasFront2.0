@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {AuthenticationService} from "../../../services/authentication.service";
-import {STATUS} from "../listUsers/listUsers.component";
-import {UserUserService} from "../../../services/userUser.service";
-import {MUser} from "../../../models/MUser";
-import {MGroup} from "../../../models/MGroup";
-import {MUserUser} from "../../../models/MUserUser";
-import {MEvent} from "../../../models/MEvent";
-import {GroupUserService} from "../../../services/groupUser.service";
-import {UserEventService} from "../../../services/userEvent.service";
+import {AuthenticationService} from "@services/authentication.service";
+import {STATUS} from "@app/components/users/listUsers/listUsers.component";
+import {UserUserService} from "@services/userUser.service";
+import {MUser} from "@models/MUser";
+import {MGroup} from "@models/MGroup";
+import {MUserUser} from "@models/MUserUser";
+import {MEvent} from "@models/MEvent";
+import {GroupUserService} from "@services/groupUser.service";
+import {UserEventService} from "@services/userEvent.service";
 
 export enum MESSAGE{
     CANCELREQUEST = '¿Cancelar solicitud?', UNFOLLOW = '¿Dejar de seguir?', ALLOWREQUEST = '¿Aceptar solicitud?', SENTREQUEST = '¿Enviar solicitud?'
@@ -23,9 +23,9 @@ export class DetailUserComponent implements OnInit {
 
     @Output()
     eventMessage = new EventEmitter<number>();
-    defaultEventImage: string = "./assets/event7.jpg";
-    defaultGroupImage: string = "./assets/group7_2.jpg";
-    defaultImage: string = "./assets/user16.jpg";
+    defaultEventImage: string = "assets/event7.jpg";
+    defaultGroupImage: string = "assets/group7_2.jpg";
+    defaultImage: string = "assets/user16.jpg";
     previousUser: string;
     nextUser: string;
 

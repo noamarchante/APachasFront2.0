@@ -1,10 +1,10 @@
  import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {AuthUser} from '../models/AuthUser';
-import {APachasError} from '../modules/notification/entities';
-import {UserService} from "./user.service";
- import {NotificationService} from "../modules/notification/services/notification.service";
+import {environment} from 'environments/environment';
+import {AuthUser} from '@models/AuthUser';
+import {APachasError} from '@modules/notification/entities';
+import {UserService} from "@services/user.service";
+ import {NotificationService} from "@modules/notification/services/notification.service";
 
 //SERVICE -> Se encarga de acceder a los datos para entregarlos a los componentes
 @Injectable({

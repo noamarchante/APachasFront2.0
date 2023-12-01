@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from "../../../services/user.service";
-import {MUser} from "../../../models/MUser";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
+import {UserService} from "@services/user.service";
+import {MUser} from "@models/MUser";
+import {NotificationService} from "@modules/notification/services/notification.service";
 
 @Component({
   selector: 'app-register',

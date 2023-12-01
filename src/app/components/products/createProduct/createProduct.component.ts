@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {NotificationService} from "../../../modules/notification/services/notification.service";
-import {MProduct} from "../../../models/MProduct";
-import {ProductService} from "../../../services/product.service";
-import {PRODUCTJOIN} from "../listProducts/listProducts.component";
-import {UserProductService} from "../../../services/userProduct.service";
-import {AuthenticationService} from "../../../services/authentication.service";
+import {NotificationService} from "@modules/notification/services/notification.service";
+import {MProduct} from "@models/MProduct";
+import {ProductService} from "@services/product.service";
+import {UserProductService} from "@services/userProduct.service";
+import {AuthenticationService} from "@services/authentication.service";
 
 @Component({
     selector: 'app-createProduct',
@@ -14,7 +13,7 @@ import {AuthenticationService} from "../../../services/authentication.service";
 })
 export class CreateProductComponent implements OnInit {
 
-    defaultImage = "./assets/product3.jpg";
+    defaultImage = "assets/product3.jpg";
     imageFormat: boolean;
     imageColor:string="";
     imageText: string;
