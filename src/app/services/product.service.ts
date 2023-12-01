@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
-import {environment} from "environments/environment";
+import {environment} from "@environments/environment";
 import {APachasError} from "@modules/notification/entities";
 import {MProduct} from "@models/MProduct";
 import {Group} from "@services/entities/Group";

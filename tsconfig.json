@@ -22,7 +22,8 @@
       "@models/*": ["app/models/*"],
       "@modules/*": ["app/modules/*"],
       "@guards/*": ["app/guards/*"],
-      "@helpers/*": ["app/helpers/*"]
+      "@helpers/*": ["app/helpers/*"],
+      "@environments/*": ["environments/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,6 +1,6 @@
  import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from 'environments/environment';
+import {environment} from '@environments/environment';
 import {AuthUser} from '@models/AuthUser';
 import {APachasError} from '@modules/notification/entities';
 import {UserService} from "@services/user.service";

@@ -1,5 +1,5 @@
 import {Observable} from "rxjs";
-import {environment} from "environments/environment";
+import {environment} from "@environments/environment";
 import {MEvent} from "@models/MEvent";
 import {Event} from "@services/entities/Event";
 import {map} from "rxjs/operators";
