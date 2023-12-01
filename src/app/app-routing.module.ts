@@ -94,10 +94,10 @@ const routes: Routes = [
 		path: 'retrievePasswordEmail', component: RetrievePasswordEmailComponent
 	},
 	{
-		path: 'transactionHistory', component: TransactionHistoryComponent
+		path: 'transactionHistory', component: TransactionHistoryComponent, canActivate: [AuthGuard]
 	},
 	{
-		path: 'paypal', component: PaypalComponent
+		path: 'paypal', component: PaypalComponent, canActivate: [AuthGuard]
 	},
 	{
 		path: '', redirectTo: 'login', pathMatch: 'full'
@@ -107,7 +107,7 @@ const routes: Routes = [
 @NgModule({
 	imports: [
 		RouterModule.forRoot(routes, {
-			useHash: false,
+			useHash: true,
 			anchorScrolling: 'enabled'
 		})
 	],
