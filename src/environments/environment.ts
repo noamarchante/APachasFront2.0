@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  restApi: 'https://apachasapi20-production.up.railway.app/'
+  restApi: 'https://apachasapi20-production.up.railway.app'
 };
 
 /*
