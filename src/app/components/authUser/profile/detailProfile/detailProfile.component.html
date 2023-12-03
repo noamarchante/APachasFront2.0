@@ -5,15 +5,15 @@
             <div class="row">
                 <div class="col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 imageDiv">
                     <ng-container *ngIf="authUser.photo; else imagesDiv">
-                        <img class="image" [src]="imageProfile" alt=""
+                        <img class="image" [src]="imageProfile" alt="imagen de perfil"
                              id="detailProfile_photo">
                     </ng-container>
                     <ng-template #imagesDiv>
-                        <img class="image" [src]="defaultImage">
+                        <img class="image" [src]="defaultImage" alt="imagen por defecto">
                     </ng-template>
                 </div>
                 <div class="col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 titleclass">
-                    <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#editProfileModal">Editar perfil</button>
+                    <button type="button" title="editar perfil" class="button" data-bs-toggle="modal" data-bs-target="#editProfileModal">Editar perfil</button>
 
                 </div>
             </div>

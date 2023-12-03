@@ -13,17 +13,17 @@
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                 <div class="row imageRow">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 file-input imageDiv">
-                                        <input (change)="getImage($event)" accept="image/png,image/jpeg" class="file"
+                                        <input (change)="getImage($event)" title="fichero para foto" accept="image/png,image/jpeg" class="file"
                                                type="file"
                                                id="editProfile_userPhoto" name="userPhoto">
                                         <label title="Cambiar imagen de usuario" for="editProfile_userPhoto"
                                                (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">
                                             <ng-container *ngIf="authUser.photo; else imagesDiv">
-                                                <img class="image imageColor2" [ngClass]="imageColor" [src]="authUser.photo" alt=""
+                                                <img class="image imageColor2" [ngClass]="imageColor" [src]="authUser.photo" alt="foto de perfil"
                                                      id="editProfile_photo">
                                             </ng-container>
                                             <ng-template #imagesDiv>
-                                                <img class="image imageColor2" [ngClass]="imageColor" [src]="defaultImage">
+                                                <img class="image imageColor2" [ngClass]="imageColor" [src]="defaultImage" title="imagen por defecto" alt="foto de perfil popr defecto">
                                             </ng-template>
                                             <p class="imageText2" [ngClass]="imageText"></p>
                                         </label>
@@ -37,7 +37,7 @@
                                 <div class="row secondDiv">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 passwordDiv">
                                         <div>
-                                            <input type="password" class="inputs" id="editProfile_password" autocomplete="current-password" name="current-password" placeholder="Contraseña Actual"
+                                            <input type="password" class="inputs" id="editProfile_password" title="contraseña" autocomplete="current-password" name="current-password" placeholder="Contraseña Actual"
                                                    [(ngModel)]="password" #passwordForm="ngModel" minlength="6">
                                             <div *ngIf="password != authUser.password && password !=''" class="alert alert-danger">
                                                 <div>La contraseña no es correcta</div>
@@ -55,7 +55,7 @@
                                 <div class="row secondDiv">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div>
-                                            <input type="password" class="inputs" id="editProfile_newPassword" autocomplete="new-password" name="new-password" placeholder="Nueva contraseña"
+                                            <input type="password" title="contraseña nueva" class="inputs" id="editProfile_newPassword" autocomplete="new-password" name="new-password" placeholder="Nueva contraseña"
                                                    [(ngModel)]="newPassword" #passwordForm="ngModel" minlength="6">
                                             <div *ngIf="editProfileForm.submitted && passwordForm.invalid" class="alert alert-danger">
                                                 <div *ngIf="passwordForm.errors.required">La contraseña es un campo obligatorio</div>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="row secondDiv">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <input type="password" class="inputs" id="editProfile_userPasswordConfirm" autocomplete="new-password" name="new-password"
+                                        <input type="password" title="confirmacion contraseña" class="inputs" id="editProfile_userPasswordConfirm" autocomplete="new-password" name="new-password"
                                                placeholder="Confirmación contraseña" [(ngModel)]="passwordConfirm"
                                                #userPasswordConfirmForm="ngModel" minlength="6">
                                         <div *ngIf="newPassword != passwordConfirm" class="alert alert-danger">
@@ -90,7 +90,7 @@
                                         <input type="text" id="editProfile_userName" name="userName"
                                                class="inputs" placeholder="Nombre*" minlength="1" maxlength="40"
                                                pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]+)*"
-                                               title="Puede contener letras, máximo 40 caracteres. Campo obligatorio"
+                                               title="nombre"
                                                [(ngModel)]="authUser.name" required
                                                #userNameForm="ngModel">
                                         <div *ngIf="editProfileForm.onSubmit(undefined) && userNameForm.invalid  || userNameForm.invalid && userNameForm.value != null"
@@ -108,7 +108,7 @@
                                         <input type="text" id="editProfile_userSurname" name="userSurname"
                                                class="inputs" placeholder="Apellidos*" minlength="1" maxlength="40"
                                                pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*"
-                                               title="Puede contener letras, máximo 40 caracteres. Campo obligatorio"
+                                               title="apellidos"
                                                [(ngModel)]="authUser.surname" required
                                                #userSurnameForm="ngModel">
                                         <div *ngIf="editProfileForm.onSubmit(undefined) && userSurnameForm.invalid  || userSurnameForm.invalid && userSurnameForm.value != null"
@@ -126,7 +126,7 @@
                                         <input type="text" id="editProfile_login" name="login"
                                                class="inputs" placeholder="Login*" minlength="1" maxlength="40"
                                                pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*"
-                                               title="Puede contener letras, máximo 40 caracteres. Campo obligatorio"
+                                               title="login"
                                                [(ngModel)]="login" required
                                                #loginForm="ngModel" autocomplete="username">
                                         <div *ngIf="!available" class="alert alert-danger">
@@ -170,7 +170,7 @@
                                 <div class="row description-row">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-check form-switch">
-                                            <input name="notify" class="form-check-input check" type="checkbox" id="flexSwitchCheckDefault" [checked]="authUser.notify" (click)="setNotify()">
+                                            <input name="notify" title="establecer notificaciones por email" class="form-check-input check" type="checkbox" id="flexSwitchCheckDefault" [checked]="authUser.notify" (click)="setNotify()">
                                             <label class="form-check-label text check" for="flexSwitchCheckDefault">Notificaciones email</label>
                                         </div>
                                     </div>
@@ -179,12 +179,12 @@
                         </div>
                         <div class="modal-footer">
                             <div class="buttons">
-                                <button type="button" id="closeButton" class="button close" data-bs-dismiss="modal" (click)="closeModal()">
+                                <button type="button" id="closeButton" title="cerrar" class="button close" data-bs-dismiss="modal" (click)="closeModal()">
                                     Cerrar
                                 </button>
                             </div>
                             <div class="buttons">
-                                <input type="submit" class="button" value="Guardar">
+                                <input type="submit" title="guardar" class="button" value="Guardar">
                             </div>
                         </div>
                     </div>

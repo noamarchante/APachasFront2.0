@@ -100,7 +100,7 @@ const routes: Routes = [
 		path: 'paypal', component: PaypalComponent, canActivate: [AuthGuard]
 	},
 	{
-		path: '', redirectTo: 'login', pathMatch: 'full'
+		path: '', redirectTo: localStorage.getItem('currentUser') ? 'home': "login", pathMatch: 'full'
 	}
 ];
 

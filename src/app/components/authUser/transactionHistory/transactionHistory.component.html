@@ -68,12 +68,12 @@
                         <ng-container *ngIf="getEventTransaction(transaction.eventId).eventPhoto != null; else eventImagesDiv">
                             <p class="imageP">
                                 <img class="imageTransaction"
-                                     [src]="imagesEvents[transaction.eventId]" alt="" id="detailEvent_photo">
+                                     [src]="imagesEvents[transaction.eventId]" alt="imagen de evento" id="detailEvent_photo">
                             </p>
                         </ng-container>
                         <ng-template #eventImagesDiv>
                             <p class="imageP">
-                                <img class="imageTransaction" [src]="defaultEventImage">
+                                <img class="imageTransaction" [src]="defaultEventImage" alt="imagen de evento por defecto">
                             </p>
                         </ng-template>
                         <div class="card-body-xxl-7 card-body-xl-12 card-body-lg-7 card-body-md-12 card-body-sm-7 divAligment">
@@ -84,12 +84,12 @@
                         <ng-container *ngIf="getActor(transaction.senderId).userPhoto != null; else senderImagesDiv">
                             <p class="imageP">
                                 <img class="imageTransaction"
-                                 [src]="imagesPartakers[transaction.senderId]" alt="" id="detailSender_photo">
+                                 [src]="imagesPartakers[transaction.senderId]" alt="imagen de usuario participante" id="detailSender_photo">
                             </p>
                         </ng-container>
                         <ng-template #senderImagesDiv>
                             <p class="imageP">
-                                <img class="imageTransaction" [src]="defaultUserImage">
+                                <img class="imageTransaction" [src]="defaultUserImage" alt="imagen por defecto usuario participante">
                             </p>
                         </ng-template>
                         <div class="card-body-xxl-7 card-body-xl-12 card-body-lg-7 card-body-md-12 card-body-sm-7 divAligment">
@@ -100,12 +100,12 @@
                         <ng-container *ngIf="getActor(transaction.receiverId).userPhoto != null; else receiverImagesDiv">
                         <p class="imageP">
                             <img class="imageTransaction"
-                                 [src]="imagesPartakers[transaction.receiverId]" alt="" id="detailReceiver_photo">
+                                 [src]="imagesPartakers[transaction.receiverId]" alt="imagen usuario" id="detailReceiver_photo">
                         </p>
                         </ng-container>
                         <ng-template #receiverImagesDiv>
                             <p class="imageP">
-                                <img class="imageTransaction" [src]="defaultUserImage">
+                                <img class="imageTransaction" [src]="defaultUserImage" alt="imagen usuario por defecto">
                             </p>
                         </ng-template>
                         <div class="card-body-xxl-7 card-body-xl-12 card-body-lg-7 card-body-md-12 card-body-sm-7 divAligment">
@@ -120,7 +120,7 @@
                             <p class="text status">{{getStatus(transaction)}}</p>
                         </ng-container>
                         <ng-template #statusDiv>
-                            <button class="text status button" type="button" data-bs-toggle="modal" data-bs-target="#messageConfirmModal" (click)="messageValue(transaction)">{{getStatus(transaction)}}</button>
+                            <button class="text status button" title="set status" type="button" data-bs-toggle="modal" data-bs-target="#messageConfirmModal" (click)="messageValue(transaction)">{{getStatus(transaction)}}</button>
                         </ng-template>
                     </td>
                 </tr>
@@ -129,9 +129,9 @@
     </div>
     <div class="paginationDiv">
         <ul class="row pagination">
-            <li class="page-item" [ngClass]="previous" *ngIf="transactionPage!=0"><a class="page-link previous" (click)="setTransactionPage(-1)">Anterior</a>
+            <li class="page-item" [ngClass]="previous" *ngIf="transactionPage!=0"><a class="page-link previous" title="anterior" (click)="setTransactionPage(-1)">Anterior</a>
             </li>
-            <li class="page-item" [ngClass]="next" *ngIf="transactionPage+1<totalTransactionPage"><a class="page-link next" (click)="setTransactionPage(1)">Siguiente</a>
+            <li class="page-item" [ngClass]="next" *ngIf="transactionPage+1<totalTransactionPage"><a class="page-link next" title="siguiente" (click)="setTransactionPage(1)">Siguiente</a>
             </li>
         </ul>
     </div>

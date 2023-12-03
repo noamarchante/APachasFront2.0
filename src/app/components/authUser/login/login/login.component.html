@@ -7,7 +7,7 @@
                     <h2>Iniciar sesión en <a href=""><br>¡A pachas!</a></h2>
                     <div>
                         <input type="text" id="login_userLogin" name="userLogin" placeholder="Nombre de usuario"
-                               pattern="[a-zA-ZñÑ0-9_-]{1,100}" title="Must be an alphanumeric"
+                               pattern="[a-zA-ZñÑ0-9_-]{1,100}" title="Nombre de usuario"
                                [(ngModel)]="login" required #usernameForm="ngModel">
                         <div *ngIf="loginForm.submitted && usernameForm.invalid" class="alert alert-danger">
                             <div *ngIf="usernameForm.errors.required">Username is required.</div>
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div>
-                        <input type="password" id="login_userPassword" name="userPassword" placeholder="Contraseña"
+                        <input type="password" id="login_userPassword" title="password" name="userPassword" placeholder="Contraseña"
                                [(ngModel)]="password" required #passwordForm="ngModel" minlength="6">
                         <div *ngIf="loginForm.submitted && passwordForm.invalid" class="alert alert-danger">
                             <div *ngIf="passwordForm.errors.required">Password is required.</div>
@@ -26,9 +26,9 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Iniciar sesión">
-                    <p class="signup">¿has olvidado tu contraseña? <a href="" data-bs-toggle="modal" data-bs-target="#retrievePasswordEmailModal"> Recupérala</a></p>
-                    <p class="signup">¿no tienes una cuenta? <a routerLink="/register"> Regístrate</a></p>
+                    <input type="submit" title="iniciar sesion" value="Iniciar sesión">
+                    <p class="signup">¿has olvidado tu contraseña? <a href="" title="recuperar contraseña" data-bs-toggle="modal" data-bs-target="#retrievePasswordEmailModal"> Recupérala</a></p>
+                    <p class="signup">¿no tienes una cuenta? <a title="registro" routerLink="/register"> Regístrate</a></p>
 
                 </form>
             </div>

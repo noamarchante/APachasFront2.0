@@ -1,25 +1,25 @@
 <header *ngIf="authenticationService.getUser().authenticated == true">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand title" aria-label="vuelta a la página principal"  routerLink="/home"><img class="logo" src="assets/logo.png" alt="logo"></a>
+      <a class="navbar-brand title" aria-label="vuelta a la página principal" title="home"  routerLink="/home"><img class="logo" src="assets/logo.png" alt="logo"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav w-100">
           <li class="nav-item">
-            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="usuarios" routerLink="/users">Usuarios</a>
+            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="usuarios" title="usuarios" routerLink="/users">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="grupos" routerLink="/groups">Grupos</a>
+            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="grupos" title="grupos" routerLink="/groups">Grupos</a>
           </li>
           <li class="nav-item">
-            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="eventos" routerLink="/events">Eventos</a>
+            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="eventos" title="eventos" routerLink="/events">Eventos</a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="dropdown not">
-            <button type="button" class="notButton nav-link  text" id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" title="notificaciones" class="notButton nav-link  text" id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
               <span [ngClass]="badge" class="position-absolute top-0 start-100 translate-middle p-1 border border-light rounded-circle">
                 <span class="visually-hidden">Notificaciones</span>
               </span>
@@ -32,7 +32,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown profile">
-            <a *ngIf="authenticationService.getUser().authenticated == true" aria-label="desplegable" class="nav-link dropdown-toggle text" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a *ngIf="authenticationService.getUser().authenticated == true" title="menu" aria-label="desplegable" class="nav-link dropdown-toggle text" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <ng-container *ngIf="authenticationService.getUser().photo; else imagesDiv">
                 <img class="image" [src]="authenticationService.getUser().photo" alt="foto de usuario">
               </ng-container>
@@ -42,11 +42,11 @@
             </a>
             <ul class="dropdown-menu profileDrop" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a *ngIf="authenticationService.getUser().authenticated == true" aria-label="perfil" class="dropdown-item textDrop" routerLink="/profile">Perfil</a>
+                <a *ngIf="authenticationService.getUser().authenticated == true" title="perfil" aria-label="perfil" class="dropdown-item textDrop" routerLink="/profile">Perfil</a>
               </li>
-              <li><a *ngIf="authenticationService.getUser().authenticated == true" aria-label="historial de transacciones" class="dropdown-item textDrop" routerLink="/transactionHistory">Historial de transacciones</a></li>
-              <li><a *ngIf="authenticationService.getUser().authenticated == false" class="dropdown-item textDrop" aria-label="inicio de sesión" (click)="logIn()">Iniciar sesión</a></li>
-              <li><a *ngIf="authenticationService.getUser().authenticated == true" class="dropdown-item textDrop" aria-label="cierre de sesión" (click)="logOut()">Cerrar sesión</a></li>
+              <li><a *ngIf="authenticationService.getUser().authenticated == true" aria-label="historial de transacciones" class="dropdown-item textDrop" title="historial" routerLink="/transactionHistory">Historial de transacciones</a></li>
+              <li><a *ngIf="authenticationService.getUser().authenticated == false" class="dropdown-item textDrop" aria-label="inicio de sesión" title="inicio sesion" (click)="logIn()">Iniciar sesión</a></li>
+              <li><a *ngIf="authenticationService.getUser().authenticated == true" class="dropdown-item textDrop" aria-label="cierre de sesión" title="cerrar sesion" (click)="logOut()">Cerrar sesión</a></li>
             </ul>
           </li>
         </ul>
