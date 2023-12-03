@@ -69,7 +69,7 @@ section .container .user .formBx
   transition: 0.5s;
 }
 
-section .container .user .formBx h2
+section .container .user .formBx h1
 {
   font-size: 18px;
   font-weight: 600;
@@ -81,7 +81,7 @@ section .container .user .formBx h2
   color: #555;
 }
 
-section .container .user .formBx h2 a {
+section .container .user .formBx h1 a {
   font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
