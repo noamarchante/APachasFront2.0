@@ -41,15 +41,7 @@ import {RetrievePasswordEmailComponent} from "@app/components/authUser/login/ret
 import {TransactionHistoryComponent} from "@app/components/authUser/transactionHistory/transactionHistory.component";
 import {NgxPayPalModule} from "ngx-paypal";
 import {PaypalComponent} from "@app/components/authUser/paypal/paypal.component";
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LanguageSwitcherComponent } from './components/translations/language-switcher.component';
-import { LanguageService } from './services/language.service';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
-
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/locale/', '.json');
-}
 registerLocaleData(localeEs, 'es');
 @NgModule({
   declarations: [
@@ -77,8 +69,7 @@ registerLocaleData(localeEs, 'es');
     RetrievePasswordComponent,
     RetrievePasswordEmailComponent,
     TransactionHistoryComponent,
-    PaypalComponent,
-    LanguageSwitcherComponent
+    PaypalComponent
   ],
     imports: [
         AppRoutingModule,
@@ -99,14 +90,7 @@ registerLocaleData(localeEs, 'es');
             clickToClose: true
         }),
         Daterangepicker,
-        NgxPayPalModule,
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient],
-          },
-        }),
+        NgxPayPalModule
     ],
 
   providers: [
@@ -114,7 +98,6 @@ registerLocaleData(localeEs, 'es');
       provide: ErrorHandler,
       useClass: ErrorNotificationHandler
     },
-    LanguageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor, multi: true
