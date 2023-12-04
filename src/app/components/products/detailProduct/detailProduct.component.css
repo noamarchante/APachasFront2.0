@@ -29,7 +29,7 @@
     box-shadow: none;
     margin: 8px 0;
     max-width: 180px;
-    background: #66bb6a;
+    background: #236726;
     color: #fff;
     cursor: pointer;
     font-size: 14px;
@@ -260,7 +260,7 @@ ul.paginationProduct li:last-child a
     text-transform: uppercase;
     font-weight: 600;
     text-decoration: none;
-    color: #66bb6a;
+    color: #236726;
     cursor:pointer;
     vertical-align: center;
 }

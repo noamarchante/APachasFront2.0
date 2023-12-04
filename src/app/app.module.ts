@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {AppComponent} from '@app/app.component';
 import {AppRoutingModule} from '@app/app-routing.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {NotificationModule} from '@modules/notification/notification.module';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {ErrorNotificationHandler} from '@modules/notification/handlers/error-notification.handler';
@@ -41,7 +41,15 @@ import {RetrievePasswordEmailComponent} from "@app/components/authUser/login/ret
 import {TransactionHistoryComponent} from "@app/components/authUser/transactionHistory/transactionHistory.component";
 import {NgxPayPalModule} from "ngx-paypal";
 import {PaypalComponent} from "@app/components/authUser/paypal/paypal.component";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageSwitcherComponent } from './components/translations/language-switcher.component';
+import { LanguageService } from './services/language.service';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/locale/', '.json');
+}
 registerLocaleData(localeEs, 'es');
 @NgModule({
   declarations: [
@@ -69,7 +77,8 @@ registerLocaleData(localeEs, 'es');
     RetrievePasswordComponent,
     RetrievePasswordEmailComponent,
     TransactionHistoryComponent,
-    PaypalComponent
+    PaypalComponent,
+    LanguageSwitcherComponent
   ],
     imports: [
         AppRoutingModule,
@@ -90,7 +99,14 @@ registerLocaleData(localeEs, 'es');
             clickToClose: true
         }),
         Daterangepicker,
-        NgxPayPalModule
+        NgxPayPalModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+          },
+        }),
     ],
 
   providers: [
@@ -98,6 +114,7 @@ registerLocaleData(localeEs, 'es');
       provide: ErrorHandler,
       useClass: ErrorNotificationHandler
     },
+    LanguageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor, multi: true

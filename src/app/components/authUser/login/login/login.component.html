@@ -26,6 +26,7 @@
                             </div>
                         </div>
                     </div>
+                    <p>{{'greeting'| translate}}</p>
                     <input type="submit" title="iniciar sesion" value="Iniciar sesión">
                     <p class="signup">¿has olvidado tu contraseña? <a href="" title="recuperar contraseña" data-bs-toggle="modal" data-bs-target="#retrievePasswordEmailModal"> Recupérala</a></p>
                     <p class="signup">¿no tienes una cuenta? <a title="registro" routerLink="/register"> Regístrate</a></p>
@@ -38,3 +39,5 @@
 <app-retrievePasswordEmail></app-retrievePasswordEmail>
 
 <simple-notifications></simple-notifications>
+
+<app-language-switcher></app-language-switcher>

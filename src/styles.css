@@ -95,7 +95,7 @@
 
 
 .daterangepicker td.active.start-date, .daterangepicker td.active.end-date {
-     background-color: #66bb6a !important;
+     background-color: #236726 !important;
 }
 
 .daterangepicker td.in-range {
@@ -103,7 +103,7 @@
 }
 
 .daterangepicker .applyBtn{
-     background-color: #66bb6a !important;
+     background-color: #236726 !important;
      border: none;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .cal-month-view .cal-day-badge{
-     background-color: #66bb6a !important;
+     background-color: #236726 !important;
 }
 
 .cal-month-view .cal-open-day-events{
@@ -206,8 +206,8 @@
 }
 
 .form-check-input:checked{
-     background-color: #66bb6a;
-     border-color: #66bb6a;
+     background-color: #236726;
+     border-color: #236726;
 }
 
 .form-check-input:focus{

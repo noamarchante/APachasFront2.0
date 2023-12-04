@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": false
   },
@@ -29,6 +28,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "i18n": {
+              "sourceLocale": "es",
+              "locales": {
+                "en": "src/locale/messages.en.xlf",
+                "gl": "src/locale/messages.gl.xlf"
+              }
+            },
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css",
