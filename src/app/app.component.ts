@@ -6,7 +6,7 @@ import {AuthenticationService} from '@services/authentication.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {UserEventService} from "@services/userEvent.service";
 import {UserUserService} from "@services/userUser.service";
-import { DarkModeService } from './services/darkMode.service';
+import { DarkModeService } from '@services/darkMode.service';
 
 declare var paypal;
 

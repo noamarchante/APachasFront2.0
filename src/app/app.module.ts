@@ -41,9 +41,9 @@ import {RetrievePasswordEmailComponent} from "@app/components/authUser/login/ret
 import {TransactionHistoryComponent} from "@app/components/authUser/transactionHistory/transactionHistory.component";
 import {NgxPayPalModule} from "ngx-paypal";
 import {PaypalComponent} from "@app/components/authUser/paypal/paypal.component";
-import { LangPipe } from './modules/translations/lang.pipe';
-import { TranslationComponent } from './components/translation/translation.component';
-import { TranslationModule } from './modules/translations/translation.module';
+import { LangPipe } from '@modules/translations/lang.pipe';
+import { TranslationComponent } from '@app/components/translation/translation.component';
+import { TranslationModule } from '@modules/translations/translation.module';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
