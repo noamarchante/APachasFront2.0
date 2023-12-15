@@ -1,6 +1,6 @@
 import {Injectable, Optional, SkipSelf} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import { TranslationServiceConfig } from './translations-config.service';
+import { TranslationServiceConfig } from '@modules/translations/translations-config.service';
 
 /**
  * Class representing the translation service.

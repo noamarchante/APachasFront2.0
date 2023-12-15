@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {HttpClientModule} from '@angular/common/http';
 import { TranslationService } from './translation.service';
-import { TranslationServiceConfig } from './translations-config.service';
+import { TranslationServiceConfig } from '@modules/translations/translations-config.service';
 
 @NgModule({
 	declarations: [],
