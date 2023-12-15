@@ -55,7 +55,7 @@ export class DetailEventComponent implements OnInit {
     messageRequest: boolean;
     close: boolean = false;
 
-    googleCalendarUrl: string = "";
+    googleCalendarUrl: string = "https://calendar.google.com/calendar/u/0/r/eventedit";
     darkMode = false;
 
     constructor(private eventService: EventService,
