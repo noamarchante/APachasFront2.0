@@ -31,9 +31,13 @@
     background-color: rgba(102, 187, 106, 0.1);
 }
 
+.darkDrop:hover, .darkDrop:focus {
+    background-color: rgb(25, 22, 27) !important;
+}
+
 .buttonText{
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: none;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -98,7 +102,7 @@
 
 .text{
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: none;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;

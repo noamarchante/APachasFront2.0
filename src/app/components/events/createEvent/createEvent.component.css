@@ -16,6 +16,14 @@
     color: #555;
 }
 
+.inputDark{
+    border: 1px solid #ffffff !important;
+}
+
+.closeDark{
+    border: 1px solid #ffffff !important;
+}
+
 .file {
     opacity: 0;
     width: 0.1px;

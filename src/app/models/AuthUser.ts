@@ -14,6 +14,7 @@ export class AuthUser {
   private userBirthday: string;
   private userPhoto: string;
   private userNotify: boolean;
+  private notifications: string[];
 
   constructor() {
     const user: AuthUser = JSON.parse(<string>localStorage.getItem('currentUser'));
@@ -50,6 +51,14 @@ export class AuthUser {
 
   set authenticated(value: boolean) {
     this._authenticated = value;
+  }
+
+  get notification(): string[] {
+    return this.notifications;
+  }
+
+  set notification(value: string[]) {
+    this.notifications = value;
   }
 
   get email(): string {

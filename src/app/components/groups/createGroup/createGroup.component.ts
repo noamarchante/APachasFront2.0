@@ -7,6 +7,8 @@ import {UserUserService} from "@services/userUser.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {NotificationService} from "@modules/notification/services/notification.service";
 import {MGroup} from "@models/MGroup";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
     selector: 'app-createGroup',
@@ -22,21 +24,28 @@ export class CreateGroupComponent implements OnInit {
     groupMembers: number[];
     imageColor:string="";
     imageText: string;
-    title: string = "CREAR GRUPO";
+    title: string = this.translationService.translate('group.create.title');
     _userGroup: MGroup;
     @Output()
     eventSave = new EventEmitter<boolean>();
+
+    darkMode = false;
 
     constructor(private groupService: GroupService,
                 private groupUserService: GroupUserService,
                 private userUserService: UserUserService,
                 private authenticationService: AuthenticationService,
                 private sanitizer: DomSanitizer,
-                private notificationService: NotificationService
+                private notificationService: NotificationService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.groupMembers = [];
         this.friends = [];
     }
@@ -48,11 +57,11 @@ export class CreateGroupComponent implements OnInit {
     @Input() set userGroup(userGroup: MGroup){
         if (userGroup.groupId != undefined){
             this._userGroup = userGroup;
-            this.title = "Editar grupo";
+            this.title = this.translationService.translate('group.edit.title');
             this.getMembers();
         }else{
             this._userGroup = new MGroup();
-            this.title = "Crear grupo";
+            this.title = this.translationService.translate('group.create.title');
         }
         this.groupMembers = [];
         this.getFriends();
@@ -77,7 +86,7 @@ export class CreateGroupComponent implements OnInit {
                 });
                 this.closeModal();
                 document.getElementById("closeButton").click();
-                this.notificationService.success("Nuevo grupo creado", "Se ha creado el grupo correctamente.");
+                this.notificationService.success(this.translationService.translate('group.success.create.description'), this.translationService.translate('group.success.create.title'));
             });
     }
 
@@ -88,7 +97,7 @@ export class CreateGroupComponent implements OnInit {
             this.eventSave.emit();
             this.closeModal();
             document.getElementById("closeButton").click();
-            this.notificationService.success("Grupo editado", "Se ha editado el grupo correctamente.");
+            this.notificationService.success(this.translationService.translate('group.success.edit.description'), this.translationService.translate('group.success.edit.title'));
         });
     }
 

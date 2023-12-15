@@ -11,7 +11,7 @@
 {
     padding-top: 50px;
     padding-bottom: 30px;
-    background: #fff;
+    background: transparent;
 }
 
 .text{
@@ -24,6 +24,7 @@
     text-align: center;
     font-weight: 300;
     color: #333;
+    border: none;
     outline: none;
 }
 
@@ -55,6 +56,34 @@ input[type="search"]::-webkit-search-cancel-button{
 
 .createDiv{
     text-align: left !important;
+}
+
+.dark{
+    background: #236726;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    max-width: 180px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.5s;
+    text-transform: uppercase;
+}
+
+.color{
+    background: rgba(102, 187, 106, 0.05);
+}
+.darkColor:hover{
+    background: rgb(25, 22, 27) !important;
+    cursor:pointer;
+}
+
+.darkInput{
+    border:  1px solid #ffffff !important;
 }
 
 .button

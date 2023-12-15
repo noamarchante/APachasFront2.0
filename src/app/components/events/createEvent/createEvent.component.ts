@@ -10,6 +10,8 @@ import {EventService} from "@services/event.service";
 import {MGroup} from "@models/MGroup";
 import {GroupUserService} from "@services/groupUser.service";
 import {MGroupMembers} from "@models/MGroupMembers";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
     selector: 'app-createEvent',
@@ -31,8 +33,10 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
     eventGroups: number[];
     imageColor:string="";
     imageText: string;
-    title: string = "CREAR EVENTO";
+    title: string = this.translationService.translate('event.create');
     _event: MEvent;
+
+    darkMode = false;
 
     @Output()
     eventSave = new EventEmitter<boolean>();
@@ -49,27 +53,27 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
             format: 'DD/MM/yyyy HH:mm',
             "firstDay": 1,
             daysOfWeek: [
-            "D",
-            "L",
-            "M",
-            "X",
-            "J",
-            "V",
-            "S"
+            this.translationService.translate('calendar.week.sunday'),
+            this.translationService.translate('calendar.week.monday'),
+            this.translationService.translate('calendar.week.tuesday'),
+            this.translationService.translate('calendar.week.wendnesday'),
+            this.translationService.translate('calendar.week.thurdsday'),
+            this.translationService.translate('calendar.week.friday'),
+            this.translationService.translate('calendar.week.saturday')
             ],
-            monthNames: [
-                "Enero",
-                "Febrero",
-                "Marzo",
-                "Abril",
-                "Mayo",
-                "Junio",
-                "Julio",
-                "Agosto",
-                "Septiembre",
-                "Octubre",
-                "Noviembre",
-                "Diciembre"
+            monthNames:  [
+                this.translationService.translate('calendar.month.january'),
+                this.translationService.translate('calendar.month.february'),
+                this.translationService.translate('calendar.month.march'),
+                this.translationService.translate('calendar.month.april'),
+                this.translationService.translate('calendar.month.may'),
+                this.translationService.translate('calendar.month.june'),
+                this.translationService.translate('calendar.month.july'),
+                this.translationService.translate('calendar.month.august'),
+                this.translationService.translate('calendar.month.september'),
+                this.translationService.translate('calendar.month.october'),
+                this.translationService.translate('calendar.month.november'),
+                this.translationService.translate('calendar.month.december')
             ]
         },
         minDate: new Date(),
@@ -85,11 +89,16 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
                 private userUserService: UserUserService,
                 private authenticationService: AuthenticationService,
                 private sanitizer: DomSanitizer,
-                private notificationService: NotificationService
+                private notificationService: NotificationService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.eventPartakers = [];
         this.eventGroups = [];
         this.friends = [];
@@ -98,8 +107,8 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
     }
 
     ngAfterViewChecked() {
-        document.getElementsByClassName("applyDate")[0].textContent ="Aplicar";
-        document.getElementsByClassName("cancelDate")[0].textContent = "Cancelar";
+        document.getElementsByClassName("applyDate")[0].textContent =this.translationService.translate('save');
+        document.getElementsByClassName("cancelDate")[0].textContent = this.translationService.translate('cancel');
     }
 
     get event(){
@@ -109,13 +118,13 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
     @Input() set event(event: MEvent){
         if (event.eventId != undefined){
             this._event = event;
-            this.title = "Editar evento";
+            this.title = this.translationService.translate('event.edit');
             this.initialDate = this.event.eventStart;
             this.finalDate = this.event.eventEnd;
             this.getPartakers();
         }else{
             this._event = new MEvent();
-            this.title = "Crear evento";
+            this.title = this.translationService.translate('event.create');
             this.initialDate = null;
             this.finalDate = null;
         }
@@ -152,9 +161,8 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
             });
             this.closeModal();
             document.getElementById("closeButton").click();
-            this.notificationService.success("Nuevo evento creado", "Se ha creado el evento correctamente.");
+            this.notificationService.success(this.translationService.translate('event.success.create.message'),this.translationService.translate('event.success.create.title') );
         });
-
 
     }
 
@@ -165,7 +173,7 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
             this.eventSave.emit();
             this.closeModal();
             document.getElementById("closeButton").click();
-            this.notificationService.success("Evento editado", "Se ha editado el evento correctamente.");
+            this.notificationService.success(this.translationService.translate('event.success.edit.message'),this.translationService.translate('event.success.edit.title'));
         });
     }
 
@@ -240,7 +248,6 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
         this.cancelDate();
     }
 
-
     private getFriends(users: number[]){
         this.userUserService.getFriends(this.authenticationService.getUser().id).subscribe((response) => {
             this.friends = response;
@@ -248,7 +255,7 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
                 if (!Object.values(users).includes(user.userId)){
                     let member: MGroupMembers = new MGroupMembers();
                     member.groupId = 0;
-                    member.groupName = "Otros";
+                    member.groupName = this.translationService.translate('event.group.others');
                     member.groupPhoto = null;
                     member.userId = user.userId;
                     member.userLogin = user.userLogin;

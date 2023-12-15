@@ -17,6 +17,10 @@
     background-color: rgba(102, 187, 106, 0.1);
 }
 
+.darkDrop:hover, .darkDrop:focus{
+    background-color: rgb(25, 22, 27) !important;
+}
+
 .buttonText{
     text-decoration: none;
     border: 1px solid #ffffff;
@@ -74,7 +78,7 @@
 
 .text{
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: 1px none;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -91,8 +95,12 @@
 
 .subtitle{
     color: #555!important;
-    font-weight: 450!important;
 }
+
+.common {
+    font-weight: 450!important
+}
+
 .userSubtitle{
     margin-top: -6% ;
 }
@@ -160,6 +168,10 @@ ul.paginationUser li:last-child a
     padding-top: 5px;
     padding-right: 10px;
     width: 40%;
+}
+
+.dropdown-item {
+    border: none;
 }
 
 .button {
@@ -270,6 +282,19 @@ div.mutualRight{
     font-weight: 600;
     text-decoration: none;
     color: #236726;
+    text-transform: uppercase;
+    cursor:pointer;
+    padding-left: 10%;
+}
+
+.moreDark{
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #66bb6a;
     text-transform: uppercase;
     cursor:pointer;
     padding-left: 10%;

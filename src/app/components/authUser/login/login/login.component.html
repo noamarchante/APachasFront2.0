@@ -1,36 +1,36 @@
 <section>
     <div class="container">
         <div class="user signinBx">
-            <div class="imgBx"><img src="assets/LoginMoney.jpg" alt="Imagen decorativa de billetes para login"></div>
-            <div class="formBx">
-                <form (submit)="logIn()" ngNativeValidate #loginForm="ngForm">
-                    <h1>Iniciar sesión en <a href="" title="pagina de inicio"><br>¡A pachas!</a></h1>
-                    <div>
-                        <input type="text" id="login_userLogin" name="userLogin" placeholder="Nombre de usuario"
-                               pattern="[a-zA-ZñÑ0-9_-]{1,100}" title="Nombre de usuario"
-                               [(ngModel)]="login" required #usernameForm="ngModel">
-                        <div *ngIf="loginForm.submitted && usernameForm.invalid" class="alert alert-danger">
-                            <div *ngIf="usernameForm.errors.required">Username is required.</div>
-                            <div *ngIf="usernameForm.errors.pattern">Username can only contain letters, numbers or
-                                underscore and should
-                                have a length between 1 and 100.
+            <div class="imgBx">
+                <img src="assets/LoginMoney.jpg" alt="{{'deco' | translate}}">
+            </div>
+            <div class="flex">
+            <app-translation></app-translation>
+                <div class="formBx">
+                    <form (submit)="logIn()" ngNativeValidate #loginForm="ngForm">
+                        <h1>{{'log.in.title' | translate}}<a href="" title="{{'home' | translate}}"><br>¡A pachas!</a></h1>
+                        <div>
+                            <input type="text" id="login_userLogin" name="userLogin" placeholder="{{'user.username' | translate}}"
+                                pattern="[a-zA-ZñÑ0-9_-]{1,100}" title="{{'user.username' | translate}}"
+                                [(ngModel)]="login" required #usernameForm="ngModel">
+                            <div *ngIf="loginForm.submitted && usernameForm.invalid" class="alert alert-danger">
+                                <div *ngIf="usernameForm.errors.required">{{'user.username.required' | translate}}</div>
+                                <div *ngIf="usernameForm.errors.pattern">{{'user.username.format' | translate}}</div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <input type="password" id="login_userPassword" title="password" name="userPassword" placeholder="Contraseña"
-                               [(ngModel)]="password" required #passwordForm="ngModel" minlength="6">
-                        <div *ngIf="loginForm.submitted && passwordForm.invalid" class="alert alert-danger">
-                            <div *ngIf="passwordForm.errors.required">Password is required.</div>
-                            <div *ngIf="passwordForm.errors.minlength">Password can't be shorter than 6 characters.
+                        <div>
+                            <input type="password" id="login_userPassword" title="{{'password' | translate}}" name="userPassword" placeholder="{{'password' | translate}}"
+                                [(ngModel)]="password" required #passwordForm="ngModel" minlength="6">
+                            <div *ngIf="loginForm.submitted && passwordForm.invalid" class="alert alert-danger">
+                                <div *ngIf="passwordForm.errors.required">{{'password.required' | translate}}</div>
+                                <div *ngIf="passwordForm.errors.minlength">{{'password.min' | translate}}</div>
                             </div>
                         </div>
-                    </div>
-                    <input type="submit" title="iniciar sesion" value="Iniciar sesión">
-                    <p class="signup">¿has olvidado tu contraseña? <a href="" title="recuperar contraseña" data-bs-toggle="modal" data-bs-target="#retrievePasswordEmailModal"> Recupérala</a></p>
-                    <p class="signup">¿no tienes una cuenta? <a title="registro" routerLink="/register"> Regístrate</a></p>
-
-                </form>
+                        <input type="submit" title="{{'log.in.button' | translate}}" value="{{'log.in.button' | translate}}">
+                        <p class="signup">{{'password.remember' | translate}} <a href="" title="{{'password.remember' | translate}}" data-bs-toggle="modal" data-bs-target="#retrievePasswordEmailModal"> {{'password.retrieve' | translate}}</a></p>
+                        <p class="signup">{{'account.get' | translate}} <a title="{{'signup.get' | translate}}" routerLink="/register"> {{'signup.get' | translate}}</a></p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

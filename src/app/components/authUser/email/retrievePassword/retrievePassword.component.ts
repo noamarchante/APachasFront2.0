@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {MRetrievePassword} from "@models/MRetrievePassword";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "@services/user.service";
+import { TranslationService } from "@app/modules/translations/translation.service";
 
 @Component({
     selector: 'app-retrievePassword',
@@ -12,14 +13,15 @@ export class RetrievePasswordComponent implements OnInit{
     mRetrievePassword: MRetrievePassword = new MRetrievePassword();
     password = "";
     passwordConfirm = "";
-    message = "ERROR EN LA RECUPERACIÓN DE LA CONTRASEÑA. Inténtelo de nuevo mas tarde o solicite un nuevo enlace";
+    message = this.translationService.translate('email.password.error');
     messageColor = "messageColor";
     hidden: boolean = false;
     token: boolean = false;
 
     constructor(private router: Router,
                 private userService: UserService,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private translationService: TranslationService) {
     }
 
     ngOnInit() {
@@ -52,10 +54,10 @@ export class RetrievePasswordComponent implements OnInit{
         this.hidden = true;
         if (goodRequest){
             this.messageColor = "";
-            this.message = "CONTRASEÑA CAMBIADA. Ya puedes acceder con tu nueva contraseña";
+            this.message = this.translationService.translate('email.passwors.success');
         }else{
             this.messageColor = "messageColor";
-            this.message = "ERROR EN LA RECUPERACIÓN DE LA CONTRASEÑA. Inténtelo de nuevo mas tarde o solicite un nuevo enlace";
+            this.message = this.translationService.translate('email.password.error');
         }
     }
 }

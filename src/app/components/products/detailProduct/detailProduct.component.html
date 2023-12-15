@@ -2,29 +2,30 @@
      aria-labelledby="detailProductLabel" aria-hidden="true">
     <app-messageConfirm (eventMessageConfirm)="onDelete($event)" [message]=message></app-messageConfirm>
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
             <div class="modal-header">
-                <h5 class="modal-title title">{{product.productName}}</h5>
+                <h5 class="modal-title title" [ngClass]="darkMode ? 'text-light' : 'titleColor'">{{product.productName}}</h5>
                 <div *ngIf="open" class="dropdown">
-                    <a class="btn btn-neutral dropdown-toggle drop" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="btn btn-neutral dropdown-toggle drop" [ngClass]="darkMode ? 'text-light' : ''" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="zmdi zmdi-label"></i>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
                         <li>
-                            <button type="button" data-bs-dismiss="modal" class="dropdown-item buttonText" title="Cambiar de estado" (click)="setStatus();">{{status}}</button>
+                            <button type="button" [ngClass]="darkMode ? 'text-light buttonDark' : ''" data-bs-dismiss="modal" class="dropdown-item buttonText" title="{{status}}" (click)="setStatus();">{{status}}</button>
                         </li>
                         <li>
-                            <button type="button" class="dropdown-item buttonText" title="Editar producto"
+                            <button type="button" [ngClass]="darkMode ? 'text-light buttonDark' : ''" class="dropdown-item buttonText" title="{{'product.edit' | translate}}"
                                     data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#createProductModal"
-                                    (click)="pagePartaker=0">Editar producto</button>
+                                    (click)="pagePartaker=0">{{'product.edit' | translate}}</button>
                         </li>
                         <li>
-                            <button type="button" class="dropdown-item buttonText" title="Eliminar producto"  data-bs-toggle="modal" data-bs-target="#messageConfirmModal"
-                                    (click)="messageValue();pagePartaker=0">Eliminar producto</button>
+                            <button type="button" [ngClass]="darkMode ? 'text-light buttonDark' : ''" class="dropdown-item buttonText" title="{{'product.delete' | translate}}"  data-bs-toggle="modal" data-bs-target="#messageConfirmModal"
+                                    (click)="messageValue();pagePartaker=0">{{'product.delete' | translate}}</button>
                         </li>
                     </ul>
                 </div>
-                <button type="button" id="closeButton" class="btn-close closeButton" data-bs-dismiss="modal"
+
+                <button type="button" id="closeButton" title="{{'close' | translate}}" class="btn-close closeButton" data-bs-dismiss="modal"
                         aria-label="Close"
                         (click)="pagePartaker=0"></button>
             </div>
@@ -34,27 +35,27 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="imageProductDiv">
                                 <ng-container *ngIf="product.productPhoto; else imagesDiv">
-                                    <img class="imageProduct" [src]="product.productPhoto" alt=""
+                                    <img class="imageProduct" [src]="product.productPhoto" alt="{{'product.photo' | translate}}"
                                          id="detailProduct_photo">
                                 </ng-container>
                                 <ng-template #imagesDiv>
-                                    <img class="imageProduct" [src]="defaultImage">
+                                    <img class="imageProduct" alt="{{'product.photo.default' | translate}}" [src]="defaultImage">
                                 </ng-template>
-                                <div class="date text">
-                                    Fecha de compra: {{product.productPurchaseDate | date: 'dd-MM-yyyy'}}
+                                <div class="date text" [ngClass]="darkMode ? 'text-light' : ''">
+                                    {{'product.date.purchase' | translate}}: {{product.productPurchaseDate | date: 'dd-MM-yyyy'}}
                                 </div>
 
                             </div>
                             <div class="text"
-                                 name="productQuantityAndCost"unidades
-                                 id="detailProduct_productAmount">
-                                <img class="icon" src="assets/amount.svg" alt="">{{product.productQuantity}}
-                                <img class="icon" src="assets/money.svg" alt="">{{product.productCost}}€
+                                 name="productQuantityAndCost"
+                                 id="detailProduct_productAmount" [ngClass]="darkMode ? 'text-light' : ''">
+                                <img class="icon" src="assets/amount.svg" alt="{{'icon' | translate}}">{{product.productQuantity}}
+                                <img class="icon" src="assets/money.svg" alt="{{'icon' | translate}}">{{product.productCost}}€
                             </div>
                             <div class="description-row text"
-                                 name="productDescription"
+                                 name="productDescription" [ngClass]="darkMode ? 'text-light' : ''"
                                  id="detailProduct_productDescription">
-                                <img class="icon" src="assets/comment.svg" alt="">{{product.productDescription}}
+                                <img class="icon" src="assets/comment.svg" alt="{{'icon' | translate}}">{{product.productDescription}}
                             </div>
                         </div>
                         <div class="paginationMemberDiv col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -63,35 +64,35 @@
                                     <ng-container *ngIf="user.userPhoto; else userImagesDiv">
                                         <p class="imageP">
                                             <img class="imageMember"
-                                                 [src]="user.userPhoto" alt="" id="detailUser_photo">
+                                                 [src]="user.userPhoto" alt="{{'user.photo' | translate}}" id="detailUser_photo">
                                         </p>
-                                        <p class="member">
+                                        <p class="member" [ngClass]="darkMode ? 'text-light' : ''">
                                             {{user.userLogin}}
                                         </p>
                                     </ng-container>
                                     <ng-template #userImagesDiv>
                                         <p class="imageP">
-                                            <img class="imageMember" [src]="defaultUserImage">
+                                            <img class="imageMember" alt="{{'user.photo.default' | translate}}" [src]="defaultUserImage">
                                         </p>
-                                        <p class="member">
+                                        <p class="member" [ngClass]="darkMode ? 'text-light' : ''">
                                             {{user.userLogin}}
                                         </p>
                                     </ng-template>
                                 </div>
-                                <div *ngIf="productPartakers.length > sizePartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getLessPartakers()"><a>
-                                    Ver menos</a></div>
-                                <div *ngIf="productPartakers.length < totalPartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getMorePartakers()"><a>
-                                    Ver más</a></div>
+                                <div *ngIf="productPartakers.length > sizePartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getLessPartakers()"><a title="{{'less' | translate}}">
+                                    {{'less' | translate}}</a></div>
+                                <div *ngIf="productPartakers.length < totalPartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getMorePartakers()"><a title="{{'more' | translate}}">
+                                    {{'more' | translate}}</a></div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <ul class="row paginationProduct">
                             <li [ngClass]="previousProduct" *ngIf="previous">
-                                <a class="previousProduct" (click)="setPageProduct(-1); pagePartaker=0">Anterior</a>
+                                <a class="previousProduct" [ngClass]="darkMode ? 'bg-dark text-light' : ''" (click)="setPageProduct(-1); pagePartaker=0" title="{{'previous' | translate}}">{{'previous' | translate}}</a>
                             </li>
                             <li [ngClass]="nextProduct" *ngIf="next">
-                                <a class="nextProduct" (click)="setPageProduct(1); pagePartaker=0">Siguiente</a>
+                                <a class="nextProduct" [ngClass]="darkMode ? 'bg-dark text-light' : ''" (click)="setPageProduct(1); pagePartaker=0" title="{{'next' | translate}}">{{'next' | translate}}</a>
                             </li>
                         </ul>
                     </div>

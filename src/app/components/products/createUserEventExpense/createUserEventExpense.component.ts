@@ -3,6 +3,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {NotificationService} from "@modules/notification/services/notification.service";
 import {UserEventService} from "@services/userEvent.service";
 import {MUserEvent} from "@models/MUserEvent";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
     selector: 'app-createUserEventExpense',
@@ -16,14 +18,21 @@ export class CreateUserEventExpenseComponent implements OnInit {
     operation: string[] = [];
     showOperation: string ="";
     totalExpense: number;
+    darkMode = false;
 
     constructor(private userEventService: UserEventService,
                 private sanitizer: DomSanitizer,
-                private notificationService: NotificationService
+                private notificationService: NotificationService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
+    }
 
     get userEvent(){
         return this._userEvent;
@@ -49,7 +58,7 @@ export class CreateUserEventExpenseComponent implements OnInit {
             this.eventSave.emit();
             this.closeModal();
             document.getElementById("closeButton").click();
-            this.notificationService.success("Dinero añadido al evento", "Se ha editado el dinero añadido correctamente.");
+            this.notificationService.success(this.translationService.translate('money.added.message'), this.translationService.translate('money.added.title'));
         });
     }
 

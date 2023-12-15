@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { DarkModeService } from '@app/services/darkMode.service';
 
 @Component({
     selector: 'app-messageConfirm',
@@ -11,11 +12,16 @@ export class MessageConfirmComponent implements OnInit {
     eventMessageConfirm = new EventEmitter<boolean>();
 
     _message: string = "";
+    darkMode = false;
 
-    constructor() {
+    constructor(private darkModeService: DarkModeService) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
+    }
 
     get message(){
         return this._message;

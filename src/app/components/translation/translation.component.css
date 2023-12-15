@@ -1,0 +1,29 @@
+.textDrop{
+    text-decoration: none;
+    box-shadow: none;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 400;
+    color: #333;
+    outline: none;
+}
+
+.darkDrop:hover, .darkDrop:focus{
+    background-color: rgb(25, 22, 27) !important;
+}
+
+
+.textDrop:hover{
+    background-color: rgba(102, 187, 106, 0.1);
+    cursor: pointer;
+}
+
+.text {
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 400;
+}

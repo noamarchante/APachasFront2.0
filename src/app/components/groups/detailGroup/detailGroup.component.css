@@ -17,6 +17,18 @@
     color: #555;
 }
 
+.moreDark a{
+    position: relative;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #66bb6a;
+    cursor:pointer;
+    vertical-align: center;
+}
+
 .icon{
     width: 25px;
     height: 20px;
@@ -25,6 +37,10 @@
 
 .dropdown-item:hover, .dropdown-item:focus {
     background-color: rgba(102, 187, 106, 0.1);
+}
+
+.darkDrop:hover, .darkDrop:focus{
+    background-color: rgb(25, 22, 27);
 }
 
 .row{
@@ -57,7 +73,6 @@
 
 .text{
     text-decoration: none;
-    border: 1px solid #ffffff;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -76,7 +91,7 @@
 
 .buttonText{
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: none;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;

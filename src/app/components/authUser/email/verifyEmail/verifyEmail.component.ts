@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "@services/user.service";
 import {MVerifyEmail} from "@models/MVerifyEmail";
+import { TranslationService } from "@app/modules/translations/translation.service";
 @Component({
     selector: 'app-verifyEmail',
     templateUrl: './verifyEmail.component.html',
@@ -11,12 +12,13 @@ export class VerifyEmailComponent implements OnInit{
 
     mVerifyEmail: MVerifyEmail = new MVerifyEmail();
 
-    message = "ERROR DE VERIFICACIÓN. Inténtelo de nuevo mas tarde o solicite un nuevo enlace";
+    message = this.translationService.translate('email.error');
     messageColor = "messageColor";
 
     constructor(private router: Router,
                 private userService: UserService,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private translationService: TranslationService) {
     }
 
     ngOnInit() {
@@ -39,10 +41,10 @@ export class VerifyEmailComponent implements OnInit{
 
     private getMessage(goodRequest: boolean){
         if (goodRequest){
-            this.message = "Tu cuenta ha sido verificada";
+            this.message = this.translationService.translate('email.success');
             this.messageColor = "";
         }else{
-            this.message = "ERROR DE VERIFICACIÓN. Inténtelo de nuevo mas tarde o solicite un nuevo enlace";
+            this.message = this.translationService.translate('email.error');
             this.messageColor = "messageColor";
         }
     }

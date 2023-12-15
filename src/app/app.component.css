@@ -12,9 +12,23 @@
     padding: 10px;
 }
 
+.form-check input:checked{
+    background-color: #66bb6a;
+}
+
 .nav-item{
     padding-left: 10px;
 }
+
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+.selected {
+    color: black;
+    font-weight: 600;    
+  }
 
 .not{
     margin-top: 30px;
@@ -25,7 +39,7 @@
 .notButton{
     width: 20px;
     height: 50px;
-    background: url("assets/alert.svg") top left no-repeat ;
+    background: url("assets/alert.svg") top left no-repeat;
     border: none;
     outline: none;
     box-shadow: none;
@@ -51,6 +65,14 @@
     outline: none;
 }
 
+.lang {
+    margin-top: 20px;
+    color: #555;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
 
 .textDrop{
     text-decoration: none;
@@ -67,6 +89,10 @@
 .textDrop:hover{
     background-color: rgba(102, 187, 106, 0.1);
     cursor: pointer;
+}
+
+.darkDrop:hover, .darkDrop:focus{
+    background-color: rgb(25, 22, 27) !important;
 }
 
 .dropdown-toggle{
@@ -101,6 +127,9 @@
 
     }
 
+    .lang{
+        margin-left: 35%;
+    }
 
     .notButton{
         margin-left: 49%;
@@ -132,6 +161,10 @@
         margin-left: 49%;
     }
 
+    .lang{
+        margin-left: 35%;
+    }
+
     .start-100{
         margin-left: -45% !important;
     }
@@ -143,6 +176,10 @@
 
     .dropdown-menu {
         margin-left: -8%;
+    }
+
+    .lang{
+        margin-left: 35%;
     }
 
     .profileDrop{
@@ -169,6 +206,9 @@
         margin-left: -10%;
     }
 
+    .lang{
+        margin-left: 35%;
+    }
 
     .profileDrop{
         margin-right: -45%;

@@ -20,6 +20,10 @@
     background-color: rgba(102, 187, 106, 0.1) !important;
 }
 
+.darkDeny{
+    border:  1px solid #ffffff !important;
+}
+
 .file {
     opacity: 0;
     width: 0.1px;
@@ -152,6 +156,10 @@
 
 .close{
     background: #555;
+}
+
+.darkBack{
+    border:  1px solid #ffffff !important;
 }
 
 

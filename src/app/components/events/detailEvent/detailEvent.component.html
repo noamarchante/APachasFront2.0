@@ -2,29 +2,29 @@
      aria-labelledby="detailEventLabel" aria-hidden="true">
     <app-messageConfirm (eventMessageConfirm)="onRequest($event)" [message]=message></app-messageConfirm>
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
             <div class="modal-header">
-                <h5 class="modal-title title">{{event.eventName}}</h5>
+                <h5 class="modal-title title" [ngClass]="darkMode ? 'text-light' : ''">{{event.eventName}}</h5>
                 <div class="dropdown">
-                    <a class="btn btn-neutral dropdown-toggle drop" aria-label="opciones" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="btn btn-neutral dropdown-toggle drop" aria-label="opciones" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="darkMode ? 'text-light' : ''">
                         <i class="zmdi zmdi-label"></i>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><button type="button" *ngIf="showButtons() && event.eventOpen" class="dropdown-item buttonText" title="Editar evento"
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
+                        <li><button type="button" [ngClass]="darkMode ? 'text-light darkDrop' : ''" *ngIf="showButtons() && event.eventOpen" class="dropdown-item buttonText" title="{{'event.edit.action' | translate}}"
                                     data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#createEventModal"
-                                    (click)="pagePartaker=0">Editar evento</button></li>
-                        <li><button type="button" *ngIf="showButtons()" class="dropdown-item buttonText" title="Eliminar evento" data-bs-toggle="modal" data-bs-target="#messageConfirmModal"
-                                    (click)="showDeleteEvent();pagePartaker=0">Eliminar evento</button></li>
-                        <li><button *ngIf="showSetStatus() && event.eventOpen" type="button" class="dropdown-item buttonText" title="Cambiar de estado"
+                                    (click)="pagePartaker=0">{{'event.edit.action' | translate}}</button></li>
+                        <li><button type="button" [ngClass]="darkMode ? 'text-light darkDrop' : ''" *ngIf="showButtons()" class="dropdown-item buttonText" title="{{'event.delete.action' | translate}}" data-bs-toggle="modal" data-bs-target="#messageConfirmModal"
+                                    (click)="showDeleteEvent();pagePartaker=0">{{'event.delete.action' | translate}}</button></li>
+                        <li><button *ngIf="showSetStatus() && event.eventOpen" [ngClass]="darkMode ? 'text-light darkDrop' : ''" type="button" class="dropdown-item buttonText" title="{{'event.state' | translate}}"
                                     data-bs-toggle="modal" data-bs-target="#messageConfirmModal" (click)="messageValue();">{{statusMessage}}</button></li>
-                        <li><a [href]="googleCalendarUrl" aria-label="añadir a google calendar" target="_blank" type="button" class="dropdown-item buttonText" title="googleCalendar">Añadir a Google Calendar</a></li>
-                        <li><button *ngIf="showButtons() && event.eventOpen" type="button" id="close" class="dropdown-item buttonText" title=""
-                                    data-bs-toggle="modal" data-bs-target="#messageConfirmModal" (click)="closeMessage()">Finalizar evento</button></li>
-                        <li><button *ngIf="show" (click)="showDetailsAndProducts()" data-bs-dismiss="modal" type="button" class="dropdown-item buttonText" title="Gestion evento">Gestión del evento</button></li>
-                        <li><button *ngIf="show && !event.eventOpen" (click)="showTransactions()" data-bs-dismiss="modal" type="button" class="dropdown-item buttonText" title="Transacciones">Transacciones</button></li>
+                        <li><a [href]="googleCalendarUrl" [ngClass]="darkMode ? 'text-light darkDrop' : ''" aria-label="añadir a google calendar" type="button" class="dropdown-item buttonText" title="{{'event.calendar' | translate}}">{{'event.calendar' | translate}}</a></li>
+                        <li><button *ngIf="showButtons() && event.eventOpen" [ngClass]="darkMode ? 'text-light darkDrop' : ''" type="button" id="close" class="dropdown-item buttonText" title="{{'event.finish.action' | translate}}"
+                                    data-bs-toggle="modal" data-bs-target="#messageConfirmModal" (click)="closeMessage()">{{'event.finish.action' | translate}}</button></li>
+                        <li><button *ngIf="show" (click)="showDetailsAndProducts()" [ngClass]="darkMode ? 'text-light darkDrop' : ''" data-bs-dismiss="modal" type="button" class="dropdown-item buttonText" title="{{'event.manage' | translate}}">{{'event.manage' | translate}}</button></li>
+                        <li><button *ngIf="show && !event.eventOpen" [ngClass]="darkMode ? 'text-light darkDrop' : ''" (click)="showTransactions()" data-bs-dismiss="modal" type="button" class="dropdown-item buttonText" title="{{'transactions' | translate}}">{{'transactions' | translate}}</button></li>
                     </ul>
                 </div>
-                <button type="button" id="closeButton" class="btn-close closeButton" data-bs-dismiss="modal"
+                <button type="button" id="closeButton" title="{{'close' | translate}}" class="btn-close closeButton" data-bs-dismiss="modal"
                         aria-label="Close"
                         (click)="pagePartaker=0"></button>
             </div>
@@ -34,26 +34,26 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="imageEventDiv">
                                 <ng-container *ngIf="event.eventPhoto; else imagesDiv">
-                                    <img class="imageEvent" [src]="event.eventPhoto" alt="foto de evento"
+                                    <img class="imageEvent" [src]="event.eventPhoto" alt="{{'event.photo' | translate}}"
                                          id="detailUserEvent_photo">
                                 </ng-container>
                                 <ng-template #imagesDiv>
-                                    <img class="imageEvent" [src]="defaultImage" alt="foto de evento por defecto">
+                                    <img class="imageEvent" [src]="defaultImage" alt="{{'event.photo.default' | translate}}">
                                 </ng-template>
-                                <div class="date text">
+                                <div class="date text" [ngClass]="darkMode ? 'text-light' : ''">
                                     <img class="icon" src="assets/date.svg" alt="icono de fecha"
                                             id="detailUserEvent_date">{{event.eventStart | date: 'dd-MM-yyyy HH:mm'}}
                                     <p class="finalDate">{{event.eventEnd | date: 'dd-MM-yyyy HH:mm'}}</p></div>
                                 <div class="description-row text"
                                      name="eventLocation"
-                                     id="detailEvent_eventLocation">
+                                     id="detailEvent_eventLocation" [ngClass]="darkMode ? 'text-light' : ''">
                                     <img class="icon" src="assets/location.svg" alt="icono de Localizacion"
                                          id="detailUserEvent_location">
                                     {{event.eventLocation}}
                                 </div>
                                 <div class="description-row text"
                                      name="eventDescription"
-                                     id="detailEvent_eventDescription">
+                                     id="detailEvent_eventDescription" [ngClass]="darkMode ? 'text-light' : ''">
                                     <img class="icon" src="assets/comment.svg" alt="icono de comentario"
                                          id="detailUserEvent_description">{{event.eventDescription}}
                                 </div>
@@ -65,35 +65,35 @@
                                     <ng-container *ngIf="user.userPhoto; else userImagesDiv">
                                         <p title="{{ownerLabel(user.userId)}}" class="imageP">
                                             <img class="imagePartaker" [ngClass]="ownerBorder(user.userId)"
-                                                 [src]="user.userPhoto" alt="foto de usuario" id="detailUser_photo">
+                                                 [src]="user.userPhoto" alt="{{'user.photo' | translate}}" id="detailUser_photo">
                                         </p>
-                                        <p title="{{ownerLabel(user.userId)}}" class="partaker">
+                                        <p title="{{ownerLabel(user.userId)}}" class="partaker" [ngClass]="darkMode ? 'text-light' : ''">
                                             {{user.userLogin}}
                                         </p>
                                     </ng-container>
                                     <ng-template #userImagesDiv>
                                         <p title="{{ownerLabel(user.userId)}}" class="imageP">
-                                            <img class="imagePartaker" alt="imagen de usuario por defecto" [ngClass]="ownerBorder(user.userId)" [src]="defaultUserImage">
+                                            <img class="imagePartaker" alt="{{'user.photo.default' | translate}}" [ngClass]="ownerBorder(user.userId)" [src]="defaultUserImage">
                                         </p>
-                                        <p title="{{ownerLabel(user.userId)}}" class="partaker">
+                                        <p title="{{ownerLabel(user.userId)}}" [ngClass]="darkMode ? 'text-light' : ''" class="partaker">
                                             {{user.userLogin}}
                                         </p>
                                     </ng-template>
                                 </div>
-                                <div *ngIf="eventPartakers.length > sizePartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getLessPartakers()"><a aria-label="ver menos">
-                                    Ver menos</a></div>
-                                <div *ngIf="eventPartakers.length < totalPartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getMorePartakers()"><a aria-label="ver mas">
-                                    Ver más</a></div>
+                                <div *ngIf="eventPartakers.length > sizePartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getLessPartakers()"><a aria-label="ver menos" title="{{'less' | translate}}">
+                                    {{'less' | translate}}</a></div>
+                                <div *ngIf="eventPartakers.length < totalPartaker" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 more" (click)="getMorePartakers()"><a aria-label="ver mas" title="{{'more' | translate}}">
+                                    {{'more' | translate}}</a></div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <ul class="row paginationEvent">
                             <li [ngClass]="previousEvent" *ngIf="previous">
-                                <a class="previousEvent" (click)="setPageEvent(-1); pagePartaker=0" aria-label="anterior">Anterior</a>
+                                <a class="previousEvent" (click)="setPageEvent(-1); pagePartaker=0" [ngClass]="darkMode ? 'bg-dark text-light' : ''" title="{{'previous' | translate}}" aria-label="anterior">{{'previous' | translate}}</a>
                             </li>
                             <li [ngClass]="nextEvent" *ngIf="next">
-                                <a class="nextEvent" (click)="setPageEvent(1); pagePartaker=0" aria-label="siguiente">Siguiente</a>
+                                <a class="nextEvent" (click)="setPageEvent(1); pagePartaker=0" [ngClass]="darkMode ? 'bg-dark text-light' : ''" title="{{'next' | translate}}" aria-label="siguiente">{{'next' | translate}}</a>
                             </li>
                         </ul>
                     </div>

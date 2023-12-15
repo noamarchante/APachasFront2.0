@@ -15,10 +15,16 @@
     width: 100%;
     color: #555;
 }
+.closeDark{
+    border: 1px solid #ffffff !important;
+}
+
+.inputDark{
+    border: 1px solid #ffffff !important;
+}
 
 .text{
     text-decoration: none;
-    border: 1px solid #ffffff;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -105,6 +111,11 @@ input[type="button"]{
     font-weight: 500;
     letter-spacing: 1px;
     transition: 0.5s;
+}
+
+.calcDark{
+    background-color: transparent;
+    border: 1px solid #ffffff !important;
 }
 
 .resetButton{

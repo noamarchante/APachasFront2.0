@@ -1,59 +1,95 @@
 <header *ngIf="authenticationService.getUser().authenticated == true">
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand title" aria-label="vuelta a la página principal" title="home"  routerLink="/home"><img class="logo" src="assets/logo.png" alt="logo"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav w-100">
-          <li class="nav-item">
-            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="usuarios" title="usuarios" routerLink="/users">Usuarios</a>
-          </li>
-          <li class="nav-item">
-            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="grupos" title="grupos" routerLink="/groups">Grupos</a>
-          </li>
-          <li class="nav-item">
-            <a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text" aria-label="eventos" title="eventos" routerLink="/events">Eventos</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="dropdown not">
-            <button type="button" title="notificaciones" class="notButton nav-link  text" id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
-              <span [ngClass]="badge" class="position-absolute top-0 start-100 translate-middle p-1 border border-light rounded-circle">
-                <span class="visually-hidden">Notificaciones</span>
-              </span>
-            </button>
-            <ul class="dropdown-menu notification-menu" aria-labelledby="navbarDropdownMenuLink2">
-              <li class="dropdown-item textDrop" *ngFor="let notification of notifications">
-                <p >{{notification}}</p>
-              </li>
-              <li class="dropdown-item textDrop" [hidden]="notifications.length > 0"><p >No hay notificaciones pendientes</p></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown profile">
-            <a *ngIf="authenticationService.getUser().authenticated == true" title="menu" aria-label="desplegable" class="nav-link dropdown-toggle text" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <ng-container *ngIf="authenticationService.getUser().photo; else imagesDiv">
-                <img class="image" [src]="authenticationService.getUser().photo" alt="foto de usuario">
-              </ng-container>
-              <ng-template #imagesDiv>
-                <img class="image" [src]="defaultImage" alt="foto por defecto de usuario">
-              </ng-template>
-            </a>
-            <ul class="dropdown-menu profileDrop" aria-labelledby="navbarDropdownMenuLink">
-              <li>
-                <a *ngIf="authenticationService.getUser().authenticated == true" title="perfil" aria-label="perfil" class="dropdown-item textDrop" routerLink="/profile">Perfil</a>
-              </li>
-              <li><a *ngIf="authenticationService.getUser().authenticated == true" aria-label="historial de transacciones" class="dropdown-item textDrop" title="historial" routerLink="/transactionHistory">Historial de transacciones</a></li>
-              <li><a *ngIf="authenticationService.getUser().authenticated == false" class="dropdown-item textDrop" aria-label="inicio de sesión" title="inicio sesion" (click)="logIn()">Iniciar sesión</a></li>
-              <li><a *ngIf="authenticationService.getUser().authenticated == true" class="dropdown-item textDrop" aria-label="cierre de sesión" title="cerrar sesion" (click)="logOut()">Cerrar sesión</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+	<nav class="navbar navbar-expand-md" [ngClass]="darkMode ? 'bg-dark text-light' : 'navbar-light bg-light'">
+		<div class="container-fluid">
+			<a class="navbar-brand title" aria-label="vuelta a la página principal" title="{{'home' | translate}}"
+				routerLink="/home"><img class="logo" src="assets/logo.png" alt="{{'logo' | translate}}"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav w-100">
+					<li class="nav-item">
+						<a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text"
+							[ngClass]="darkMode ? 'text-light' : ''" aria-label="usuarios"
+							title="{{'users' | translate}}" routerLink="/users">{{'users' | translate}}</a>
+					</li>
+					<li class="nav-item">
+						<a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text"
+							[ngClass]="darkMode ? 'text-light' : ''" aria-label="grupos"
+							title="{{'groups' | translate}}" routerLink="/groups">{{'groups' | translate}}</a>
+					</li>
+					<li class="nav-item">
+						<a *ngIf="authenticationService.getUser().authenticated == true" class="nav-link text"
+							[ngClass]="darkMode ? 'text-light' : ''" aria-label="eventos"
+							title="{{'events' | translate}}" routerLink="/events">{{'events' | translate}}</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<div class="form-check form-switch align-self-center">
+						<input name="darkMode"
+							title="{{darkMode ? ('mode.light' | translate) : ('mode.dark' | translate)}}"
+							[ngClass]="darkMode ? 'text-light' : ''" class="form-check-input check" type="checkbox"
+							id="flexSwitchCheckDefault" [checked]="darkMode" (click)="toggleDarkMode()">
+					</div>
+					<app-translation class="lang"></app-translation>
+					<li class="dropdown not">
+						<button type="button" title="{{'notifications' | translate}}" class="notButton nav-link  text"
+							id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
+							<span [ngClass]="badge"
+								class="position-absolute top-0 start-100 translate-middle p-1 border border-light rounded-circle">
+								<span class="visually-hidden">{{'notifications' | translate}}</span>
+							</span>
+						</button>
+						<ul class="dropdown-menu notification-menu" aria-labelledby="navbarDropdownMenuLink2" [ngClass] = "darkMode ? 'bg-dark text-light' : ''">
+							<li class="dropdown-item textDrop" [ngClass]="darkMode ? 'bg-dark text-light darkDrop' : ''" *ngFor="let notification of notifications">
+								<p>{{notification}}</p>
+							</li>
+							<li class="dropdown-item textDrop" [ngClass]="darkMode ? 'bg-dark text-light darkDrop' : ''" [hidden]="notifications.length > 0">
+								<p>{{'pending.notifications' | translate}}</p>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown profile">
+						<a *ngIf="authenticationService.getUser().authenticated == true" title="{{'menu' | translate}}"
+							aria-label="desplegable" class="nav-link dropdown-toggle text" href="#"
+							id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" [ngClass]="darkMode ? 'text-light' : ''" aria-expanded="false">
+							<ng-container *ngIf="authenticationService.getUser().photo; else imagesDiv">
+								<img class="image" [src]="authenticationService.getUser().photo"
+									alt="{{'user.photo' | translate}}">
+							</ng-container>
+							<ng-template #imagesDiv>
+								<img class="image" [src]="defaultImage" alt="{{'user.photo.default' | translate}}">
+							</ng-template>
+						</a>
+						<ul class="dropdown-menu profileDrop" [ngClass]="darkMode ? 'bg-dark text-light' : ''"
+							aria-labelledby="navbarDropdownMenuLink">
+							<li>
+								<a *ngIf="authenticationService.getUser().authenticated == true"
+									[ngClass]="darkMode ? 'bg-dark text-light darkDrop': ''" title="{{'profile' | translate}}"
+									aria-label="perfil" class="dropdown-item textDrop" routerLink="/profile">{{'profile'
+									| translate}}</a>
+							</li>
+							<li><a *ngIf="authenticationService.getUser().authenticated == true"
+									[ngClass]="darkMode ? 'bg-dark text-light darkDrop' : ''"
+									aria-label="historial de transacciones" class="dropdown-item textDrop"
+									title="{{'history.transactions' | translate}}"
+									routerLink="/transactionHistory">{{'history.transactions' | translate}}</a></li>
+							<li><a *ngIf="authenticationService.getUser().authenticated == false"
+									[ngClass]="darkMode ? 'bg-dark text-light darkDrop' : ''" class="dropdown-item textDrop"
+									aria-label="inicio de sesión" title="{{'log.in' | translate}}"
+									(click)="logIn()">{{'log.in' | translate}}</a></li>
+							<li><a *ngIf="authenticationService.getUser().authenticated == true"
+									[ngClass]="darkMode ? 'bg-dark text-light darkDrop' : ''" class="dropdown-item textDrop"
+									aria-label="cierre de sesión" title="{{'log.out' | translate}}"
+									(click)="logOut()">{{'log.out' | translate}}</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </header>
 <main class="container h-100">
-  <router-outlet></router-outlet>
+	<router-outlet></router-outlet>
 </main>

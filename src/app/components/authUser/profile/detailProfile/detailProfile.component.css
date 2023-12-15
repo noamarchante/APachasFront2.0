@@ -36,7 +36,6 @@
     letter-spacing: 1px;
     text-align: left;
     font-weight: 300;
-    color: #333;
     padding: 10px;
     outline: none;
 }
@@ -62,16 +61,18 @@
 
 .todayDate{
     text-decoration: none;
-    border: 1px solid #ffffff;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
     font-weight: 300;
-    color: #333;
     padding: 10px;
     outline: none;
+}
+
+.todayDateDark{
+    color: #fff;
 }
 
 .imageCol{
@@ -116,7 +117,6 @@
     display: inline-block;
     text-align: center;
     padding-top: 50px;
-    background: #fff;
 }
 
 .image {

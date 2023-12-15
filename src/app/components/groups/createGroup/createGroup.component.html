@@ -1,10 +1,10 @@
 <div class="modal fade" id="createGroupModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
      aria-labelledby="createGroupLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-         <div class="modal-content">
+         <div class="modal-content" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
             <div class="modal-header">
-                <h5 class="modal-title title">{{title}}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title title" [ngClass]="darkMode ? 'text-light' : ''">{{title}}</h5>
+                <button type="button" title="{{'close' | translate}}" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form (submit)="onSubmit();" ngNativeValidate #createUserGroupForm="ngForm">
@@ -14,20 +14,20 @@
                                 <input (change)="getImage($event)" accept="image/png,image/jpeg" class="file"
                                        type="file"
                                        id="createUserGroup_userGroupPhoto" name="userGroupPhoto">
-                                <label title="Cambiar imagen de grupo" for="createUserGroup_userGroupPhoto"
+                                <label title="{{'import.photo' | translate}}" for="createUserGroup_userGroupPhoto"
                                        (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">
                                     <ng-container *ngIf="userGroup.groupPhoto; else imagesDiv">
-                                        <img class="image imageColor2" [ngClass]="imageColor" [src]="userGroup.groupPhoto" alt="imagen de grupo"
+                                        <img class="image imageColor2" [ngClass]="imageColor" [src]="userGroup.groupPhoto" alt="{{'group.photo' | translate}}"
                                              id="createUserGroup_photo">
                                     </ng-container>
                                     <ng-template #imagesDiv>
-                                        <img class="image imageColor2" alt="imagen de grupo por defecto" [ngClass]="imageColor" [src]="defaultImage">
+                                        <img class="image imageColor2" alt="{{'group.photo.default' | translate}}" [ngClass]="imageColor" [src]="defaultImage">
                                     </ng-template>
                                     <p class="imageText2" [ngClass]="imageText"></p>
                                 </label>
                                 <div *ngIf="imageFormat == false"
                                      class="alert alert-danger">
-                                    <div *ngIf="imageFormat == false">Sólo JPG o PNG
+                                    <div *ngIf="imageFormat == false">{{'import.photo.format' | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -35,17 +35,16 @@
                                 <div class="row name-row">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <input type="text" id="createUserGroup_userGroupName" name="userGroupName"
-                                               class="inputs" placeholder="Nombre*" minlength="1" maxlength="40"
+                                               class="inputs" placeholder="{{'group.name' | translate}}*" minlength="1" maxlength="40"
                                                pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]+)*"
-                                               title="Puede contener letras, máximo 40 caracteres. Campo obligatorio"
+                                               title="{{'group.name' | translate}}"
                                                [(ngModel)]="userGroup.groupName" required
-                                               #userGroupNameForm="ngModel" value="gggg">
+                                               #userGroupNameForm="ngModel" value="gggg" [ngClass]="darkMode ? 'bg-dark text-light darkBack' : ''">
                                         <div *ngIf="createUserGroupForm.onSubmit(undefined) && userGroupNameForm.invalid  || userGroupNameForm.invalid && userGroupNameForm.value != null"
                                              class="alert alert-danger">
-                                            <div *ngIf="userGroupNameForm.errors.required">Campo obligatorio
+                                            <div *ngIf="userGroupNameForm.errors.required">{{'user.name.required' | translate}}
                                             </div>
-                                            <div *ngIf="userGroupNameForm.errors.pattern">Máximo 40 caracteres
-                                                alfanuméricos
+                                            <div *ngIf="userGroupNameForm.errors.pattern">{{'user.name.max' | translate}}
                                             </div>
                                         </div>
                                     </div>
@@ -56,16 +55,16 @@
                                                   cols="50"
                                                   id="createUserGroup_userGroupDescription" minlength="0"
                                                   maxlength="100"
-                                                  name="userGroupDescription" placeholder="Descripción"
+                                                  [ngClass]="darkMode ? 'bg-dark text-light darkBack' : ''"
+                                                  name="userGroupDescription" placeholder="{{'group.description' | translate}}"
                                                   pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]+)*"
-                                                  title="Puede contener letras y números, máximo 100 caracteres"
+                                                  title="{{'group.description' | translate}}"
                                                   [(ngModel)]="userGroup.groupDescription"
                                                   #userGroupDescriptionForm="ngModel">
                                         </textarea>
                                         <div *ngIf="createUserGroupForm.submitted && userGroupDescriptionForm.invalid  || userGroupDescriptionForm.invalid && userGroupDescriptionForm.value!= null"
                                              class="alert alert-danger">
-                                            <div *ngIf="userGroupDescriptionForm.errors.pattern">Puede contener letras y
-                                                números, máximo 100 caracteres
+                                            <div *ngIf="userGroupDescriptionForm.errors.pattern">{{'group.description.format' | translate}}
                                             </div>
                                         </div>
                                     </div>
@@ -73,24 +72,25 @@
                             </div>
                         </div>
                     <div class="row">
-                            <ng-select class="text" id="createUserGroup_userGroupMembers" name="userGroupMembers"
+                            <ng-select class="text"
+                                       id="createUserGroup_userGroupMembers" name="userGroupMembers"
                                        [items]="friends"
                                        [multiple]="true"
                                        [closeOnSelect]="false"
                                        [hideSelected]="true"
                                        bindLabel="userLogin"
                                        bindValue="userId"
-                                       placeholder="Participantes"
+                                       placeholder="{{'group.members' | translate}}"
                                        [(ngModel)]="groupMembers">
                                 <ng-template class="text" ng-multi-label-tmp let-items="items" let-clear="clear">
                                     <div class="ng-value" *ngFor="let item of items ">
                                         <ng-container *ngIf="item.userPhoto; else userPhotoDiv">
-                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="usuario"
+                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="{{'user.photo' | translate}}"
                                                     [src]="item.userPhoto" class="imageSelect"><p
                                                     class="selectedText">{{item.userLogin}}</p></span>
                                         </ng-container>
                                         <ng-template #userPhotoDiv>
-                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="usuario por defecto"
+                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="{{'user.photo.default' | translate}}"
                                                     [src]="defaultUserImage" class="imageSelect"><p
                                                     class="selectedText">{{item.userLogin}}</p></span>
                                         </ng-template>
@@ -100,12 +100,12 @@
                                 </ng-template>
                                 <ng-template ng-option-tmp let-item="item">
                                     <ng-container *ngIf="item.userPhoto; else userPhotoDiv">
-                                        <span class="ng-value-label" title="{{item.userLogin}}"><img alt="usuario"
+                                        <span class="ng-value-label" title="{{item.userLogin}}"><img alt="{{'user.photo' | translate}}"
                                                 [src]="item.userPhoto" class="imageSelect"><p
                                                 class="selectedText listSelect">{{item.userLogin}}</p></span>
                                     </ng-container>
                                     <ng-template #userPhotoDiv>
-                                        <span class="ng-value-label" title="{{item.userLogin}}"><img alt="usuario por defecto"
+                                        <span class="ng-value-label" title="{{item.userLogin}}"><img alt="{{'user.photo.default' | translate}}"
                                                 [src]="defaultUserImage" class="imageSelect"><p
                                                 class="selectedText listSelect">{{item.userLogin}} </p></span>
                                     </ng-template>
@@ -116,12 +116,12 @@
                     </div>
                     <div class="modal-footer">
                         <div class="buttons">
-                            <button type="button" id="closeButton" class="button close" data-bs-dismiss="modal" (click)="closeModal()">
-                                Cerrar
+                            <button type="button" id="closeButton" title="{{'close' | translate}}" [ngClass]="darkMode ? 'bg-dark text-light darkDeny' : ''" class="button close" data-bs-dismiss="modal" (click)="closeModal()">
+                                {{'close' | translate}}
                             </button>
                         </div>
                         <div class="buttons">
-                            <input type="submit" class="button" value="Guardar">
+                            <input type="submit" class="button" title="{{'save' | translate}}" value="{{'save' | translate}}">
                         </div>
                     </div>
                 </form>

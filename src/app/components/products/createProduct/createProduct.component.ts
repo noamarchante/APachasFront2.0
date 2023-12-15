@@ -5,6 +5,8 @@ import {MProduct} from "@models/MProduct";
 import {ProductService} from "@services/product.service";
 import {UserProductService} from "@services/userProduct.service";
 import {AuthenticationService} from "@services/authentication.service";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
     selector: 'app-createProduct',
@@ -17,12 +19,14 @@ export class CreateProductComponent implements OnInit {
     imageFormat: boolean;
     imageColor:string="";
     imageText: string;
-    title: string = "CREAR PRODUCTO";
+    title: string = this.translationService.translate('product.create');
     _product: MProduct;
     _eventId: number;
     @Output()
     eventSave = new EventEmitter<boolean>();
     public productPurchaseDate;
+
+    darkMode = false;
 
     public options: any = {
         autoApply: false,
@@ -35,27 +39,27 @@ export class CreateProductComponent implements OnInit {
             format: 'DD/MM/yyyy',
             "firstDay": 1,
             daysOfWeek: [
-                "D",
-                "L",
-                "M",
-                "X",
-                "J",
-                "V",
-                "S"
+                this.translationService.translate('calendar.week.sunday'),
+                this.translationService.translate('calendar.week.monday'),
+                this.translationService.translate('calendar.week.tusday'),
+                this.translationService.translate('calendar.week.wednesday'),
+                this.translationService.translate('calendar.week.thursday'),
+                this.translationService.translate('calendar.week.friday'),
+                this.translationService.translate('calendar.week.saturday')
             ],
             monthNames: [
-                "Enero",
-                "Febrero",
-                "Marzo",
-                "Abril",
-                "Mayo",
-                "Junio",
-                "Julio",
-                "Agosto",
-                "Septiembre",
-                "Octubre",
-                "Noviembre",
-                "Diciembre"
+                this.translationService.translate('calendar.month.january'),
+                this.translationService.translate('calendar.month.february'),
+                this.translationService.translate('calendar.month.march'),
+                this.translationService.translate('calendar.month.april'),
+                this.translationService.translate('calendar.month.may'),
+                this.translationService.translate('calendar.month.june'),
+                this.translationService.translate('calendar.month.july'),
+                this.translationService.translate('calendar.month.august'),
+                this.translationService.translate('calendar.month.september'),
+                this.translationService.translate('calendar.month.october'),
+                this.translationService.translate('calendar.month.november'),
+                this.translationService.translate('calendar.month.december')
             ]
         },
         minDate: undefined,
@@ -66,16 +70,21 @@ export class CreateProductComponent implements OnInit {
         singleDatePicker: true
     };
 
-
     constructor(private productService: ProductService,
                 private sanitizer: DomSanitizer,
                 private notificationService: NotificationService,
                 private userProductService: UserProductService,
-                private authenticationService: AuthenticationService
+                private authenticationService: AuthenticationService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
+    }
 
     get product(){
         return this._product;
@@ -85,10 +94,10 @@ export class CreateProductComponent implements OnInit {
         if (product.productId != undefined){
             this._product = product;
             this.productPurchaseDate = this.product.productPurchaseDate;
-            this.title = "Editar producto";
+            this.title = this.translationService.translate('product.edit');
         }else{
             this._product = new MProduct();
-            this.title = "Crear producto";
+            this.title = this.translationService.translate('product.create');
             this.productPurchaseDate = null;
         }
     }
@@ -131,7 +140,7 @@ export class CreateProductComponent implements OnInit {
             this.eventSave.emit();
             this.closeModal();
             document.getElementById("closeProductButton").click();
-            this.notificationService.success("Nuevo producto creado", "Se ha creado el producto correctamente.");
+            this.notificationService.success(this.translationService.translate('product.create.message'), this.translationService.translate('product.create.title'));
         });
     }
 
@@ -147,7 +156,7 @@ export class CreateProductComponent implements OnInit {
             this.eventSave.emit();
             this.closeModal();
             document.getElementById("closeProductButton").click();
-            this.notificationService.success("Producto editado", "Se ha editado el producto correctamente.");
+            this.notificationService.success(this.translationService.translate('product.edit.message'), this.translationService.translate('product.edit.title') );
         });
     }
 

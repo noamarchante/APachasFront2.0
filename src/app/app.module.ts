@@ -41,6 +41,14 @@ import {RetrievePasswordEmailComponent} from "@app/components/authUser/login/ret
 import {TransactionHistoryComponent} from "@app/components/authUser/transactionHistory/transactionHistory.component";
 import {NgxPayPalModule} from "ngx-paypal";
 import {PaypalComponent} from "@app/components/authUser/paypal/paypal.component";
+import { LangPipe } from './modules/translations/lang.pipe';
+import { TranslationComponent } from './components/translation/translation.component';
+import { TranslationModule } from './modules/translations/translation.module';
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import localeEn from '@angular/common/locales/en';
+import localeGl from '@angular/common/locales/gl';
 
 registerLocaleData(localeEs, 'es');
 @NgModule({
@@ -69,7 +77,9 @@ registerLocaleData(localeEs, 'es');
     RetrievePasswordComponent,
     RetrievePasswordEmailComponent,
     TransactionHistoryComponent,
-    PaypalComponent
+    PaypalComponent,
+    LangPipe,
+    TranslationComponent
   ],
     imports: [
         AppRoutingModule,
@@ -89,6 +99,18 @@ registerLocaleData(localeEs, 'es');
             pauseOnHover: true,
             clickToClose: true
         }),
+        TranslationModule.forRoot({locale_id: 'es'}),
+		    TranslateModule.forRoot({
+			    loader: {
+				    provide: TranslateLoader,
+				    useFactory: HttpLoaderFactory,
+				    deps: [HttpClient]
+			    },
+			    compiler: {
+				    provide: TranslateCompiler,
+				    useClass: TranslateMessageFormatCompiler
+			    }
+		    }),
         Daterangepicker,
         NgxPayPalModule
     ],
@@ -107,3 +129,10 @@ registerLocaleData(localeEs, 'es');
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+	return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+}
+
+registerLocaleData(localeEn)
+registerLocaleData(localeGl)

@@ -8,9 +8,11 @@ import {MUserUser} from "@models/MUserUser";
 import {MEvent} from "@models/MEvent";
 import {GroupUserService} from "@services/groupUser.service";
 import {UserEventService} from "@services/userEvent.service";
+import { DarkModeService } from "@app/services/darkMode.service";
+import { TranslationService } from "@app/modules/translations/translation.service";
 
 export enum MESSAGE{
-    CANCELREQUEST = '¿Cancelar solicitud?', UNFOLLOW = '¿Dejar de seguir?', ALLOWREQUEST = '¿Aceptar solicitud?', SENTREQUEST = '¿Enviar solicitud?'
+    CANCELREQUEST = 'message.request.cancel', UNFOLLOW = 'message.unfollow', ALLOWREQUEST = 'message.request.allow', SENTREQUEST = 'message.request.sent'
 }
 
 @Component({
@@ -23,6 +25,7 @@ export class DetailUserComponent implements OnInit {
 
     @Output()
     eventMessage = new EventEmitter<number>();
+
     defaultEventImage: string = "assets/event7.jpg";
     defaultGroupImage: string = "assets/group7_2.jpg";
     defaultImage: string = "assets/user16.jpg";
@@ -61,6 +64,7 @@ export class DetailUserComponent implements OnInit {
     _previous: boolean = false;
     _next: boolean = false;
     _user: MUser = new MUser();
+    darkMode = false;
 
     @Output()
     eventDetail = new EventEmitter<number>();
@@ -68,15 +72,19 @@ export class DetailUserComponent implements OnInit {
     constructor(private authenticationService: AuthenticationService,
                 private userUserService: UserUserService,
                 private userEventService: UserEventService,
-                private groupUserService: GroupUserService
+                private groupUserService: GroupUserService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+          });
         this.paginationUserClass();
         this.paginationFriendClass();
         this.paginationEventClass();
-
     }
 
     get user(){
@@ -161,26 +169,27 @@ export class DetailUserComponent implements OnInit {
     }
 
     setMessage(){
-        if (this.status == STATUS.FOLLOW){
-            this.message = MESSAGE.UNFOLLOW;
-        }else if (this.status == STATUS.SENT){
-            this.message = MESSAGE.CANCELREQUEST;
-        }else if (this.status == STATUS.PENDING){
-            this.message = MESSAGE.ALLOWREQUEST;
-        }else if (this.status == STATUS.REQUEST){
-            this.message = MESSAGE.SENTREQUEST;
+        if (this.status == this.translationService.translate(STATUS.FOLLOW)){
+            this.message = this.translationService.translate(MESSAGE.UNFOLLOW);
+        }else if (this.status == this.translationService.translate(STATUS.SENT)){
+            this.message = this.translationService.translate(MESSAGE.CANCELREQUEST);
+        }else if (this.status == this.translationService.translate(STATUS.PENDING)){
+            this.message = this.translationService.translate(MESSAGE.ALLOWREQUEST);
+        }else if (this.status == this.translationService.translate(STATUS.REQUEST)){
+            this.message = this.translationService.translate(MESSAGE.SENTREQUEST);
+
         }
     }
 
     getMessageStatus(): string{
-        if (this.status == STATUS.FOLLOW){
-            return "DEJAR DE SEGUIR";
-        }else if (this.status == STATUS.SENT){
-            return "CANCELAR ENVÍO DE SOLICITUD";
-        }else if (this.status == STATUS.PENDING){
-            return "ACEPTAR O DENEGAR SOLICITUD";
-        }else if (this.status == STATUS.REQUEST){
-            return "ENVIAR SOLICITUD"
+        if (this.status == this.translationService.translate(STATUS.FOLLOW)){
+            return this.translationService.translate("message.unfollow.status");
+        }else if (this.status == this.translationService.translate(STATUS.SENT)){
+            return this.translationService.translate("message.request.cancel.status");
+        }else if (this.status == this.translationService.translate(STATUS.PENDING)){
+            return this.translationService.translate("message.request.allow.status");
+        }else if (this.status == this.translationService.translate(STATUS.REQUEST)){
+            return this.translationService.translate("message.request.sent.status")
         }
     }
 
@@ -250,13 +259,13 @@ export class DetailUserComponent implements OnInit {
 
     onRequest($event){
         if ($event){
-            if (this.status == STATUS.PENDING) {
+            if (this.status == this.translationService.translate(STATUS.PENDING)) {
                 let mUserUser: MUserUser = new MUserUser();
                 mUserUser.userId = this.user.userId;
                 mUserUser.friendId = this.authenticationService.getUser().id;
                 mUserUser.accept = true;
                 this.userUserService.editUserUser(mUserUser).subscribe();
-            }else if (this.status == STATUS.REQUEST){
+            }else if (this.status == this.translationService.translate(STATUS.REQUEST)){
                 let mUserUser: MUserUser = new MUserUser();
                 mUserUser.userId = this.authenticationService.getUser().id;
                 mUserUser.friendId = this.user.userId;
@@ -269,11 +278,11 @@ export class DetailUserComponent implements OnInit {
                         this.userUserService.createUserUser(mUserUser).subscribe();
                     }
                 });
-            }else if (this.status == STATUS.SENT || this.status == STATUS.FOLLOW){
+            }else if (this.status == this.translationService.translate(STATUS.SENT) || this.status == this.translationService.translate(STATUS.FOLLOW)){
                 this.deleteUserUser();
             }
         }else{
-            if (this.status == STATUS.PENDING){
+            if (this.status == this.translationService.translate(STATUS.PENDING)){
                 this.deleteUserUser();
             }
         }

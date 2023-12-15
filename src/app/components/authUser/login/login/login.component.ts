@@ -6,6 +6,7 @@ import {AuthenticationService} from '@services/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from "@modules/notification/services/notification.service";
 import {UserService} from "@services/user.service";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
 	selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 				private userService: UserService,
 				private route: ActivatedRoute,
 				private router: Router,
-				private notificationService: NotificationService) {
+				private notificationService: NotificationService,
+				private translationService: TranslationService) {
 	}
 
 	ngOnInit() {
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
 	ngAfterViewChecked(): void {
 		if (localStorage.getItem("profile") != undefined){
-			this.notificationService.success("Usuario editado", "Se ha editado el usuario correctamente.");
+			this.notificationService.success(this.translationService.translate('user.edit.success.title'), this.translationService.translate('user.edit.success.message'));
 			localStorage.removeItem("profile");
 		}
 	}

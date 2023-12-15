@@ -10,9 +10,12 @@ import {UserProductService} from "@services/userProduct.service";
 import {MUserEvent} from "@models/MUserEvent";
 import {MUserUserEvent} from "@models/MUserUserEvent";
 import {UserUserEventService} from "@services/userUserEvent.service";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
+import { ConsoleService } from '@ng-select/ng-select/lib/console.service';
 
 export enum PRODUCTJOIN {
-    JOIN = 'Participar', CANCEL = 'Quitar participación'
+    JOIN = 'status.follow', CANCEL = 'message.unfollow.status'
 }
 
 @Component({
@@ -22,6 +25,7 @@ export enum PRODUCTJOIN {
 })
 
 export class ListProductsComponent implements OnInit {
+    
     size: number= 6;
     index: number;
     previous:string;
@@ -43,6 +47,8 @@ export class ListProductsComponent implements OnInit {
     moneyText: string;
     previousMember:string;
     nextMember: string;
+
+    darkMode = false;
 
 
     //PRODUCTOS
@@ -77,9 +83,14 @@ export class ListProductsComponent implements OnInit {
                 private userUserEventService: UserUserEventService,
                 private userProductService: UserProductService,
                 private authenticationService: AuthenticationService,
-                private sanitizer: DomSanitizer) {}
+                private sanitizer: DomSanitizer,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService) {}
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         if (localStorage.getItem("products") != undefined){
             this.event = JSON.parse(<string>localStorage.getItem("products"));
             this.partakerReset();
@@ -164,7 +175,7 @@ export class ListProductsComponent implements OnInit {
     ownerLabel(userId:number):string{
         let value:string = "";
         if (userId == this.event.eventOwner){
-            value = "Administrador";
+            value = this.translationService.translate('owner');
         }
         return value;
     }
@@ -287,7 +298,7 @@ export class ListProductsComponent implements OnInit {
     }
 
     private productPagination(){
-        if(this.productName == ""){
+        if(this.productName == "" || this.productName == null){
             this.getProducts();
         }else{
             this.searchProduct();
@@ -327,28 +338,30 @@ export class ListProductsComponent implements OnInit {
     }
 
     private searchProductTotalPages(){
-        this.productService.countSearchProducts(this.productName, this.event.eventId).subscribe((response) => {
-            this.totalProductPage = Math.ceil(response/this.size);
-        });
+        if(this.productName != "" && this.productName != null && this.event != null && this.event.eventId != null){
+            this.productService.countSearchProducts(this.productName, this.event.eventId).subscribe((response) => {
+                this.totalProductPage = Math.ceil(response/this.size);
+            });
+        }
     }
 
     private getStatus (mProducts: MProduct[]) {
         mProducts.forEach((mProduct) => {
             this.userProductService.getUserProduct(mProduct.productId, this.authenticationService.getUser().id).subscribe((response) => {
                 if (response.productId == 0 || response.userProductActive == false){
-                    this.status[mProduct.productId] = PRODUCTJOIN.JOIN;
+                    this.status[mProduct.productId] = this.translationService.translate(PRODUCTJOIN.JOIN);
                 }else if (response.userProductActive == true){
-                    this.status[mProduct.productId] = PRODUCTJOIN.CANCEL;
+                    this.status[mProduct.productId] = this.translationService.translate(PRODUCTJOIN.CANCEL);
                 }
             });
         });
     }
 
     messageStatus(productId:number): string{
-        if (this.status[productId] == PRODUCTJOIN.JOIN.valueOf()){
-            return "Solicitar participación";
+        if (this.status[productId] == this.translationService.translate(PRODUCTJOIN.JOIN).valueOf()){
+            return this.translationService.translate('product.follow.request');;
         }else{
-            return "Participando";
+            return this.translationService.translate('product.follow');
         }
     }
 
@@ -357,7 +370,6 @@ export class ListProductsComponent implements OnInit {
         this.userEventService.getPageableUserEvents(this.event.eventId, this.userEventPage, this.totalPartaker).subscribe((response) => {
             this.userEvents = response;
             this.totalUserEventPages();
-
         });
     }
 
@@ -414,7 +426,7 @@ export class ListProductsComponent implements OnInit {
     }
 
     private userEventPagination(){
-        if(this.userName == ""){
+        if(this.userName == "" && this.userName != null){
             this.getUserEvents();
         }else{
             this.searchUserEvent();

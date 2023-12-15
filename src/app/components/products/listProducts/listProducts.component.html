@@ -3,35 +3,35 @@
         <div class="col-xxl-3 col-xl-2 col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="imageEventDiv">
                 <ng-container *ngIf="event.eventPhoto; else imagesDiv">
-                    <img class="imageEvent" [src]="imageEvent" alt=""
+                    <img class="imageEvent" [src]="imageEvent" alt="{{'event.photo' | translate}}"
                          id="detailUserEvent_photo">
                 </ng-container>
                 <ng-template #imagesDiv>
-                    <img class="imageEvent" [src]="defaultEventImage">
+                    <img class="imageEvent" alt="{{'event.photo.default' | translate}}" [src]="defaultEventImage">
                 </ng-template>
             </div>
         </div>
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12">
-            <h5 class="row modal-title title eventTitle">
+            <h5 class="row modal-title title eventTitle" [ngClass]="darkMode ? 'text-light' : ''">
                 {{event.eventName}}
             </h5>
-            <div class="row date text">
-                <img class="icon" src="assets/date.svg" alt=""
+            <div class="row date text" [ngClass]="darkMode ? 'text-light' : ''">
+                <img class="icon" src="assets/date.svg" alt="{{'icon' | translate}}"
                      id="detailUserEvent_date">
                 {{event.eventStart | date: 'dd-MM-yyyy HH:mm'}}<br>
                 {{event.eventEnd | date: 'dd-MM-yyyy HH:mm'}}
             </div>
             <div class="row description-row text"
                  name="eventLocation"
-                 id="detailEvent_eventLocation">
-                <img class="icon" src="assets/location.svg" alt=""
+                 id="detailEvent_eventLocation" [ngClass]="darkMode ? 'text-light' : ''">
+                <img class="icon" src="assets/location.svg" alt="{{'icon' | translate}}"
                      id="detailUserEvent_location">
                 {{event.eventLocation}}
             </div>
             <div class="row description-row text"
-                     name="eventDescription"
+                     name="eventDescription" [ngClass]="darkMode ? 'text-light' : ''"
                      id="detailEvent_eventDescription">
-                <img class="icon" src="assets/comment.svg" alt=""
+                <img class="icon" src="assets/comment.svg" alt="{{'icon' | translate}}"
                      id="detailUserEvent_description">
                 {{event.eventDescription}}
             </div>
@@ -42,86 +42,86 @@
                     <ng-container *ngIf="user.userPhoto; else userImagesDiv">
                         <p title="{{ownerLabel(user.userId)}}" class="imageP">
                             <img class="imagePartaker" [ngClass]="ownerBorder(user.userId)"
-                                 [src]="imagesPartakers[user.userId]" alt="" id="detailUser_photo">
+                                 [src]="imagesPartakers[user.userId]" alt="{{'user.photo' | translate}}" id="detailUser_photo">
                         </p>
-                        <p title="{{ownerLabel(user.userId)}}" class="partaker">
+                        <p title="{{ownerLabel(user.userId)}}" class="partaker" [ngClass]="darkMode ? 'text-light' : ''">
                             {{user.userLogin}}
                         </p>
                     </ng-container>
                     <ng-template #userImagesDiv>
                         <p title="{{ownerLabel(user.userId)}}" class="imageP">
-                            <img class="imagePartaker" [ngClass]="ownerBorder(user.userId)" [src]="defaultUserImage">
+                            <img class="imagePartaker" alt="{{'user.photo.default' | translate}}" [ngClass]="ownerBorder(user.userId)" [src]="defaultUserImage">
                         </p>
-                        <p title="{{ownerLabel(user.userId)}}" class="partaker">
+                        <p title="{{ownerLabel(user.userId)}}" class="partaker" [ngClass]="darkMode ? 'text-light' : ''">
                             {{user.userLogin}}
                         </p>
                     </ng-template>
                     <app-createUserEventExpense (eventSave)="getAuthUserEvent()" [userEvent]="authUserEvent"></app-createUserEventExpense>
                 </div>
-                <div *ngIf="eventPartakers.length > sizePartaker" [ngClass]="previousMember" class="more" (click)="getLessPartakers()"><a>
-                    Ver menos</a></div>
-                <div *ngIf="eventPartakers.length < totalPartaker" [ngClass]="nextMember" class="more" (click)="getMorePartakers()"><a>
-                    Ver más</a></div>
+                <div *ngIf="eventPartakers.length > sizePartaker" [ngClass]="previousMember" class="more" (click)="getLessPartakers()"><a title="{{'less' | translate}}">
+                    {{'less' | translate}}</a></div>
+                <div *ngIf="eventPartakers.length < totalPartaker" [ngClass]="nextMember" class="more" (click)="getMorePartakers()"><a title="{{'more' | translate}}">
+                    {{'more' | translate}}</a></div>
             </div>
         </div>
     </div>
     <div class="row moneyCircles">
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 circle">
-            <div class="money">
-                <p  title="Dinero que he aportado al evento" class="partakerExpense">
+            <div class="money" [ngClass]="darkMode ? 'moneyDark' : ''">
+                <p  title="{{'money.advanced' | translate}}" [ngClass]="darkMode ? 'text-light' : ''" class="partakerExpense">
                     {{cost(totalExpense)}}€
                 </p>
-                <p  title="Dinero que he aportado al evento" class="partakerTextExpense">
-                    Dinero adelantado
+                <p  title="{{'money.advanced' | translate}}" [ngClass]="darkMode ? 'text-light' : ''" class="partakerTextExpense">
+                    {{'money.advanced' | translate}}
                 </p>
             </div>
             <div class="moneyButton">
-                <button *ngIf="event.eventOpen" type="button" class="button" data-bs-toggle="modal" data-bs-target="#createUserEventExpenseModal">Añadir</button>
+                <button *ngIf="event.eventOpen" type="button" class="button" data-bs-toggle="modal" data-bs-target="#createUserEventExpenseModal">{{'add' | translate}}</button>
             </div>
         </div>
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 circle">
-            <div class="money">
-                <p class="partakerExpense" title="Dinero que he gastado en el evento">
+            <div class="money" [ngClass]="darkMode ? 'moneyDark' : ''">
+                <p class="partakerExpense" [ngClass]="darkMode ? 'text-light' : ''" title="{{'money.spent' | translate}}">
                     {{cost(debt)}}€
                 </p>
-                <p class="partakerTextExpense" title="Dinero que he gastado en el evento">
-                    Dinero gastado
+                <p class="partakerTextExpense" [ngClass]="darkMode ? 'text-light' : ''" title="{{'money.spent' | translate}}">
+                    {{'money.spent' | translate}}
                 </p>
             </div>
         </div>
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 circle">
-            <div class="money">
-                <p  title="Dinero total adelantado al evento" class="partakerExpense">
+            <div class="money" [ngClass]="darkMode ? 'moneyDark' : ''">
+                <p  title="{{'money.total.advanced' | translate}}" [ngClass]="darkMode ? 'text-light' : ''" class="partakerExpense">
                     {{cost(totalEventExpense)}}€
                 </p>
-                <p  title="Dinero total adelantado al evento" class="partakerTextExpense">
-                    Dinero total adelantado
+                <p  title="{{'money.total.advanced' | translate}}" [ngClass]="darkMode ? 'text-light' : ''" class="partakerTextExpense">
+                    {{'money.total.advanced' | translate}}
                 </p>
             </div>
         </div>
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 circle">
-            <div class="money">
-                <p  title="Dinero total gastado en el evento" class="partakerExpense">
+            <div class="money" [ngClass]="darkMode ? 'moneyDark' : ''">
+                <p  title="{{'money.total.spent' | translate}}" [ngClass]="darkMode ? 'text-light' : ''" class="partakerExpense">
                     {{cost(totalProductCost)}}€
                 </p>
-                <p  title="Dinero total gastado en el evento" class="partakerTextExpense">
-                    Dinero total gastado
+                <p  title="{{'money.total.spent' | translate}}" [ngClass]="darkMode ? 'text-light' : ''" class="partakerTextExpense">
+                    {{'money.total.spent' | translate}}
                 </p>
             </div>
         </div>
     </div>
 </section>
 <section>
-    <h6 class="subtitle modal-title">PRODUCTOS</h6>
+    <h6 class="subtitle modal-title" [ngClass]="darkMode ? 'text-light' : ''">{{'product.title' | translate}}</h6>
     <div class="searchDiv row">
         <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7 search">
             <form ngNativeValidate (input)="searchProductInput()" #searchProductsForm="ngForm">
-                <input type="search" id="events_productName" name="productName" placeholder="Buscar por nombre de producto"
+                <input type="search" id="events_productName" [ngClass]="darkMode ? 'text-light searchDark' : ''" name="productName" placeholder="{{'product.search.name' | translate}}"
                        [(ngModel)]="productName" required #productNameForm="ngModel" aria-label="Search">
             </form>
         </div>
         <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 createDiv">
-            <button *ngIf="event.eventOpen" type="button" class="addButton" data-bs-toggle="modal" data-bs-target="#createProductModal" (click)="setProduct();">Añadir</button>
+            <button *ngIf="event.eventOpen" type="button" class="addButton" data-bs-toggle="modal" data-bs-target="#createProductModal" title="{{'add' | translate}}" (click)="setProduct();">{{'add' | translate}}</button>
         </div>
     </div>
     <app-createProduct (eventSave)="getProducts();" [product]="selectedProduct" [eventId]="event.eventId"></app-createProduct>
@@ -132,22 +132,22 @@
         <ng-container *ngIf="products.length!= 0; else productsDiv">
             <div *ngFor="let product of products;let i=index">
                 <div class="col">
-                    <div class="card mb-3 color" id="detailProductCard" data-bs-toggle="modal" data-bs-target="#detailProductModal"
+                    <div class="card mb-3" id="detailProductCard" [ngClass]="darkMode ? 'bg-dark text-light colorDark' : 'color'" data-bs-toggle="modal" data-bs-target="#detailProductModal"
                          (click)="selectProduct(i)">
                         <div class="row g-0">
                             <div class="col-xxl-5 col-xl-12 col-lg-5 col-md-12 col-sm-5 divAligment">
                                 <ng-container *ngIf="product.productPhoto != null; else imagesDiv">
-                                    <img class="image" [src]="imagesProducts[product.productId]">
+                                    <img class="image" alt="{{'product.photo' | translate}}" [src]="imagesProducts[product.productId]">
                                 </ng-container>
                                 <ng-template #imagesDiv>
-                                    <img class="image" [src]="defaultImage">
+                                    <img class="image" alt="{{'product.photo.default' | translate}}" [src]="defaultImage">
                                 </ng-template>
                             </div>
                             <div class="col-xxl-7 col-xl-12 col-lg-7 col-md-12 col-sm-7 divAligment">
                                 <div class="card-body-xxl-7 card-body-xl-12 card-body-lg-7 card-body-md-12 card-body-sm-7 divAligment">
-                                    <h5 class="title">{{product.productName}}</h5>
+                                    <h5 class="title" [ngClass]="darkMode ? 'text-light' : ''">{{product.productName}}</h5>
                                     <p class="card-text">
-                                        <a class="message">{{messageStatus(product.productId)}}</a>
+                                        <a class="message" [ngClass]="darkMode ? 'messageDark' : ''">{{messageStatus(product.productId)}}</a>
                                     </p>
                                 </div>
                             </div>
@@ -157,14 +157,14 @@
             </div>
         </ng-container>
         <ng-template #productsDiv>
-            <p class="text">No existen productos</p>
+            <p class="text" [ngClass]="darkMode ? 'text-light' : ''">{{'products.empty' | translate}}</p>
         </ng-template>
     </div>
     <div class="paginationDiv">
         <ul class="row pagination">
-            <li class="page-item" [ngClass]="previous" *ngIf="productPage!=0"><a class="page-link previous" (click)="setProductPage(-1)">Anterior</a>
+            <li class="page-item" [ngClass]="previous" *ngIf="productPage!=0"><a [ngClass]="darkMode ? 'bg-dark text-light' : ''" class="page-link previous" title="{{'previous' | translate}}" (click)="setProductPage(-1)">{{'previous' | translate}}</a>
             </li>
-            <li class="page-item" [ngClass]="next" *ngIf="productPage+1<totalProductPage"><a class="page-link next" (click)="setProductPage(1)">Siguiente</a>
+            <li class="page-item" [ngClass]="next" *ngIf="productPage+1<totalProductPage"><a class="page-link next" [ngClass]="darkMode ? 'bg-dark text-light' : ''" title="{{'next' | translate}}" (click)="setProductPage(1)">{{'next' | translate}}</a>
             </li>
         </ul>
     </div>

@@ -34,6 +34,7 @@ export class AuthenticationService {
 		  );
 	}
 
+
   //CONFIGURA AL USUARIO LOGGEADO
 	public logIn(login: string, password: string, authorization: string) {
 		this.user.login = login;

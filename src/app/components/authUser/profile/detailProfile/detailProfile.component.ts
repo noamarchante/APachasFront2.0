@@ -1,4 +1,4 @@
-import {Component, OnInit,ChangeDetectionStrategy, ViewChild, TemplateRef,} from '@angular/core';
+import {Component, OnInit,ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef,} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from "@services/authentication.service";
 import {AuthUser} from "@models/AuthUser";
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {CalendarEvent, CalendarView,} from 'angular-calendar';
 import {UserEventService} from "@services/userEvent.service";
 import {EventService} from "@services/event.service";
+import { DarkModeService } from '@app/services/darkMode.service';
 
 const colors: any = {
     blue: {
@@ -49,19 +50,25 @@ export class DetailProfileComponent implements OnInit {
 
     activeDayIsOpen: boolean = false;
 
+    darkMode = false;
+
     constructor(private router: Router,
                 private authenticationService: AuthenticationService,
                 private sanitizer: DomSanitizer,
                 private userEventService: UserEventService,
-                private eventService: EventService) {
+                private eventService: EventService,
+                private darkModeService: DarkModeService) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.authUser = this.authenticationService.getUser();
         this.getURLProfile();
         this.getOpenEvents();
         this.getClosedEvents();
-
+    
     }
 
     private getURLProfile() {

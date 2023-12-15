@@ -4,12 +4,13 @@ import {UserUserService} from "@services/userUser.service";
 import {AuthenticationService} from "@services/authentication.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {MUser} from "@models/MUser";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 
 export enum STATUS {
-    REQUEST = 'Solicitar amistad', PENDING = 'Solicitud pendiente', FOLLOW = 'Siguiendo', SENT = 'Solicitud enviada'
+    REQUEST = 'status.request', PENDING = 'status.pending', FOLLOW = 'status.follow', SENT = 'status.sent'
 }
-
 @Component({
     selector: 'app-users',
     templateUrl: './listUsers.component.html',
@@ -31,13 +32,19 @@ export class ListUsersComponent implements OnInit {
     index:number;
     status:string="";
     selectedUser: MUser = new MUser();
+    darkMode = false;
 
     constructor(private userService: UserService,
                 private userUserService: UserUserService,
                 private authenticationService: AuthenticationService,
-                private sanitizer: DomSanitizer) {}
+                private sanitizer: DomSanitizer,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService) {}
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+          });  
         this.getUsers();
         this.paginationClass();
     }
@@ -97,7 +104,7 @@ export class ListUsersComponent implements OnInit {
     }
 
     private pagination(){
-        if(this.login == ""){
+        if(this.login == "" || this.login == null || this.login == undefined){
             this.getUsers();
         }else{
             this.searchUsers();
@@ -131,9 +138,13 @@ export class ListUsersComponent implements OnInit {
     }
 
     private searchTotalPages(){
-        this.userService.countSearchUsers(this.login, this.authenticationService.getUser().id).subscribe((response) => {
-            this.totalPage = Math.ceil(response/this.size);
-        });
+        if(this.login == "" || this.login == null){
+            this.totalPages();
+        }else{
+            this.userService.countSearchUsers(this.login, this.authenticationService.getUser().id).subscribe((response) => {
+                this.totalPage = Math.ceil(response/this.size);
+            });
+        }
     }
 
     getNext (): boolean{
@@ -165,13 +176,13 @@ export class ListUsersComponent implements OnInit {
     private statusValue (statusBD: boolean, friend: boolean): string {
         let status: string;
         if (statusBD) {
-            status = STATUS.FOLLOW;
+            status = this.translationService.translate(STATUS.FOLLOW);
         } else if (friend) {
-            status = STATUS.PENDING;
+            status = this.translationService.translate(STATUS.PENDING);
         }else if (!statusBD){
-            status = STATUS.SENT;
+            status = this.translationService.translate(STATUS.SENT);
         }else{
-            status = STATUS.REQUEST;
+            status = this.translationService.translate(STATUS.REQUEST);
         }
         return status;
     }
@@ -193,7 +204,7 @@ export class ListUsersComponent implements OnInit {
                 if (response != null) {
                     this.friends[mUser.userId] = this.statusValue(response.accept, true);
                 }else{
-                    this.friends[mUser.userId] = STATUS.REQUEST;
+                    this.friends[mUser.userId] = this.translationService.translate(STATUS.REQUEST);
                 }
             });
     }

@@ -3,9 +3,10 @@ import {NotificationService} from '@modules/notification/services/notification.s
 import {NotificationsService} from 'angular2-notifications';
 import {Severity} from '@modules/notification/entities';
 import {AuthenticationService} from '@services/authentication.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {UserEventService} from "@services/userEvent.service";
 import {UserUserService} from "@services/userUser.service";
+import { DarkModeService } from './services/darkMode.service';
 
 declare var paypal;
 
@@ -19,17 +20,25 @@ export class AppComponent implements OnInit {
   defaultImage: string = 'assets/user16.jpg';
   notifications: string[] = [];
   badge: string ="";
+  darkMode = false;
   constructor(
     private notificationService: NotificationService,
     private notificationsService: NotificationsService,
     public authenticationService: AuthenticationService,
     private router: Router,
     private userEventService: UserEventService,
-    private userUserService: UserUserService
+    private userUserService: UserUserService,
+    private route: ActivatedRoute,
+    private darkModeService: DarkModeService
   ) {
   }
 
   ngOnInit() {
+
+    this.darkModeService.darkMode$.subscribe((mode) => {
+      this.darkMode = mode;
+      this.toggleBodyClass();
+    });
     this.notificationService.getMessages().subscribe(
       message => {
         switch (message.severity) {
@@ -48,14 +57,30 @@ export class AppComponent implements OnInit {
         }
       }
     );
+
     this.getEventNotifications();
     this.getUserNotifications();
   }
 
+  private toggleBodyClass() {
+    const body = document.body;
+    if (this.darkMode) {
+      body.classList.add('dark-mode');
+    } else {
+      body.classList.remove('dark-mode');
+    }
+  }
+
+  toggleDarkMode() {
+    this.darkModeService.toggleDarkMode();
+  }
+
+  isSelected(routeName: string): boolean {
+    return this.route.snapshot.routeConfig?.path === routeName;
+  }
+
   getEventNotifications() {
-    const userId = this.authenticationService.getUser()?.id;
-    if(userId != null){
-    this.userEventService.getNotifications(userId).subscribe(
+    this.userEventService.getNotifications(this.authenticationService.getUser()?.id).subscribe(
         (events) => {
             this.processEventNotifications(events);
             this.setBadge();
@@ -65,7 +90,7 @@ export class AppComponent implements OnInit {
             // Handle the error appropriately
         }
     );
-      }
+      
 }
 
 processEventNotifications(events: any[]) {
@@ -75,9 +100,7 @@ processEventNotifications(events: any[]) {
 }
 
 getUserNotifications() {
-    const userId = this.authenticationService.getUser().id;
-    if(userId != null){
-      this.userUserService.getNotifications(userId).subscribe(
+      this.userUserService.getNotifications(this.authenticationService.getUser()?.id).subscribe(
           (userNotifications) => {
               this.processUserNotifications(userNotifications);
               this.setBadge();
@@ -86,7 +109,7 @@ getUserNotifications() {
               console.error('Error fetching user notifications:', error);
           }
       );
-    }
+    
 }
 
 processUserNotifications(userNotifications: any[]) {

@@ -9,7 +9,6 @@
 
 .text{
     text-decoration: none;
-    border: 1px solid #ffffff;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -20,11 +19,19 @@
     outline: none;
 }
 
+.messageDark{
+    color: #66bb6a !important;
+}
+
 .searchDiv
 {
     padding-top: 50px;
     padding-bottom: 30px;
-    background: #fff;
+}
+
+.searchDark{
+    border: 1px solid #ffffff !important;
+    background-color: #1e1e1e !important;
 }
 
 .message
@@ -66,7 +73,7 @@
 
 .filterSearch{
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: none;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -79,8 +86,17 @@
     cursor: pointer;
 }
 
+.checkDark{
+    background-color: #236726;
+    color: #fff !important;
+}
+
 .filterSearch:hover{
     background-color: rgba(102, 187, 106, 0.1);
+}
+
+.filterDark:hover{
+    background-color: #1e1e1e;
 }
 
 .dropdown-menu{
@@ -90,7 +106,6 @@
     margin-right: 10% !important;
 
 }
-
 
 .checkFilter{
     background: rgba(102, 187, 106, 0.12);
@@ -128,11 +143,11 @@ input[type="search"]::-webkit-search-cancel-button{
 }
 .tag {
     padding: 10px;
+    text-align: center;
     border: none;
     outline: none;
     box-shadow: none;
     max-width: 120px;
-    background: #fff;
     color: #236726;
     font-size: 14px;
     font-weight: 500;
@@ -167,6 +182,15 @@ input[type="search"]::-webkit-search-cancel-button{
 
 .color:hover{
     background: rgba(102, 187, 106, 0.12);
+    cursor:pointer;
+}
+
+.color{
+    background: rgba(102, 187, 106, 0.05);
+}
+
+.colorDark:hover{
+    background: rgb(25, 22, 27) !important;
     cursor:pointer;
 }
 

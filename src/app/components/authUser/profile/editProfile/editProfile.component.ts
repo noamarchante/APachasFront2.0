@@ -5,6 +5,8 @@ import {AuthenticationService} from "@services/authentication.service";
 import {AuthUser} from "@models/AuthUser";
 import {UserService} from "@services/user.service";
 import {Router} from "@angular/router";
+import {TranslationService} from '@modules/translations/translation.service';
+import { DarkModeService } from '@app/services/darkMode.service';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class EditProfileComponent implements OnInit, AfterViewChecked {
     imageFormat: boolean;
     imageColor:string="";
     imageText: string;
-    title: string = "EDITAR USUARIO";
+    title: string = this.translationService.translate('user.edit.title');
     _authUser: AuthUser;
     birthday: Date;
     password = "";
@@ -25,6 +27,8 @@ export class EditProfileComponent implements OnInit, AfterViewChecked {
     passwordConfirm = "";
     login = "";
     available: boolean = true;
+
+    darkMode = false;
 
     public options: any = {
         autoApply: false,
@@ -37,27 +41,27 @@ export class EditProfileComponent implements OnInit, AfterViewChecked {
             format: 'DD/MM/yyyy',
             "firstDay": 1,
             daysOfWeek: [
-                "D",
-                "L",
-                "M",
-                "X",
-                "J",
-                "V",
-                "S"
+                this.translationService.translate('calendar.week.sunday'),
+                this.translationService.translate('calendar.week.monday'),
+                this.translationService.translate('calendar.week.tuesday'),
+                this.translationService.translate('calendar.week.wednesday'),
+                this.translationService.translate('calendar.week.thursday'),
+                this.translationService.translate('calendar.week.friday'),
+                this.translationService.translate('calendar.week.saturday'),
             ],
             monthNames: [
-                "Enero",
-                "Febrero",
-                "Marzo",
-                "Abril",
-                "Mayo",
-                "Junio",
-                "Julio",
-                "Agosto",
-                "Septiembre",
-                "Octubre",
-                "Noviembre",
-                "Diciembre"
+                this.translationService.translate('calendar.month.january'),
+                this.translationService.translate('calendar.month.february'),
+                this.translationService.translate('calendar.month.march'),
+                this.translationService.translate('calendar.month.april'),
+                this.translationService.translate('calendar.month.may'),
+                this.translationService.translate('calendar.month.june'),
+                this.translationService.translate('calendar.month.july'),
+                this.translationService.translate('calendar.month.august'),
+                this.translationService.translate('calendar.month.september'),
+                this.translationService.translate('calendar.month.october'),
+                this.translationService.translate('calendar.month.november'),
+                this.translationService.translate('calendar.month.december'),
             ]
         },
         minDate: undefined,
@@ -70,14 +74,19 @@ export class EditProfileComponent implements OnInit, AfterViewChecked {
 
 
     constructor(private sanitizer: DomSanitizer,
+                private translationService: TranslationService,
                 private authenticationService: AuthenticationService,
                 private userService: UserService,
                 private router: Router,
-                private notificationService: NotificationService
+                private notificationService: NotificationService,
+                private darkModeService: DarkModeService
     ) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
     }
 
     get authUser(){
@@ -104,8 +113,8 @@ export class EditProfileComponent implements OnInit, AfterViewChecked {
     }
 
     ngAfterViewChecked() {
-        document.getElementsByClassName("applyDate")[0].textContent ="Aplicar";
-        document.getElementsByClassName("cancelDate")[0].textContent = "Cancelar";
+        document.getElementsByClassName("applyDate")[0].textContent = this.translationService.translate('save');
+        document.getElementsByClassName("cancelDate")[0].textContent = this.translationService.translate('cancel');
     }
 
     public applyDate(): void {

@@ -42,6 +42,15 @@
     transition: 0.5s;
 }
 
+.buttonDark {
+    color: #1e1e1e !important;
+    background: #66bb6a !important;
+}
+
+.darkDeny{
+    border:  1px solid #ffffff;
+}
+
 .close{
     background: #555;
 }

@@ -5,15 +5,15 @@
             <div class="row">
                 <div class="col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 imageDiv">
                     <ng-container *ngIf="authUser.photo; else imagesDiv">
-                        <img class="image" [src]="imageProfile" alt="imagen de perfil"
+                        <img class="image" [src]="imageProfile" alt="{{'user.photo' | translate}}"
                              id="detailProfile_photo">
                     </ng-container>
                     <ng-template #imagesDiv>
-                        <img class="image" [src]="defaultImage" alt="imagen por defecto">
+                        <img class="image" [src]="defaultImage" alt="{{'user.photo.default' | translate}}">
                     </ng-template>
                 </div>
                 <div class="col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 titleclass">
-                    <button type="button" title="editar perfil" class="button" data-bs-toggle="modal" data-bs-target="#editProfileModal">Editar perfil</button>
+                    <button type="button" title="{{'profile.edit' | translate}}" class="button" data-bs-toggle="modal" data-bs-target="#editProfileModal">{{'profile.edit' | translate}}</button>
 
                 </div>
             </div>
@@ -26,30 +26,31 @@
                 <!--BOTONES ANTERIOR HOY SIGUIENTE -->
                 <div class="col-md-4">
                     <div class="btn-group">
-                        <div class="btn btn-primary"
+                        <div
+                             class="btn btn-primary"
                              mwlCalendarPreviousView
                              [view]="view"
                              [(viewDate)]="viewDate"
                              (viewDateChange)="closeOpenMonthViewDay()">
-                            Anterior
+                            {{'calendar.previous' | translate}}
                         </div>
                         <div class="btn btn-primary"
                              mwlCalendarToday
                              [(viewDate)]="viewDate">
-                            Hoy
+                            {{'calendar.today' | translate}}
                         </div>
                         <div class="btn btn-primary"
                              mwlCalendarNextView
                              [view]="view"
                              [(viewDate)]="viewDate"
                              (viewDateChange)="closeOpenMonthViewDay()">
-                            Siguiente
+                             {{'calendar.next' | translate}}
                         </div>
                     </div>
                 </div>
                 <!-- FECHA ACTUAL -->
                 <div class="col-md-4">
-                    <h3 class="todayDate">{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
+                    <h3 class="todayDate" [ngClass]="darkMode ? 'todayDateDark' : ''">{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
                 </div>
                 <!-- BOTONES MES SEMANA DIA -->
                 <div class="col-md-4">
@@ -57,17 +58,17 @@
                         <div class="btn btn-primary"
                              (click)="setView(CalendarView.Month)"
                              [class.active]="view === CalendarView.Month">
-                            Mes
+                             {{'calendar.month' | translate}}
                         </div>
                         <div class="btn btn-primary"
                              (click)="setView(CalendarView.Week)"
                              [class.active]="view === CalendarView.Week">
-                            Semana
+                             {{'calendar.week' | translate}}
                         </div>
                         <div class="btn btn-primary"
                              (click)="setView(CalendarView.Day)"
                              [class.active]="view === CalendarView.Day">
-                            Día
+                             {{'calendar.day' | translate}}
                         </div>
                     </div>
                 </div>

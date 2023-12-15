@@ -7,6 +7,8 @@ import {MUserUserEvent} from "@models/MUserUserEvent";
 import {EventService} from "@services/event.service";
 import {MEvent} from "@models/MEvent";
 import {UserService} from "@services/user.service";
+import { TranslationService } from "@app/modules/translations/translation.service";
+import { DarkModeService } from "@app/services/darkMode.service";
 
 @Component({
     selector: 'app-transactionHistory',
@@ -34,14 +36,20 @@ export class TransactionHistoryComponent implements OnInit {
     selectedTransaction: MUserUserEvent;
     paid:boolean = false;
     confirmed: boolean = false;
+    darkMode = false;
 
     constructor(private userUserEventService: UserUserEventService,
                 private userService: UserService,
                 private eventService: EventService,
                 private authenticationService: AuthenticationService,
-                private sanitizer: DomSanitizer) {}
+                private sanitizer: DomSanitizer,
+                private translationService: TranslationService,
+                private darkModeService: DarkModeService) {}
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.getTransactions();
     }
     cost(cost: number): number{
@@ -75,10 +83,10 @@ export class TransactionHistoryComponent implements OnInit {
     messageValue(transaction: MUserUserEvent){
         this.selectedTransaction = transaction;
         if (transaction.senderId == this.authenticationService.getUser().id){
-            this.message = "¿Estás seguro de que quieres confirmar que has pagado?"
+            this.message = this.translationService.translate('transaction.confirm.payment')
             this.paid = true;
         }else if (transaction.receiverId == this.authenticationService.getUser().id){
-            this.message = "¿Estás seguro de que quieres confirmar que has recibido el pago?"
+            this.message = this.translationService.translate('transaction.confirm.receiver')
             this.confirmed = true;
         }else{
             this.message = "";
@@ -326,15 +334,15 @@ export class TransactionHistoryComponent implements OnInit {
 
     checkedFilter(index: number): string{
         if (index == 0){
-            return "Ordenar por evento";
+            return this.translationService.translate('transaction.sort.event.name');
         }else if (index == 1){
-            return "Deudas";
+            return this.translationService.translate('transaction.sort.debts');
         }else if (index == 2){
-            return "Pagos";
+            return this.translationService.translate('transaction.sort.payments');
         }else if (index == 3){
-            return "Pendientes";
+            return this.translationService.translate('transaction.sort.pending');
         }else if (index == 4){
-            return "Ordenar por más reciente";
+            return this.translationService.translate('transaction.sort.recent');
         }
 
     }
@@ -343,7 +351,16 @@ export class TransactionHistoryComponent implements OnInit {
         if (this.authenticationService.getUser().id == transaction.senderId){
             return "costColor";
         }else{
-            return "";
+            return "cost";
+        }
+    }
+
+    setStatusButton (transaction){
+        if (this.getStatus(transaction) != this.translationService.translate('transaction.status.pay.pending') 
+        && this.getStatus(transaction) != 'transaction.status.charging.confirmation'){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -352,22 +369,22 @@ export class TransactionHistoryComponent implements OnInit {
         if (this.authenticationService.getUser().id == transaction.senderId){
             if (transaction.paid){
                 if (transaction.confirmed){
-                    message = "Pagado";
+                    message = this.translationService.translate('transaction.status.pay.paid');
                 }else{
-                    message = "Pendiente de confirmación";
+                    message = this.translationService.translate('transaction.status.charging.confirmation.pending');
                 }
             }else{
-                message = "Pagar";
+                message = this.translationService.translate('transaction.status.pay.pending');
             }
         }else{
             if (transaction.paid){
                 if (transaction.confirmed){
-                    message = "Recibido";
+                    message = this.translationService.translate('transaction.status.pay.received');
                 }else{
-                    message = "Confirmar";
+                    message = this.translationService.translate('transaction.status.charging.confirmation');
                 }
             }else{
-                message = "Pendiente de cobro";
+                message = this.translationService.translate('transaction.status.charging.pending');
             }
         }
         return message;
@@ -495,8 +512,12 @@ export class TransactionHistoryComponent implements OnInit {
     }
 
     private searchTransactionTotalPages(){
-        this.userUserEventService.countSearchUserUserEventsByAuthUser(this.searchTransactionValue, this.authenticationService.getUser().id).subscribe((response) => {
-            this.totalTransactionPage = Math.ceil(response/this.size);
-        });
+        if (this.searchTransactionValue == "" || this.searchTransactionValue == null){
+            this.totalTransactionPages();
+        }else{
+            this.userUserEventService.countSearchUserUserEventsByAuthUser(this.searchTransactionValue, this.authenticationService.getUser().id).subscribe((response) => {
+                this.totalTransactionPage = Math.ceil(response/this.size);
+            });
+        }
     }
 }

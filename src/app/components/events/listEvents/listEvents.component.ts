@@ -4,6 +4,8 @@ import {AuthenticationService} from "@services/authentication.service";
 import {MEvent} from "@models/MEvent";
 import {UserEventService} from "@services/userEvent.service";
 import {STATUS} from "@app/components/users/listUsers/listUsers.component";
+import { TranslationService } from '@app/modules/translations/translation.service';
+import { DarkModeService } from '@app/services/darkMode.service';
 
 @Component({
     selector: 'app-events',
@@ -26,12 +28,18 @@ export class ListEventsComponent implements OnInit {
     next:string;
     pageDirection: number;
     checked: boolean;
+    darkMode = false;
 
     constructor(private userEventService: UserEventService,
                 private authenticationService: AuthenticationService,
-                private sanitizer: DomSanitizer) {}
+                private sanitizer: DomSanitizer,
+                private translationService: TranslationService,
+                private darkModeService: DarkModeService) {}
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.getEvents();
         this.paginationClass();
         this.checked = false;
@@ -117,13 +125,13 @@ export class ListEventsComponent implements OnInit {
 
     private pagination(){
         if (this.checked){
-            if(this.eventName == ""){
+            if(this.eventName == "" || this.eventName == null){
                 this.getEventsWithFinished();
             }else{
                 this.searchWithFinished();
             }
         }else{
-            if(this.eventName == ""){
+            if(this.eventName == "" || this.eventName == null){
                 this.getEvents();
             }else{
                 this.search();
@@ -175,9 +183,13 @@ export class ListEventsComponent implements OnInit {
     }
 
     private searchTotalPages(){
-        this.userEventService.countSearchEvents(this.eventName, this.authenticationService.getUser().id).subscribe((response) => {
-            this.totalPage = Math.ceil(response/this.size);
-        });
+        if (this.eventName == "" || this.eventName == null){
+            this.totalPages();
+        }else{
+            this.userEventService.countSearchEvents(this.eventName, this.authenticationService.getUser().id).subscribe((response) => {
+                this.totalPage = Math.ceil(response/this.size);
+            });
+        }
     }
 
     private searchTotalPagesWithFinished(){
@@ -215,11 +227,11 @@ export class ListEventsComponent implements OnInit {
     private statusValue (statusBD: boolean): string {
         let status: string;
         if (statusBD) {
-            status = STATUS.FOLLOW;
+            status = this.translationService.translate(STATUS.FOLLOW);
         }else if (!statusBD){
-            status = STATUS.PENDING;
+            status = this.translationService.translate(STATUS.PENDING);
         }else{
-            status = STATUS.REQUEST;
+            status = this.translationService.translate(STATUS.REQUEST);
         }
         return status;
     }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "@services/user.service";
 import {MUser} from "@models/MUser";
 import {NotificationService} from "@modules/notification/services/notification.service";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 
 @Component({
@@ -12,12 +13,13 @@ import {NotificationService} from "@modules/notification/services/notification.s
 export class RetrievePasswordEmailComponent implements OnInit {
 
     mUser: MUser= new MUser();
-    title: string = "RECUPERAR CONTRASEÑA";
+    title: string = this.translationService.translate('email.password.title');
     email: string = "";
 
 
     constructor(private userService: UserService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private translationService: TranslationService) {
     }
 
     ngOnInit() {
@@ -27,7 +29,8 @@ export class RetrievePasswordEmailComponent implements OnInit {
         this.mUser.userEmail = this.email;
         this.userService.sendRetrievePassword(this.mUser).subscribe(()=>{
             document.getElementById("closeButton").click();
-            this.notificationService.info("Revisa tu correo electrónico para establecer una nueva contraseña", "Revisa tu correo electrónico");
+            this.notificationService.info(this.translationService.translate('email.password.change.message'), 
+            this.translationService.translate('email.password.change.title'));
             this.closeModal();
         });
     }

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {UserService} from "@services/user.service";
 import {MUser} from "@models/MUser";
 import {NotificationService} from "@modules/notification/services/notification.service";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router,
               private userService: UserService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private translationService: TranslationService) {
   }
   ngOnInit() {}
   onCreate(){
@@ -34,7 +36,10 @@ export class RegisterComponent implements OnInit {
     this.mUser.userSurname = this.surname;
     if(this.password == this.passwordConfirm) {
       this.userService.createUser(this.mUser).subscribe(()=>{
-        this.notificationService.info("Revisa tu correo electrónico y verifica tu cuenta para poder acceder a A Pachas", "Pendiente de verificación");
+        this.notificationService.info(
+          this.translationService.translate('register.create.message'),
+          this.translationService.translate('register.create.title')
+        );
       });
     }
   }

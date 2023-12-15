@@ -84,6 +84,11 @@
     font-weight: 300;
 }
 
+.inputDark{
+    border: 1px solid #ffffff !important;
+    background-color: transparent !important;
+}
+
 .description-row{
     padding-top: 13px;
 }
@@ -108,6 +113,10 @@
     font-weight: 500;
     letter-spacing: 1px;
     transition: 0.5s;
+}
+
+.closeDark{
+    border: 1px solid #ffffff
 }
 
 .close{

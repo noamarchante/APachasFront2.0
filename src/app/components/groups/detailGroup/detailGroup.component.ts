@@ -5,6 +5,8 @@ import {AuthenticationService} from "@services/authentication.service";
 import {NotificationService} from "@modules/notification/services/notification.service";
 import {MUser} from "@models/MUser";
 import {MGroup} from "@models/MGroup";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
     selector: 'app-detailGroup',
@@ -37,22 +39,29 @@ export class DetailGroupComponent implements OnInit {
     _next: boolean = false;
     _userGroup: MGroup = new MGroup();
 
+    darkMode = false;
+
     constructor(private groupService: GroupService,
                 private groupUserService: GroupUserService,
                 private authenticationService: AuthenticationService,
-                private notificationService: NotificationService
+                private notificationService: NotificationService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.paginationUserGroupClass();
     }
 
     messageValue(request: boolean){
         if (!request && this.authenticationService.getUser().id == this.userGroup.groupOwner){
-            this.message = "¿Estás seguro de que deseas eliminar el grupo?";
+            this.message = this.translationService.translate("group.message.delete");
         }else{
-            this.message = "¿Estás seguro de que quieres salir del grupo?";
+            this.message = this.translationService.translate("group.message.exit");
         }
     }
 
@@ -84,9 +93,9 @@ export class DetailGroupComponent implements OnInit {
             this._userGroup = userGroup;
             this.membersReset();
             if (this.authenticationService.getUser().id == this.userGroup.groupOwner){
-                this.delete = "Eliminar";
+                this.delete = this.translationService.translate("'delete'| translate");
             }else{
-                this.delete = "Salir";
+                this.delete = this.translationService.translate("'exit'| translate");
             }
             if (this.userGroup.groupId != null){
                 this.getMembers(this.userGroup.groupId);
@@ -105,14 +114,14 @@ export class DetailGroupComponent implements OnInit {
             if (this.userGroup.groupOwner == this.authenticationService.getUser().id){
                 this.groupService.deleteGroup(this.userGroup.groupId).subscribe(()=>{
                         this.eventDelete.emit();
-                        this.notificationService.success("Grupo eliminado", "Se ha eliminado el grupo correctamente.");
+                        this.notificationService.success("group.success.delete.message", "group.success.delete.title");
 
                     }
                 );
             }else{
                 this.groupUserService.deleteGroupUser(this.userGroup.groupId, this.authenticationService.getUser().id).subscribe(() => {
                     this.eventDelete.emit();
-                    this.notificationService.success("Eliminado del grupo", "Ya no eres miembro de este grupo.");
+                    this.notificationService.success("group.success.exit.message", "group.success.exit.title");
                 });
             }
         }
@@ -129,7 +138,7 @@ export class DetailGroupComponent implements OnInit {
     ownerLabel(userId:number):string{
         let value:string = "";
         if (userId == this.userGroup.groupOwner){
-            value = "Administrador";
+            value = this.translationService.translate("'owner'| translate");
         }
         return value;
     }

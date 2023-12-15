@@ -8,6 +8,7 @@ import {MUser} from "@models/MUser";
 import {MUserEvent} from "@models/MUserEvent";
 import {DomSanitizer} from "@angular/platform-browser";
 import {AuthenticationService} from "@services/authentication.service";
+import { DarkModeService } from '@app/services/darkMode.service';
 
 @Component({
     selector: 'app-transactions',
@@ -35,13 +36,19 @@ export class ListTransactionsComponent implements OnInit {
     totalTransactionPage:number= 0;
     selectedTransaction: MUserUserEvent = new MUserUserEvent();
 
+    darkMode = false;
+
     constructor(private productService: ProductService,
                 private userEventService: UserEventService,
                 private userUserEventService: UserUserEventService,
                 private authenticationService: AuthenticationService,
-                private sanitizer: DomSanitizer) {}
+                private sanitizer: DomSanitizer,
+                private darkModeService: DarkModeService) {}
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         if (localStorage.getItem("transactions") != undefined){
             this.event = JSON.parse(<string>localStorage.getItem("transactions"));
             this.getTransactions();

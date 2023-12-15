@@ -7,9 +7,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.filterSearch{
+.filter{
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: none;
     box-shadow: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -24,6 +24,19 @@
 
 .filterSearch:hover{
     background-color: rgba(102, 187, 106, 0.1);
+}
+
+.filterSearchDark:hover{
+    background: rgb(25, 22, 27) !important;
+    cursor:pointer;
+}
+
+.filterDark:hover, .checkFilterDark{
+    background-color: rgb(25, 22, 27) !important;
+}
+
+.searchDark{
+    border: 1px solid #ffffff;
 }
 
 .dropdown-menu{
@@ -51,6 +64,7 @@
     background: rgba(102, 187, 106, 0.12);
 }
 
+
 .title{
     font-size: 60px;
     font-weight: 600;
@@ -58,7 +72,7 @@
     letter-spacing: 2px;
     text-align: center;
     width: 100%;
-    color: #555;
+    color: #333;
 }
 
 .row{
@@ -87,7 +101,6 @@
 {
     padding-top: 50px;
     padding-bottom: 30px;
-    background: #fff;
 }
 
 .searchDiv input {
@@ -122,6 +135,10 @@ input[type="search"]::-webkit-search-cancel-button{
     font-size: 18px;
 }
 
+.darkHover > tbody > tr:hover {
+    background-color: rgb(25, 22, 27) !important;
+}
+
 .status{
     margin-top: 27%;
     color: #236726;
@@ -132,7 +149,6 @@ input[type="search"]::-webkit-search-cancel-button{
     border: none;
     outline: none;
     box-shadow: none;
-    background: #fff;
     color: #236726;
     font-size: 14px;
     font-weight: 500;
@@ -146,6 +162,24 @@ input[type="search"]::-webkit-search-cancel-button{
     text-align: center;
 }
 
+.checkDark{
+    background-color: #236726 !important;
+    color: #fff !important;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.5s;
+    text-transform: uppercase;
+    border: #236726;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 25px;
+    text-align: center;
+}
 .imageTransaction{
     width:150px;
     height:150px;
@@ -153,6 +187,10 @@ input[type="search"]::-webkit-search-cancel-button{
     background-color: white;
 }
 
+.statusDark{
+   margin-top: 27%;
+   color: #66bb6a;
+}
 .imageP{
     width: 100%;
 }
@@ -172,6 +210,11 @@ input[type="search"]::-webkit-search-cancel-button{
    color: #236726;
    font-weight: 500;
 }
+
+.costDark{
+    color: #66bb6a !important;
+    font-weight: 500;
+ }
 
 .button {
     padding: 10px;

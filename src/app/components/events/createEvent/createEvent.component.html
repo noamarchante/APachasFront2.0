@@ -1,9 +1,9 @@
 <div class="modal fade" id="createEventModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
      aria-labelledby="createEventLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
             <div class="modal-header">
-                <h5 class="modal-title title">{{title}}</h5>
+                <h5 class="modal-title title" [ngClass]="darkMode ? 'text-light' : ''">{{title}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -12,60 +12,58 @@
                         <div class="row">
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 file-input imageDiv">
                                     <input (change)="getImage($event)" accept="image/png,image/jpeg" class="file"
-                                               type="file"
+                                               type="file" [ngClass]="darkMode ? 'inputDark' : ''"
                                                id="createEvent_eventPhoto" name="eventPhoto">
                                     <label title="Cambiar imagen de evento" for="createEvent_eventPhoto"
                                                (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">
                                         <ng-container *ngIf="event.eventPhoto; else imagesDiv">
-                                            <img class="image imageColor2" [ngClass]="imageColor" [src]="event.eventPhoto" alt="foto de evento"
+                                            <img class="image imageColor2" [ngClass]="imageColor" [src]="event.eventPhoto" alt="{{'event.photo' | translate}}"
                                                      id="createEvent_photo">
                                         </ng-container>
                                         <ng-template #imagesDiv>
-                                            <img class="image imageColor2" [ngClass]="imageColor" [src]="defaultImage" alt="foto de evento por defecto">
+                                            <img class="image imageColor2" [ngClass]="imageColor" [src]="defaultImage" alt="{{'event.photo.default' | translate}}">
                                         </ng-template>
                                         <p class="imageText2" [ngClass]="imageText"></p>
                                     </label>
                                     <div *ngIf="imageFormat == false"
                                              class="alert alert-danger">
-                                        <div *ngIf="imageFormat == false">Sólo JPG o PNG
+                                        <div *ngIf="imageFormat == false">{{'import.photo.format' | translate}}
                                         </div>
                                     </div>
                             </div>
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                 <div class="row name-row">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" id="createEvent_eventName" name="eventName"
+                                        <input type="text" id="createEvent_eventName" name="eventName" [ngClass]="darkMode ? 'bg-dark text-light inputDark' : ''"
                                                    class="inputs" placeholder="Nombre*" minlength="1" maxlength="40"
                                                    pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]+)*"
-                                                   title="Puede contener letras, máximo 40 caracteres. Campo obligatorio"
+                                                   title="{{'event.name' | translate}}"
                                                    [(ngModel)]="event.eventName" required
                                                    #eventNameForm="ngModel">
                                         <div *ngIf="createEventForm.onSubmit(undefined) && eventNameForm.invalid  || eventNameForm.invalid && eventNameForm.value != null"
                                                  class="alert alert-danger">
-                                            <div *ngIf="eventNameForm.errors.required">Campo obligatorio
+                                            <div *ngIf="eventNameForm.errors.required">{{'event.name.required' | translate}}
                                             </div>
-                                            <div *ngIf="eventNameForm.errors.pattern">Máximo 40 caracteres
-                                                    alfanuméricos
+                                            <div *ngIf="eventNameForm.errors.pattern">{{'event.name.max' | translate}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row description-row">
                                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <textarea class="text-area inputs" name="eventDescription" rows="4"
+                                        <textarea class="text-area inputs" name="eventDescription" rows="4" [ngClass]="darkMode ? 'bg-dark text-light inputDark' : ''"
                                                       cols="50"
                                                       id="createEvent_eventDescription" minlength="0"
                                                       maxlength="100"
-                                                      name="eventDescription" placeholder="Descripción"
+                                                      name="eventDescription" placeholder="{{'event.description' | translate}}"
                                                       pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]+)*"
-                                                      title="Puede contener letras y números, máximo 100 caracteres"
+                                                      title="{{'event.description' | translate}}"
                                                       [(ngModel)]="event.eventDescription"
                                                       #eventDescriptionForm="ngModel">
                                         </textarea>
                                         <div *ngIf="createEventForm.submitted && eventDescriptionForm.invalid  || eventDescriptionForm.invalid && eventDescriptionForm.value!= null"
                                                  class="alert alert-danger">
-                                            <div *ngIf="eventDescriptionForm.errors.pattern">Puede contener letras y
-                                                    números, máximo 100 caracteres
+                                            <div *ngIf="eventDescriptionForm.errors.pattern">{{'event.description.max' | translate}}
                                             </div>
                                         </div>
                                     </div>
@@ -74,7 +72,7 @@
                         </div>
                         <div class="row secondDiv">
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                               <div class="daterangerpicker"
+                               <div class="daterangerpicker" [ngClass]="darkMode ? 'bg-dark text-light inputDark' : ''"
                                                  daterangepicker
                                                  [options]="options"
                                                  (selected)="selectedDate($event)"
@@ -85,10 +83,10 @@
                                                         {{initialDate | date:'dd/MM/YYYY HH:mm'}} {{finalDate | date:'dd/MM/YYYY HH:mm'}}
                                         </span>
                                         <span *ngIf="initialDate == undefined" class="placeholder align-self-center">
-                                                        Fecha y Hora*
+                                                        {{'event.date' | translate}}*
                                         </span>
                                         <div class="align-self-center">
-                                            <span *ngIf="initialDate != undefined" class="cancel" (click)="cancelDate()">×</span>
+                                            <span *ngIf="initialDate != undefined" title="{{'cancel' | translate}}" class="cancel" (click)="cancelDate()">×</span>
                                             <span class="ng-arrow-wrapper">
                                                  <span class="btn ng-arrow"><i class="bi bi-calendar"></i></span>
                                             </span>
@@ -97,18 +95,15 @@
                                </div>
                             </div>
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                               <input type="text" id="createEvent_eventLocation" name="Location"
-                                                   class="inputs" placeholder="Localización" minlength="1" maxlength="40"
+                               <input type="text" id="createEvent_eventLocation" name="Location" [ngClass]="darkMode ? 'bg-dark text-light inputDark' : ''"
+                                                   class="inputs" placeholder="{{'event.location' | translate}}" minlength="1" maxlength="40"
                                                    pattern="^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]([ ]?[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ1-9,.'-]+)*"
-                                                   title="Puede contener letras, máximo 40 caracteres. Campo obligatorio"
-                                                   [(ngModel)]="event.eventLocation" required
+                                                   title="{{'event.location' | translate}}"
+                                                   [(ngModel)]="event.eventLocation"
                                                    #eventLocationForm="ngModel">
                                <div *ngIf="createEventForm.onSubmit(undefined) && eventLocationForm.invalid  || eventLocationForm.invalid && eventLocationForm.value != null"
                                                  class="alert alert-danger">
-                                    <div *ngIf="eventLocationForm.errors.required">Campo obligatorio
-                                    </div>
-                                    <div *ngIf="eventLocationForm.errors.pattern">Máximo 40 caracteres
-                                                    alfanuméricos
+                                    <div *ngIf="eventLocationForm.errors.pattern">{{'event.location.max' | translate}}
                                     </div>
                                </div>
                             </div>
@@ -118,7 +113,7 @@
                                                [items]="selectPartakers"
                                                bindValue="userId"
                                                groupBy="groupId"
-                                               placeholder="Participantes"
+                                               placeholder="{{'group.members' | translate}}"
                                                (change)="changeSelect($event)"
                                                (remove)="removePartaker($event)"
                                                (clear)="clearPartakers()"
@@ -130,12 +125,12 @@
                                 <ng-template class="text" ng-multi-label-tmp let-items="items" let-clear="clear">
                                     <div class="ng-value" *ngFor="let item of items">
                                         <ng-container *ngIf="item.userPhoto; else userPhotoDiv">
-                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="foto de usuario"
+                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="{{'user.photo' | translate}}"
                                                         [src]="item.userPhoto" class="imageSelect"><p
                                                         class="selectedText">{{item.userLogin}}</p></span>
                                         </ng-container>
                                         <ng-template #userPhotoDiv>
-                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="foto de usuario por defecto"
+                                            <span class="ng-value-label" title="{{item.userLogin}}"><img alt="{{'user.photo.default' | translate}}"
                                                         [src]="defaultUserImage" class="imageSelect"><p
                                                         class="selectedText">{{item.userLogin}}</p></span>
                                         </ng-template>
@@ -145,24 +140,24 @@
                                 </ng-template>
                                 <ng-template ng-option-tmp let-item="item">
                                     <ng-container *ngIf="item.userPhoto; else userPhotoDiv">
-                                        <span class="ng-value-label" id="{{item.groupId + '-'+ item.userId}}" title="{{item.userLogin}}"><img alt="foto de usuario de grupo"
+                                        <span class="ng-value-label" id="{{item.groupId + '-'+ item.userId}}" title="{{item.userLogin}}"><img alt="{{'user.photo' | translate}}"
                                                         [src]="item.userPhoto" class="imageSelect"><p
                                                         class="selectedText listSelect">{{item.userLogin}}</p></span>
                                     </ng-container>
                                     <ng-template #userPhotoDiv>
-                                        <span class="ng-value-label" id="{{item.groupId + '-'+item.userId}}" title="{{item.userLogin}}"><img alt="foto de usuario de grupo por defecto"
+                                        <span class="ng-value-label" id="{{item.groupId + '-'+item.userId}}" title="{{item.userLogin}}"><img alt="{{'user.photo.default' | translate}}"
                                                         [src]="defaultUserImage" class="imageSelect"><p
                                                         class="selectedText listSelect">{{item.userLogin}} </p></span>
                                     </ng-template>
                                 </ng-template>
                                 <ng-template ng-optgroup-tmp let-item="item">
                                     <ng-container *ngIf="getPartakersByGroupId(item.groupId).groupPhoto; else groupPhotoDiv">
-                                        <span class="ng-value-label" title="{{getPartakersByGroupId(item.groupId).groupName}}"><img alt="foto de grupo"
+                                        <span class="ng-value-label" title="{{getPartakersByGroupId(item.groupId).groupName}}"><img alt="{{'group.photo' | translate}}"
                                                         [src]="getPartakersByGroupId(item.groupId).groupPhoto" class="imageSelect"><p
                                                         class="selectedText listSelect">{{getPartakersByGroupId(item.groupId).groupName}}</p></span>
                                     </ng-container>
                                     <ng-template #groupPhotoDiv>
-                                        <span class="ng-value-label" title="{{getPartakersByGroupId(item.groupId).groupName}}"><img alt="foto de grupo por defecto"
+                                        <span class="ng-value-label" title="{{getPartakersByGroupId(item.groupId).groupName}}"><img alt="{{'group.photo.default' | translate}}"
                                                         [src]="defaultGroupImage" class="imageSelect" *ngIf="item.groupId !=0"><p
                                                         class="selectedText listSelect">{{getPartakersByGroupId(item.groupId).groupName}} </p></span>
                                         <span (click)="unselectGroup(item.groupId)">
@@ -177,12 +172,12 @@
                         </div>
                         <div class="modal-footer">
                             <div class="buttons">
-                                <button type="button" id="closeButton" class="button close" data-bs-dismiss="modal" (click)="closeModal()">
-                                    Cerrar
+                                <button type="button" [ngClass]="darkMode ? 'bg-dark text-light closeDark' : ''" id="closeButton" title="{{'close' | translate}}" class="button close" data-bs-dismiss="modal" (click)="closeModal()">
+                                    {{'close' | translate}}
                                 </button>
                             </div>
                             <div class="buttons">
-                                <input type="submit" class="button" value="Guardar">
+                                <input type="submit" class="button" title="{{'save' | translate}}" value="{{'save' | translate}}">
                             </div>
                         </div>
                     </div>

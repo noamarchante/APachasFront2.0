@@ -7,11 +7,24 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.darkInput{
+    border:  1px solid #ffffff !important;
+}
+
+
+.darkColor:hover{
+    background: rgb(25, 22, 27) !important;
+    cursor:pointer;
+}
+
+.searchColor{
+    background: #fff;
+}
+
 .searchDiv
 {
     padding-top: 50px;
     padding-bottom: 30px;
-    background: #fff;
 }
 
 .searchDiv input {
@@ -45,8 +58,12 @@ input[type="search"]::-webkit-search-cancel-button{
 }
 
 .color:hover{
-    background: rgba(102, 187, 106, 0.12);
+    background: rgba(95, 174, 99, 0.12) !important;
     cursor:pointer;
+}
+
+.color{
+    background: rgba(102, 187, 106, 0.05) !important;
 }
 
 .card{
@@ -128,6 +145,20 @@ input[type="search"]::-webkit-search-cancel-button{
     cursor:pointer;
     text-decoration: none;
     color: #236726;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding-right: 5px;
+}
+
+.messageDark{
+    color: #66bb6a;
+    cursor:pointer;
+    text-decoration: none;
     border: none;
     outline: none;
     box-shadow: none;

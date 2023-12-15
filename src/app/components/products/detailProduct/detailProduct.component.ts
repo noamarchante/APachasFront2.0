@@ -7,6 +7,8 @@ import {ProductService} from "@services/product.service";
 import {UserProductService} from "@services/userProduct.service";
 import {PRODUCTJOIN} from "@app/components/products/listProducts/listProducts.component";
 import {UserEventService} from "@services/userEvent.service";
+import { DarkModeService } from '@app/services/darkMode.service';
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Component({
     selector: 'app-detailProduct',
@@ -42,25 +44,32 @@ export class DetailProductComponent implements OnInit, AfterViewChecked {
     _product: MProduct = new MProduct();
     _status: string ="";
 
+    darkMode = false;
+
     constructor(private productService: ProductService,
                 private userProductService: UserProductService,
                 private userEventService: UserEventService,
                 private authenticationService: AuthenticationService,
-                private notificationService: NotificationService
+                private notificationService: NotificationService,
+                private darkModeService: DarkModeService,
+                private translationService: TranslationService
     ) {
     }
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.paginationProductClass();
     }
 
     ngAfterViewChecked() {
-        document.getElementsByClassName("applyDate")[0].textContent ="Aplicar";
-        document.getElementsByClassName("cancelDate")[0].textContent = "Cancelar";
+        document.getElementsByClassName("applyDate")[0].textContent =this.translationService.translate('save');
+        document.getElementsByClassName("cancelDate")[0].textContent = this.translationService.translate('cancel');
     }
 
     messageValue(){
-        this.message = "¿Estás seguro de que deseas eliminar el producto?";
+        this.message = this.translationService.translate('product.delete.question');
     }
 
     get previous(){
@@ -125,7 +134,7 @@ export class DetailProductComponent implements OnInit, AfterViewChecked {
             this.productService.deleteProduct(this.product.productId).subscribe(()=>{
                 this.userProductService.deleteUserProduct(this.product.productId, this.authenticationService.getUser().id).subscribe(()=>{});
                     this.eventDelete.emit();
-                this.notificationService.success("Producto eliminado", "Se ha eliminado el producto correctamente.");
+                this.notificationService.success(this.translationService.translate('product.delete.message'),this.translationService.translate('product.delete.title'));
             });
         }
     }
@@ -189,7 +198,7 @@ export class DetailProductComponent implements OnInit, AfterViewChecked {
 
     setStatus(){
         this.statusUpdate.emit();
-        if (this.status == PRODUCTJOIN.JOIN){
+        if (this.status == this.translationService.translate(PRODUCTJOIN.JOIN)){
             this.userProductService.getUserProduct(this.product.productId, this.authenticationService.getUser().id).subscribe((response)=>{
                 if (response.productId != 0){
                     this.userProductService.editUserProduct(this.product.productId, this.authenticationService.getUser().id).subscribe();

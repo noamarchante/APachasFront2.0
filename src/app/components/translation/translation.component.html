@@ -1,0 +1,16 @@
+<div class="col-6 align-self-center dropdown">
+    <button id="dropdownLang" class="btn btn-tertiary dropdown-toggle active text"
+        [ngClass]="darkMode ? 'text-light' : ''"
+        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{translationService.getCurrentLocaleId() | lang | translate}}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownLang" [ngClass]="darkMode ? 'bg-dark text-light' : ''">
+        <li *ngFor="let language of translationService.getLocaleIds();let i=index">
+            <a class="dropdown-item textDrop"
+            [ngClass]="darkMode ? 'bg-dark text-light darkDrop' : ''"
+            (click)="switchLang(language)">
+                {{language | lang | translate}}
+            </a>
+        </li>
+    </ul>
+</div>

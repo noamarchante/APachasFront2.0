@@ -3,6 +3,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {AuthenticationService} from "@services/authentication.service";
 import {MGroup} from "@models/MGroup";
 import {GroupUserService} from "@services/groupUser.service";
+import { DarkModeService } from '@app/services/darkMode.service';
 
 @Component({
     selector: 'app-groups',
@@ -22,12 +23,17 @@ export class ListGroupsComponent implements OnInit {
     previousClass:string;
     nextClass:string;
     pageDirection: number;
+    darkMode = false;
 
     constructor(private groupUserService: GroupUserService,
                 private authenticationService: AuthenticationService,
-                private sanitizer: DomSanitizer) {}
+                private sanitizer: DomSanitizer,
+                private darkModeService: DarkModeService) {}
 
     ngOnInit() {
+        this.darkModeService.darkMode$.subscribe((mode) => {
+            this.darkMode = mode;
+        });
         this.getGroups();
         this.paginationClass();
     }
