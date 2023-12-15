@@ -244,5 +244,6 @@
     "product.edit.title": "Producto editado",
     "product.edit.message": "Se ha editado el producto correctamente",
     "money.added.title": "Dinero añadido al evento",
-    "money.added.message": "Se ha editado el dinero añadido correctamente"
+    "money.added.message": "Se ha editado el dinero añadido correctamente",
+    "welcome": "Bienvenid@"
 }

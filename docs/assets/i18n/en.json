@@ -244,5 +244,6 @@
     "product.edit.title": "Product edited",
     "product.edit.message": "Product edited successfully",
     "money.added.title": "Money added",
-    "money.added.message": "Money added successfully"
+    "money.added.message": "Money added successfully",
+    "welcome": "Welcome"
 }
