@@ -15,6 +15,11 @@ export class TranslationService {
 		private config: TranslationServiceConfig,
 		private translateService: TranslateService
 	) {
+		if (this.singleton) {
+			throw new Error(
+				'TranslationService is already provided by the root module'
+			);
+		}
 		this._localeId = this.config.locale_id;
 		this._localeIds = ["en", "es", "gl"];
 	}
