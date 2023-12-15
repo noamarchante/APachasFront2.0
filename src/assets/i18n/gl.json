@@ -244,5 +244,6 @@
     "product.edit.title": "Producto editado",
     "product.edit.message": "Editouse o producto correctamente",
     "money.added.title": "Cartos engadidos o evento",
-    "money.added.message": "Cartos engadidos correctamente"
+    "money.added.message": "Cartos engadidos correctamente",
+    "welcome": "Benvid@"
 }

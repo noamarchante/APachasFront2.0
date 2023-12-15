@@ -318,12 +318,25 @@ export class DetailEventComponent implements OnInit {
 
 
     addEventGoogleCalendar(event: MEvent){
-        let startDate: string = this.event.eventStart.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '');
+        /*let startDate: string = this.event.eventStart.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '');
         let endDate: string = this.event.eventEnd.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '');
         let date: string = startDate.substring(0,9) + (parseInt(startDate.substring(9))+20000).toString() + "/" + endDate.substring(0,9) + (parseInt(endDate.substring(9))+20000).toString();
         let title: string = this.event.eventName.replace(new RegExp(' ', 'g'), '+');
         let location: string = this.event.eventLocation.replace(new RegExp(' ', 'g'), '+');
-        let description: string = this.event.eventDescription.replace(new RegExp(' ', 'g'), '+');
-        this.googleCalendarUrl = "https://calendar.google.com/calendar/u/0/r/eventedit?text=" + title + "&dates=" + date + "&details=" + description + "&location=" + location + "&sf=true&output=xml";
+        let description: string = this.event.eventDescription.replace(new RegExp(' ', 'g'), '+');*/
+        if(this.event){
+            this.googleCalendarUrl = "https://calendar.google.com/calendar/u/0/r/eventedit?text=" + 
+            this.event.eventName.replace(new RegExp(' ', 'g'), '+') + 
+            "&dates=" + 
+            this.event.eventStart.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '').substring(0,9) + 
+            (parseInt(this.event.eventStart.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '').substring(9))+20000).toString() + 
+            "/" + this.event.eventEnd.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '').substring(0,9) + 
+            (parseInt(this.event.eventEnd.replace(new RegExp(' ', 'g'), 'T').replace(new RegExp(':', 'g'), '').replace(new RegExp('-', 'g'), '').substring(9))+20000).toString() + 
+            "&details=" + 
+            this.event.eventDescription.replace(new RegExp(' ', 'g'), '+') + 
+            "&location=" + 
+            this.event.eventLocation.replace(new RegExp(' ', 'g'), '+') + 
+            "&sf=true&output=xml";
+        }
     }
 }

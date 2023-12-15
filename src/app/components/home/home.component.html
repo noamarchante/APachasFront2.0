@@ -1,5 +1,5 @@
 <section>
 <div>
-  <h2 class="title" [ngClass]="darkMode ? 'text-light' : ''" *ngIf="loggedUser != null">Bienvenid@ {{loggedUser}}</h2>
+  <h2 class="title" [ngClass]="darkMode ? 'text-light' : ''" *ngIf="loggedUser != null">{{'welcome' | translate}} {{loggedUser}}</h2>
 </div>
 </section>
