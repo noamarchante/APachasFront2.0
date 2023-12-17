@@ -1,6 +1,7 @@
 # APachas
 
 PRESENTACIÓN: [A PACHAS 2.0PRESENTACION.pdf](https://github.com/noamarchante/APachasFront2.0/files/13697584/A.PACHAS.2.0PRESENTACION.pdf)
+https://www.canva.com/design/DAF2IVdPGiM/L7dn4sKms9u8tK3zLze2hw/edit?utm_content=DAF2IVdPGiM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 DOCUMENTACIÓN: [APachas2.0.pdf](https://github.com/noamarchante/APachasFront2.0/files/13697585/APachas2.0.pdf)
 
