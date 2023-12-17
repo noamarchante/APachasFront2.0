@@ -56,8 +56,8 @@ export class CreateEventComponent implements OnInit, AfterViewChecked {
             this.translationService.translate('calendar.week.sunday'),
             this.translationService.translate('calendar.week.monday'),
             this.translationService.translate('calendar.week.tuesday'),
-            this.translationService.translate('calendar.week.wendnesday'),
-            this.translationService.translate('calendar.week.thurdsday'),
+            this.translationService.translate('calendar.week.wednesday'),
+            this.translationService.translate('calendar.week.thursday'),
             this.translationService.translate('calendar.week.friday'),
             this.translationService.translate('calendar.week.saturday')
             ],
