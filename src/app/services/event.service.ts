@@ -6,13 +6,14 @@ import {MEvent} from "@models/MEvent";
 import {APachasError} from "@modules/notification/entities";
 import {Event} from "@services/entities/Event";
 import {map} from "rxjs/operators";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EventService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private translationService: TranslationService) { }
 
     createEvent(mEvent: MEvent): Observable<number> {
         return this.http.post<number>(`${environment.restApi}/events`,{
@@ -30,7 +31,7 @@ export class EventService {
             "eventRemoval": ""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al crear el evento', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo.`)
+                APachasError.throwOnError(this.translationService.translate("create.fail"), this.translationService.translate("create.fail.message"))
             );
     }
 
@@ -50,20 +51,20 @@ export class EventService {
             "eventRemoval": ""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al editar el evento', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo.`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
             );
     }
 
     editOpen(eventId: number, open: boolean): Observable<void>{
         return this.http.put<void>(`${environment.restApi}/events/open/${eventId}`, open)
             .pipe(
-                APachasError.throwOnError('Fallo al cerrar el evento', `Por favor, inténtelo de nuevo más tarde.`)
+                APachasError.throwOnError(this.translationService.translate("close.fail"), this.translationService.translate("close.fail.message"))
             );
     }
 
     deleteEvent(eventId: number): Observable<void> {
         return this.http.delete<void>(`${environment.restApi}/events/${eventId}`).pipe(
-            APachasError.throwOnError('Fallo al eliminar el evento', `Por favor, inténtelo de nuevo más tarde.`)
+            APachasError.throwOnError(this.translationService.translate("delete.fail"), this.translationService.translate("close.fail.message"))
         );
     }
 

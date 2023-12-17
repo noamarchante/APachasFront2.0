@@ -8,13 +8,14 @@ import {User} from "@services/entities/User";
 import {map} from "rxjs/operators";
 import {MGroup} from "@models/MGroup";
 import {Group} from "@services/entities/Group";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GroupUserService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private translationService: TranslationService) { }
 
     getPageableMembers(groupId: number, page:number, size: number): Observable<MUser[]>{
         return this.http.get<User[]>(`${environment.restApi}/groupsUsers/pageable/members/${groupId}?page=${page}&size=${size}`).pipe(
@@ -30,7 +31,7 @@ export class GroupUserService {
 
     countMembers(groupId: number): Observable<number>{
         return this.http.get<number>(`${environment.restApi}/groupsUsers/count/members/${groupId}`).pipe(
-            APachasError.throwOnError('Fallo al contar los integrantes del grupo', `Por favor, inténtelo de nuevo más tarde.`)
+            APachasError.throwOnError(this.translationService.translate("fail"), this.translationService.translate("close.fail.message"))
         );
     }
 
@@ -43,20 +44,20 @@ export class GroupUserService {
             "groupUserActive": true
         })
             .pipe(
-                APachasError.throwOnError('Fallo al añadir integrantes al grupo', `Por favor, inténtelo de nuevo más tarde.`)
+                APachasError.throwOnError(this.translationService.translate("fail.members"), this.translationService.translate("close.fail.message"))
             );
     }
 
     editGroupUser(groupId: number, userIds: number[]): Observable<void> {
         return this.http.put<void>(`${environment.restApi}/groupsUsers/${groupId}`,userIds)
             .pipe(
-                APachasError.throwOnError('Fallo al editar integrantes del grupo', `Por favor, inténtelo de nuevo más tarde.`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
             );
     }
 
     deleteGroupUser(groupId: number, userId: number): Observable<void> {
         return this.http.delete<void>(`${environment.restApi}/groupsUsers/${groupId}/${userId}`).pipe(
-            APachasError.throwOnError('Fallo al eliminar miembro del grupo', `Por favor, inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("delete.fail"), this.translationService.translate("close.fail.message"))
         );
     }
 

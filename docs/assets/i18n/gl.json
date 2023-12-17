@@ -245,5 +245,22 @@
     "product.edit.message": "Editouse o producto correctamente",
     "money.added.title": "Cartos engadidos o evento",
     "money.added.message": "Cartos engadidos correctamente",
-    "welcome": "Benvid@"
+    "welcome": "Benvid@",
+    "fail.login": "Fallo no login",
+	"fail.login.message": "Usuario ou contrasinal incorrectos. Inténteo de novo",
+	"activate.account": "Conta inactiva",
+	"activate.account.message": "Activa a tua conta co email que recibiches na cuenta proporcionada",
+    "create.fail": "Fallo o crear",
+    "create.fail.message": "Por favor, comprobe que os datos son correctos e inténteo de novo",
+    "edit.fail": "Fallo o editar",
+    "edit.fail.message": "Por favor, comprobe que os datos son correctos e inténteo de novo",
+    "close.fail": "Fallo o pechar",
+    "close.fail.message": "Por favor, inténteo de novo mais tarde",
+    "delete.fail": "Fallo o eliminar",
+    "fail": "Fallo",
+    "fail.members": "Fallo o engadir integrantes",
+    "fail.register": "Fallo no rexistro",
+    "fail.register.message": "Os datos do formulario son incorrectos ou o usuario xa existe. Por favor, inténteo de novo",
+    "fail.email": "Fallo o enviar email",
+    "fail.email.message": "Por favor, comprobe que os datos son correctos e inténteo de novo"
 }

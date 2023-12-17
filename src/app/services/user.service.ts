@@ -9,13 +9,14 @@ import {MUser} from "@models/MUser";
 import {AuthUser} from "@models/AuthUser";
 import {MVerifyEmail} from "@models/MVerifyEmail";
 import {MRetrievePassword} from "@models/MRetrievePassword";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private translationService: TranslationService) { }
 
   getPageableUsers(authId: number, page: number, size: number): Observable<MUser[]>{
     return this.http.get<User[]>(`${environment.restApi}/users/pageable/${authId}?page=${page}&size=${size}`).pipe(
@@ -74,7 +75,7 @@ export class UserService {
       "userActive": ""
     })
         .pipe(
-            APachasError.throwOnError('Fallo al editar el usuario', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
         );
   }
 
@@ -95,7 +96,7 @@ export class UserService {
       "userActive": true
     })
       .pipe(
-        APachasError.throwOnError('Fallo en el registro', `Los datos del formulario son incorrectos o el usuario ya existe. Por favor, inténtelo de nuevo`)
+        APachasError.throwOnError(this.translationService.translate("fail.register"), this.translationService.translate("fail.register.message"))
       );
   }
 
@@ -104,7 +105,7 @@ export class UserService {
       "userEmail": mUser.userEmail
     })
         .pipe(
-            APachasError.throwOnError('Fallo al enviar email', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("fail.email"), this.translationService.translate("fail.email.message"))
         );
   }
 
@@ -114,7 +115,7 @@ export class UserService {
       "tokenPassword": mVerifyEmail.tokenPassword
     })
         .pipe(
-            APachasError.throwOnError('Fallo al activar el usuario', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("activate.fail"), this.translationService.translate("activate.fail.message"))
         );
   }
 
@@ -125,9 +126,10 @@ export class UserService {
       "newPassword": mRetrievePassword.newPassword
     })
         .pipe(
-            APachasError.throwOnError('Fallo al activar el usuario', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("activate.fail"), this.translationService.translate("activate.fail.message"))
         );
   }
+
   private mapUser(user: User) : MUser {
     return {
       userId: user.userId,

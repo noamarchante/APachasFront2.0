@@ -77,7 +77,9 @@ export class DetailEventComponent implements OnInit {
         });
         this.paginationEventClass();
 
-        this.addEventGoogleCalendar(this.event);
+        if(this.event){
+            this.addEventGoogleCalendar(this.event);
+        }
     }
 
     showDetailsAndProducts(){
@@ -322,7 +324,7 @@ export class DetailEventComponent implements OnInit {
     addEventGoogleCalendar(event: MEvent){
         let startDate: string = this.event.eventStart?.replace(new RegExp(' ', 'g'), 'T')?.replace(new RegExp(':', 'g'), '')?.replace(new RegExp('-', 'g'), '');
         let endDate: string = this.event.eventEnd?.replace(new RegExp(' ', 'g'), 'T')?.replace(new RegExp(':', 'g'), '')?.replace(new RegExp('-', 'g'), '');
-        let date: string = startDate.substring(0,9) + (parseInt(startDate.substring(9))+20000).toString() + "/" + endDate.substring(0,9) + (parseInt(endDate.substring(9))+20000).toString();
+        let date: string = startDate?.substring(0,9) + (parseInt(startDate?.substring(9))+20000)?.toString() + "/" + endDate?.substring(0,9) + (parseInt(endDate?.substring(9))+20000)?.toString();
         let title: string = this.event.eventName?.replace(new RegExp(' ', 'g'), '+');
         let location: string = this.event.eventLocation?.replace(new RegExp(' ', 'g'), '+');
         let description: string = this.event.eventDescription?.replace(new RegExp(' ', 'g'), '+');

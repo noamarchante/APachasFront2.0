@@ -5,6 +5,7 @@ import {AuthUser} from '@models/AuthUser';
 import {APachasError} from '@modules/notification/entities';
 import {UserService} from "@services/user.service";
  import {NotificationService} from "@modules/notification/services/notification.service";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 //SERVICE -> Se encarga de acceder a los datos para entregarlos a los componentes
 @Injectable({
@@ -16,7 +17,7 @@ export class AuthenticationService {
 
 	private user: AuthUser = new AuthUser();
 
-	constructor(private  http: HttpClient,  private userService: UserService,private notificationService: NotificationService) {}
+	constructor(private  http: HttpClient,  private userService: UserService,private notificationService: NotificationService, private translationService: TranslationService) {}
 
   //COMPRUEBA SI LAS CREDENCIALES SON CORRECTAS
 	checkCredentials(login: string, password: string) {
@@ -30,10 +31,9 @@ export class AuthenticationService {
 		}, {observe:"response" as "body", responseType: 'json'}
 		)
 		  .pipe(
-			APachasError.throwOnError('Failed to login', `User or password incorrect. Please try again.`)
+			APachasError.throwOnError(this.translationService.translate('fail.login'), this.translationService.translate("fail.login.message"))
 		  );
 	}
-
 
   //CONFIGURA AL USUARIO LOGGEADO
 	public logIn(login: string, password: string, authorization: string) {
@@ -61,11 +61,10 @@ export class AuthenticationService {
 				this.user.notify = response.userNotify;
 				this.user.save();
 			}else{
-				this.notificationService.warning("Activa tu cuenta con el email que has recibido en la cuenta proporcionada","Cuenta no activada");
+				this.notificationService.warning(this.translationService.translate("activate.account.message"),this.translationService.translate("activate.account"));
 			}
 		});
 	}
-
 
 	/*getEditUser(): AuthUser{
 		this.userService.getUserById(this.user.id).subscribe((response) => {

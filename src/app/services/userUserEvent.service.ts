@@ -8,18 +8,19 @@ import {MUserUserEvent} from "@models/MUserUserEvent";
 import {APachasError} from "@modules/notification/entities";
 import {MUser} from "@models/MUser";
 import {User} from "@services/entities/User";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserUserEventService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private translationService: TranslationService) { }
 
     createUserUserEvent(eventId: any): Observable<void> {
         return this.http.post<void>(`${environment.restApi}/usersUsersEvents`, eventId)
             .pipe(
-                APachasError.throwOnError('Fallo al añadir transacciones', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("create.fail"), this.translationService.translate("create.fail.message"))
             );
     }
 
@@ -38,14 +39,14 @@ export class UserUserEventService {
     editPaid(transaction: MUserUserEvent, paid: boolean): Observable<void>{
         return this.http.put<void>(`${environment.restApi}/usersUsersEvents/paid/${transaction.eventId}/${transaction.senderId}/${transaction.receiverId}`, paid)
             .pipe(
-                APachasError.throwOnError('Fallo al actualizar el pago', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
             );
     }
 
     editConfirmed(transaction: MUserUserEvent, confirmed: boolean): Observable<void>{
         return this.http.put<void>(`${environment.restApi}/usersUsersEvents/confirmed/${transaction.eventId}/${transaction.senderId}/${transaction.receiverId}`, confirmed)
             .pipe(
-                APachasError.throwOnError('Fallo al actualizar la confirmación', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
             );
     }
 

@@ -8,6 +8,7 @@ import {Group} from "@services/entities/Group";
 import {map} from "rxjs/operators";
 import {Product} from "@services/entities/Product";
 import {MEvent} from "@models/MEvent";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ import {MEvent} from "@models/MEvent";
 export class ProductService {
 
     event: MEvent;
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private translationService: TranslationService) { }
 
     createProduct(mProduct: MProduct): Observable<number> {
         return this.http.post<number>(`${environment.restApi}/products`,{
@@ -32,7 +33,7 @@ export class ProductService {
             "eventRemoval": ""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al crear el producto', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo.`)
+                APachasError.throwOnError(this.translationService.translate("create.fail"), this.translationService.translate("create.fail.message"))
             );
     }
 
@@ -51,13 +52,13 @@ export class ProductService {
             "eventRemoval": ""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al editar el producto', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
             );
     }
 
     deleteProduct(productId: number): Observable<void> {
         return this.http.delete<void>(`${environment.restApi}/products/${productId}`).pipe(
-            APachasError.throwOnError('Fallo al eliminar producto', `Por favor, inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("delete.fail"), this.translationService.translate("close.fail.message"))
         );
     }
 

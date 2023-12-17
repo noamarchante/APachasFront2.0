@@ -8,13 +8,14 @@ import {MUser} from "@models/MUser";
 import {UserUser} from "@services/entities/UserUser";
 import {MUserUser} from "@models/MUserUser";
 import {map} from "rxjs/operators";
+import { TranslationService } from '@app/modules/translations/translation.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserUserService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private translationService: TranslationService) { }
 
     getUserUser(friendId: number, userId: number): Observable<MUserUser> {
         return this.http.get<UserUser>(`${environment.restApi}/usersUsers/${friendId}/${userId}`).pipe(
@@ -47,7 +48,7 @@ export class UserUserService {
             "userUserRemoval": ""
         })
             .pipe(
-                APachasError.throwOnError('Fallo en la solicitud de amistad o solicitud ya enviada', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("fail"), this.translationService.translate("close.fail.message"))
             );
     }
 
@@ -61,7 +62,7 @@ export class UserUserService {
             "userUserRemoval": ""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al aceptar la solicitud', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("fail"), this.translationService.translate("close.fail.message"))
             );
     }
 

@@ -9,6 +9,7 @@ import {APachasError} from "@modules/notification/entities";
 import {AuthenticationService} from "@services/authentication.service";
 import {UserProduct} from "@services/entities/UserProduct";
 import {MUserProduct} from "@models/MUserProduct";
+import { TranslationService } from "@app/modules/translations/translation.service";
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ import {MUserProduct} from "@models/MUserProduct";
 export class UserProductService {
 
     constructor(private http: HttpClient,
-                private authenticationService: AuthenticationService) {
+                private authenticationService: AuthenticationService, private translationService: TranslationService) {
     }
 
     getPageablePartakers(productId: number, page:number, size: number): Observable<MUser[]>{
@@ -37,7 +38,7 @@ export class UserProductService {
 
     deleteUserProduct(productId: number, userId: number): Observable<void> {
         return this.http.delete<void>(`${environment.restApi}/usersProducts/${productId}/${userId}`).pipe(
-            APachasError.throwOnError('Fallo al eliminar participante del producto', `Por favor, inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("delete.fail"), this.translationService.translate("close.fail.message"))
         );
     }
 
@@ -55,7 +56,7 @@ export class UserProductService {
             "userProductRemoval":""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al añadir participantes al producto', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("create.fail"), this.translationService.translate("create.fail.message"))
             );
     }
 
@@ -68,7 +69,7 @@ export class UserProductService {
             "userProductRemoval":""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al editar participantes del producto', `Por favor, compruebe que los datos son correcto e inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("edit.fail.message"))
             );
     }
 

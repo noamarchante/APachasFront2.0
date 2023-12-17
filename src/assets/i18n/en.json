@@ -245,5 +245,22 @@
     "product.edit.message": "Product edited successfully",
     "money.added.title": "Money added",
     "money.added.message": "Money added successfully",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "fail.login": "Failed to login",
+	"fail.login.message": " User or password incorrect. Please try again.",
+	"activate.account": "Not active account Cuenta no activada",
+	"activate.account.message": "Activate account with the email Activa tu cuenta con el email que has recibido en la cuenta proporcionada",
+    "create.fail": "Fail to create Fallo al crear",
+    "create.fail.message": "Please, wait and try again Por favor, compruebe que los datos son correcto e inténtelo de nuevo",
+    "edit.fail": "Fail to edit Fallo al editar",
+    "edit.fail.message": "Please, wait and try again Por favor, compruebe que los datos son correcto e inténtelo de nuevo",
+    "close.fail": "Fail to close Fallo al cerrar",
+    "close.fail.message": "Please, wait and try again Por favor, inténtelo de nuevo más tarde",
+    "delete.fail": "Fail to delete Fallo al eliminar",
+    "fail": "Fail fallo",
+    "fail.members": "Fail adding members Fallo al añadir integrantes al grupo",
+    "fail.register": "Fail to registerFallo en el registro",
+    "fail.register.message": " The data is incorrect or the user already exists. Please wait and try again Los datos del formulario son incorrectos o el usuario ya existe. Por favor, inténtelo de nuevo",
+    "fail.email": "Fail to send email Fallo al enviar email",
+    "fail.email.message": "Please, wait and try again Por favor, compruebe que los datos son correcto e inténtelo de nuevo"
 }

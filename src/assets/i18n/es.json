@@ -245,5 +245,22 @@
     "product.edit.message": "Se ha editado el producto correctamente",
     "money.added.title": "Dinero añadido al evento",
     "money.added.message": "Se ha editado el dinero añadido correctamente",
-    "welcome": "Bienvenid@"
+    "welcome": "Bienvenid@",
+    "fail.login": "Fallo en login",
+	"fail.login.message": "Usuario o contraseña incorrectos. Inténtelo de nuevo",
+	"activate.account": "Cuenta inactiva",
+	"activate.account.message": "Activa tu cuenta con el email que has recibido en la cuenta proporcionada",
+    "create.fail": "Fallo al crear",
+    "create.fail.message": "Por favor, compruebe que los datos son correcto e inténtelo de nuevo",
+    "edit.fail": "Fallo al editar",
+    "edit.fail.message": "Por favor, compruebe que los datos son correcto e inténtelo de nuevo",
+    "close.fail": "Fallo al cerrar",
+    "close.fail.message": "Por favor, inténtelo de nuevo más tarde",
+    "delete.fail": "Fallo al eliminar",
+    "fail": "Fallo",
+    "fail.members": "Fallo al añadir integrantes",
+    "fail.register": "Fallo en el registro",
+    "fail.register.message": "Los datos del formulario son incorrectos o el usuario ya existe. Por favor, inténtelo de nuevo",
+    "fail.email": "Fallo al enviar email",
+    "fail.email.message": "Por favor, compruebe que los datos son correcto e inténtelo de nuevo"
 }

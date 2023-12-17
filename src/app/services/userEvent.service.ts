@@ -11,6 +11,7 @@ import {APachasError} from "@modules/notification/entities";
 import {UserEvent} from "@services/entities/UserEvent";
 import {MUserEvent} from "@models/MUserEvent";
 import {AuthenticationService} from "@services/authentication.service";
+import { TranslationService } from "@app/modules/translations/translation.service";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,7 @@ import {AuthenticationService} from "@services/authentication.service";
 export class UserEventService {
 
     constructor(private http: HttpClient,
-                private authenticationService: AuthenticationService) {
+                private authenticationService: AuthenticationService, private translationService: TranslationService) {
     }
 
     countMutualEvents(userId: number, authId: number): Observable<number> {
@@ -93,7 +94,7 @@ export class UserEventService {
 
     deleteUserEvent(eventId: number, userId: number): Observable<void> {
         return this.http.delete<void>(`${environment.restApi}/usersEvents/${eventId}/${userId}`).pipe(
-            APachasError.throwOnError('Fallo al eliminar participante del evento', `Por favor, inténtelo de nuevo`)
+            APachasError.throwOnError(this.translationService.translate("delete.fail"),this.translationService.translate("close.fail.message"))
         );
     }
 
@@ -113,35 +114,35 @@ export class UserEventService {
             "userEventRemoval":""
         })
             .pipe(
-                APachasError.throwOnError('Fallo al añadir participantes al evento', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("fail.members"), this.translationService.translate("close.fail.message"))
             );
     }
 
     editUserEvent(eventId: number, userIds: number[]): Observable<void> {
         return this.http.put<void>(`${environment.restApi}/usersEvents/${eventId}`,userIds)
             .pipe(
-                APachasError.throwOnError('Fallo al editar participantes del evento', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("close.fail.message"))
             );
     }
 
     editTotalExpense(mUserEvent: MUserEvent): Observable<void>{
         return this.http.put<void>(`${environment.restApi}/usersEvents/totalExpense/${mUserEvent.eventId}/${mUserEvent.userId}`, mUserEvent.totalExpense)
             .pipe(
-                APachasError.throwOnError('Fallo al editar el dinero aportado por el participante autenticado del evento', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("close.fail.message"))
             );
     }
 
     editDebt(eventId: number, userId: number, userDebt: number): Observable<void>{
         return this.http.put<void>(`${environment.restApi}/usersEvents/debt/${eventId}/${userId}`, userDebt)
             .pipe(
-                APachasError.throwOnError('Fallo al editar el dinero que debe el participante del evento', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"), this.translationService.translate("close.fail.message"))
             );
     }
 
     editStatus(eventId: number, authId: number): Observable<void>{
         return this.http.put<void>(`${environment.restApi}/usersEvents/status/${eventId}`, authId)
             .pipe(
-                APachasError.throwOnError('Fallo al editar el estado de los participantes del evento', `Por favor, inténtelo de nuevo`)
+                APachasError.throwOnError(this.translationService.translate("edit.fail"),this.translationService.translate("close.fail.message"))
             );
     }
 
