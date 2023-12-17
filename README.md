@@ -1,5 +1,10 @@
 # APachas
 
+PRESENTACIÓN: [A PACHAS 2.0PRESENTACION.pdf](https://github.com/noamarchante/APachasFront2.0/files/13697584/A.PACHAS.2.0PRESENTACION.pdf)
+
+DOCUMENTACIÓN: [APachas2.0.pdf](https://github.com/noamarchante/APachasFront2.0/files/13697585/APachas2.0.pdf)
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.4.
 
 ## Development server
